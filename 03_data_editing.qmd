@@ -1,0 +1,203 @@
+---
+title: "Processamento de Dados"
+author:
+  - name: Paulo Barros
+    orcid: 0000-0001-9839-0796
+    email: pbarrosbio@gmail.com
+    affiliations:
+      - name: PPZ - UESB - GACOM
+
+---
+
+O processamento de dados é sem dúvida a etapa mais importante e que mais consome
+tempo em um fluxo de análises. Nesta seção vamos abordar algumas funções básicas
+do `tidyverse` que auxiliam bastante na realização de tarefas triviais de edição
+de dados.
+
+## Combinando _Datasets_
+
+```{r}
+#| message: false
+#| warning: false
+library(tidyverse)
+```
+
+
+Em muitas situações é comum que seja necessário combinar múltiplas fontes de dados.
+Em melhoramento animal por exemplo é comum que informações dos mesmos animais estejam
+dispersas por arquivos de dados individuais.
+
+Vamos dar uma olhada nos datasets que temos disponíveis? Se lembram como fazer?
+
+```{r}
+list.files(path = "data", pattern = "NEL.*.csv")
+```
+
+Os arquivos `NELPN.csv`, `NELP365.csv` e `NELP550.csv` possuem dados de 50 animais com
+respectivas medidas biométricas para Peso ao Nascimento (PN), Peso a um ano
+(P365) e Peso ao Sobreano (P550). Estes dados foram simulados com base em animais
+da raça Nelore.
+
+Uma vez que os mesmos animais estão nos três conjuntos de dados, nosso objetivo
+é unir estes arquivos em um único conjunto de dados. Vamos fazer isso de duas
+maneiras diferentes.
+
+### Modo Básico
+
+* Carregamos os arquivos individualmente cada um em um objeto
+
+* Usamos as funções de _join_ do `tidyverse` para unir os objetos
+
+```{r}
+pn <- read_csv("data/NELPN.csv")
+glimpse(pn)
+
+p365 <- read_csv("data/NELP365.csv")
+glimpse(p365)
+
+p550 <- read_csv("data/NELP550.csv")
+glimpse(p550)
+
+```
+
+A função `glimpse` é bastante útil pra nos mostrar uma prévia dos nossos dados.
+
+Agora que nossos arquivos já foram carregados, podemos fazer a combinação (_merge_)
+dos dados. Para este tipo de operação no qual temos os mesmos animais e variáveis
+medidas em arquivos separados, usaremos a ID de cada animal como uma chave de
+identificação entre os conjuntos de dados, desta maneira sabemos que teremos
+cada observação de cada animal corretamente alocada no nosso novo conjunto de dados.
+
+No nosso caso usaremos a função `inner_join` do `dplyr`. Esta função recebe dois
+conjuntos de dados e combina as observações somente para os índices em comum em
+ambos os arquivos. Como temos três datasets, usaremos o pipe para fazer a operação
+em um único fluxo de código.
+
+```{r}
+dados_nelore <- inner_join(pn,p365, by = join_by(ID)) |>
+  inner_join(p550, by = join_by(ID))
+
+dados_nelore |>
+  head()
+```
+
+Parece confuso, mas é bem simples. Vamos por partes.
+
+`inner_join(pn,p365, by = join_by(ID))` : primeiro passamos os nossos conjuntos
+de dados como argumentos para a função `inner_join`, e com o argumento `by`
+fazemos a definição de qual variável será nossa chave de identificação ou índice,
+neste caso com `by = join_by(ID)` estamos informando que a coluna `ID` é a chave.
+
+Ao fazermos isso já criamos um novo objeto que é a junção dos dados de PN e P365,
+e como mencionamos anteriormente, o `|>` lê sempre da esquerda para a direita,
+assim o nosso novo conjunto de dados do merge se torna a entrada da próxima função
+
+`inner_join(p550, by = join_by(ID))` : aqui o raciocínio é o mesmo, com a diferença
+de que como estamos no fluxo do pipe, o primeiro argumento é omitido pois o R já
+sabe que esse argumento vem do pipe anterior, e informamos então o conjunto de
+dados restante `p550`, a chave continua a mesma. E assim nosso merge está completo!
+
+Existem outros tipos de _joins_ no `dplyr` e você pode como sempre 
+[consultar a documentação](https://dplyr.tidyverse.org/reference/mutate-joins.html){target="_blank"}
+para saber os detalhes e diferenças entre eles e quando utilizar cada tipo.
+
+![Tipos de _Join_. Fonte: [pozdniakov.github.io](https://pozdniakov.github.io/tidy_stats_eng/images/joins.png){target="_blank"}](https://pozdniakov.github.io/tidy_stats_eng/images/joins.png){width="400"}
+
+### Modo Otimizado
+
+No nosso exemplo temos somente três datasets que desejamos unir, mas existem
+situações aonde o número de datasets pode ser grande bem como o volume de dados
+contidos neles. Nessas situações podemos lançar mão de funções otimizadas para
+realizar tarefas repetitivas. A função `map` do pacote `purrr` é nossa amiga!
+
+Vamos realizar a mesma operação do modo anterior mas de uma maneira mais eficiente
+tanto do ponto de vista de código quanto de gerenciamento de recursos do computador.
+
+```{r}
+nelore <- list.files(path = "data",
+                     pattern = "NEL.*.csv",
+                     full.names = TRUE) |>
+  map(read_csv) |>
+  reduce(inner_join, by = join_by(ID)) |>
+  select(ID,PN,P365,P550)
+
+nelore |> head()
+  
+```
+
+Vamos por parte novamente!
+
+O primeiro passo foi gerar uma lista de arquivos a serem lidos automaticamente
+usando a função `list.files`. Com o argumento `pattern = "NEL.*.csv"` nós informamos
+que queremos listar somente os arquivos que comecem com NEL e sejam `.csv`. E por
+fim usamos `full.names = TRUE` para que ele nos retorne o caminho completo do
+arquivo incluindo o diretóriom p.e. `data/NELPN.csv`.
+
+Com isso passamos o nosso vetor contendo os nomes dos arquivos para a função `map`.
+Esta função recebe uma lista/vetor e caminha pelos itens desta lista realizando a
+operação solicitada para cada item, no nosso caso irá executar a função `read_csv`
+para cada nome de arquivo informado no nosso vetor.
+
+A função `map` retorna uma lista por padrão, no nosso caso uma lista de `data.frame`.
+Por isso ao final invocamos a função `reduce` para reduzir a nossa lista aplicando
+a função `inner_join` da mesma maneira que fizemos no modo anterior.
+
+Neste exemplo pode parecer que o Modo 1 tem menos linhas de código e seja mais
+fácil, e de fato é. Entretanto, imagine se precisássemos ler 50 arquivos ao invés
+de três? Precisariamos criar 50 objetos e fazer o join individualmente destes, o
+que aumentaria substancialmente o número de linhas e também a quantidade de
+memória utilizada na operação.
+
+
+## Transformando Dados
+
+Uma outra operação muito comum em edição de dados é transformar o formato do
+conjunto de dados entre **formato longo (_long_)** e **formato largo (_wide_)**.
+Para demonstrar isso vamos recuperar nosso dataset de galinhas.
+
+```{r}
+library(readxl)
+library(janitor)
+
+galinhas <- read_xlsx("data/dietas_galinha.xlsx") |>
+  clean_names()
+
+head(galinhas)
+```
+
+Este dataset contem peso de galinhas submetidas a diferentes dietas. Como podemos
+observar ele se encontra no formato que chamamos de **largo (_wide_)**, uma vez
+que cada dieta que seria o nosso tratamento está representada em uma coluna
+separada.
+
+Na filosofia do `tidyverse`, para um dataset ser considerado **_tidy_** ou "arrumado",
+cada célula deve ser uma **observação completa**. Para isso podemos transformar
+o nosso formato para formato **longo (_long_)**.
+
+```{r}
+gal_long <- galinhas |>
+  pivot_longer(dieta_a:dieta_e, names_to = "dieta", values_to = "peso") |>
+  arrange(dieta)
+
+gal_long |>
+  head()
+```
+
+A função `pivot_longer` recebe um intervalo de colunas `dieta_a:dieta_e` no nosso
+caso, e transforma em uma nova variável que chamamos de `dieta` e os valores em
+uma outra chamada `peso`. Por fim usamos a função `arrange` para ordenar nossos
+dados pela coluna da dieta.
+
+Também podemos fazer o caminho inverso agora. 
+
+```{r}
+gal_long |>
+  pivot_wider(names_from = dieta, values_from = peso) |>
+  head()
+```
+
+Aqui a função  `pivot_wider` recebe uma coluna com valores categóricos e cria
+colunas individuais para cada valor na variável, associando o valor de `peso`
+correspondente. Desta forma recuperamos o formato _wide_ que existia nos dados
+originais.
+

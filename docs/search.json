@@ -1,10 +1,100 @@
 [
   {
+    "objectID": "01_r_rstudio.html",
+    "href": "01_r_rstudio.html",
+    "title": "R e RStudio",
+    "section": "",
+    "text": "O  é um ambiente de software para computação estatística, distribuído como software livre e gratuito, está disponível para diversas plataformas como Windows, MacOS e Linux.\nO RStudio é um ambiente de desenvolvimento integrado (IDE) desenvolvida pela Posit criado para facilitar a programação em R oferecendo diversos recursos para o usuário.\nÉ necessário que ambos estejam instalados em sua máquina, você pode realizar o download do R no site do  CRAN e o RStudio no site da  POSIT.",
+    "crumbs": [
+      "R e RStudio"
+    ]
+  },
+  {
+    "objectID": "01_r_rstudio.html#instalação",
+    "href": "01_r_rstudio.html#instalação",
+    "title": "R e RStudio",
+    "section": "",
+    "text": "O  é um ambiente de software para computação estatística, distribuído como software livre e gratuito, está disponível para diversas plataformas como Windows, MacOS e Linux.\nO RStudio é um ambiente de desenvolvimento integrado (IDE) desenvolvida pela Posit criado para facilitar a programação em R oferecendo diversos recursos para o usuário.\nÉ necessário que ambos estejam instalados em sua máquina, você pode realizar o download do R no site do  CRAN e o RStudio no site da  POSIT.",
+    "crumbs": [
+      "R e RStudio"
+    ]
+  },
+  {
+    "objectID": "01_r_rstudio.html#interface-do-rstudio",
+    "href": "01_r_rstudio.html#interface-do-rstudio",
+    "title": "R e RStudio",
+    "section": "2 Interface do RStudio",
+    "text": "2 Interface do RStudio\nO Rstudio é composto de quatro janelas principais:\n\n\n\nCrédito: Sophie Lee\n\n\n : Editor (Source)\nO editor é o local onde escrevemos e organizamos os nossos códigos (scripts) em R para serem executados. Isso permite que seja possível organizar nosso fluxo de trabalho nas análises e termos em mão os códigos sempre que necessário para rodar novamente os comandos, atualizar o nosso código e compartilhar o trabalho com parceiros.\nPara criar um novo arquivo de script acesse o menu em File &gt; New File &gt; R Script ou clique no . Isso criará um novo arquivo em branco no qual você pode editar o seu código em R. Você pode editar múltiplos arquivos simultaneamente.\nOs códigos no script precisam ser executados explicitamente, eles não rodam de maneira automática. Para rodar os comandos você pode pressionar simultaneamente CTRL + Enter no Windows/Linux ou COMANDO + Enter no MacOS. Você também pode selecionar o código que deseja executar e pressionar o botão  no canto superior direito do editor de scripts.\nVocê pode executar a linha atual posicionando o cursor em qualquer ponto da linha, ou selecionando uma parte específica do código que deseja executar. É possível executar multiplos comandos em sequência selecionando os respectivos trechos desejados no código.\nVocê vai perceber que todo código é executado no Console, e a grande vantagem do arquivo de script é ter um registro do fluxo de códigos, já que o console armazenda os comandos mas só nos permite executar o último comando executado por vez.\nPara salvar o seu arquivo de código você pode acessar o menu File &gt; Save as… ou clicar no  no topo da janela. Uma vez que o arquivo tenha sido salvo uma primeira vez e nomeado, você pode utilizar o atalho CTRL + s para salvar o arquivo.\n\n\n\n\n\n\nDica de estilo\n\n\n\nNomes de arquivos devem ser significativos, escritos em minúsculo e terminados em .R se um arquivo de script, .Rmd se de Rmarkdown ou .qmd se Quarto.\nEvite utilizar caracteres especiais (acentos, virgulas, pontos…) e espaços, use _ ao inves disso. Se os arquivos precisam ser executados em uma ordem específica, enumere-os sequencialmente.\n01-primeiro_script.R, 02-segundo_script.R …\n\n\nVocê pode abrir arquivos salvos previamente indo no menu File &gt; Open File… e selecionando o(s) arquivo(s) que deseja, ou no ícone . No teclado, pode usar CTRL + o.\n : Console\nO Console é onde todos os comandos em R são executados e os resultados exibidos, com exceção dos gráficos. Você vai notar o símbolo &gt;, os comandos podem ser inseridos diretamente no console e executados pressionando Enter. Mas escrever código diretamente no console não é lá muito prático.\nA cada vez que uma sessão do R é inicializada, no Console são exibidas informações como a versão do R sendo utilizada. Para limpar o console voce pode usar o atalho CTRL + l. Lembre-se que ao limpar o console os resultados exibidos nele também são perdidos.\n : Environment and history\nNa aba Environment você encontrará todos os objetos criados durante a execução dos códigos. Variáveis criadas, dados importados, tudo isso é exibido em um formato de lista nesta aba. Na aba history consta o histórico de comandos executados na sessão atual do R.\n :Files, plots, packages and help\nNeste conjunto de abas fica o explorador de arquivos, são exibidos os gráficos que criamos (plots), a lista de pacotes disponíveis e também são exibidos os arquivos de ajuda do R.\nEstas janelas (A,B,C,D) podem ser configuradas ao gosto do usuário, para isso você pode acessar o menu View &gt; Pane &gt; Pane Layout e configurar seu ambiente de trabalho da forma que achar melhor.",
+    "crumbs": [
+      "R e RStudio"
+    ]
+  },
+  {
+    "objectID": "01_r_rstudio.html#vamos-praticar",
+    "href": "01_r_rstudio.html#vamos-praticar",
+    "title": "R e RStudio",
+    "section": "3  Vamos praticar?",
+    "text": "3  Vamos praticar?\n\nCrie um novo arquivo de script no editor.\nSalve o seu arquivo em um local apropriado.",
+    "crumbs": [
+      "R e RStudio"
+    ]
+  },
+  {
+    "objectID": "01_r_rstudio.html#a-sintaxe-do-r",
+    "href": "01_r_rstudio.html#a-sintaxe-do-r",
+    "title": "R e RStudio",
+    "section": "4 A sintaxe do R",
+    "text": "4 A sintaxe do R\nO R assim como qualquer linguagem de programação segue uma sintaxe1. Importante lembrar que o R é case sensitive, ou seja, a linguagem faz diferenciação entre caracteres maiúsculos e minúsculos. Isso é essencial na hora de invocar funções e objetos.\nSeu script deve sempre fazer sentido pra você para qualquer um que vá ler o seu código, pra isso utilizamos algumas convenções na hora de escrever código em R. Você pode utilizar o # para incluir comentários no seu código. Comentários são trechos de texto que não são interpretados como comandos no R e ajudam a organizar e até mesmo a explicar partes do código no script.\nCombinando # com - você pode criar seções dentro do script, gerando automaticamente um menu de navegação que facilita a movimentação em um script longo. Você pode ver este menu clicando no botão  no canto superior direito do seu script.\n\n# Carregando dados ----\n\n# Editando os dados ----\n\nQuando escrever o seu código evite linhas muito longas, quebre o código em múltiplas linhas pra torná-lo mais legível e permitir assim o uso inclusive de comentários no meio do fluxo de código.",
+    "crumbs": [
+      "R e RStudio"
+    ]
+  },
+  {
+    "objectID": "01_r_rstudio.html#objetos-e-funções",
+    "href": "01_r_rstudio.html#objetos-e-funções",
+    "title": "R e RStudio",
+    "section": "5 Objetos e Funções",
+    "text": "5 Objetos e Funções\n\n5.1 Objetos\nTudo em R é um objeto. Objetos podem ser de várias classes como vetores, listas, matrizes, gráficos e inclusive conjuntos de dados completos.\nOs nomes dos objetos em R são bem flexíveis, entretanto como comentado anteriormente, R é case sensitive e faz dinstinção entre letras maíusculas e minúsculas. Nomes de objetos em R podem conter letras, números (desde que não no início do nome), e caracteres especiais como _ e ..\nPara definirmos um objeto em R podemos utilizar &lt;- ou =, estes são os operadores de atribuição.\n\na &lt;- c(1:3)\na\n\n[1] 1 2 3\n\nb = \"Eu sou um objeto em R!\"\nb\n\n[1] \"Eu sou um objeto em R!\"\n\n\nSe você observar a aba Environment que já discutimos antes, verá que os objetos que criamos aparecem nesta aba. E no código acima para exibir o valor contido no objeto, basta chamar o nome do objeto como fizemos e executar a linha.\n\n\n5.2 Funções\nUma Função em linguagem de programação nada mais é do que um conjunto de operações que recebe argumentos e exibe um resultado. Funções requerem que os argumentos sejam informados entre (). Vamos tentar ilustrar de maneira mais fácil. Imagine uma Cafeteira como uma função. Para fazer Café (nosso resultado), precisamos fornecer a cafeteira água e pó (argumentos). A cafeteira então esquenta a água, despeja sobre o pó e coa (operações). E no final obtemos o nosso !!",
+    "crumbs": [
+      "R e RStudio"
+    ]
+  },
+  {
+    "objectID": "01_r_rstudio.html#pacotes",
+    "href": "01_r_rstudio.html#pacotes",
+    "title": "R e RStudio",
+    "section": "6 Pacotes",
+    "text": "6 Pacotes\n\n6.1 Instalando Pacotes\nQuando temos um conjunto grande de funções, podemos combiná-las em um Pacote R. O R é composto de inúmeros pacotes que desempenham as mais diversas funções. A instalação básica do R já conta com muitos pacotes disponíveis, e podemos instalar pacotes adicionais sempre que necessário utilizando pacotes oficiais no repositório do  CRAN ou disponíveis em repositórios no GitHub.\nPara instalar um ou mais pacotes no R podemos utilizar o comando install.packages. Ou você também pode instalar os pacotes na aba Packages clicando em  e procurando na barra pelo nome do pacote. Para instalar mais de um pacote de uma vez basta separar o nome dos pacotes com ,.\nEste material utiliza o pacote tidyverse que provavelmente se você instalou o R pela primeira vez pode ser que ainda não o tenha no seu computador, vamos instalar agora então? Basta rodar o código abaixo! Pode demorar alguns minutos a depender da sua configuração de computador e internet, tenha paciência jovem padawan!\n\ninstall.packages(\"tidyverse\")\n\n\n\n6.2 Carregando pacotes\nSó precisamos instalar os pacotes uma única vez. Os pacotes no R recebem atualizações constantes, então muitas vezes você será perguntado se quer atualizar os seus pacotes.\nUma vez instalados, para ter acesso as funções em um pacote precisamos carregar ele na nossa sessão no R. Para isso usamos o comando library.\n\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.1     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.1\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\n\n\n\n6.3 Mensagens de Aviso e Erro\nA maioria dos pacotes em R exibem mensagens de inicialização/carregamento. É muito importante se familiarizar com estas mensagens! No momento do carregamento o R avisa sobre erros no processo de inicialização, ou emite alertas importantes sobre conflitos em funções no pacote. Acostume-se a sempre checar as mensagens de inicialização para ter certeza que o pacote foi iniciado corretamente.",
+    "crumbs": [
+      "R e RStudio"
+    ]
+  },
+  {
+    "objectID": "01_r_rstudio.html#ajuda-do-r",
+    "href": "01_r_rstudio.html#ajuda-do-r",
+    "title": "R e RStudio",
+    "section": "7 Ajuda do R",
+    "text": "7 Ajuda do R\nTodo pacote do R vem acompanhado de sua documentação. A documentação é o primeiro lugar no qual você deve procurar ajuda para qualquer dúvida que lhe ocorrer. Muitos problemas para quem está começando a trabalhar com a linguagem vem justamente ao ignorar a documentação das funções e o arquivo de ajuda. Eles servem para te mostrar como a função funciona, quais seus argumentos e formatos de entrada e qual as saídas esperadas.\nAlém disso, muitos pacotes oferecem também um vasto conteúdo teórico a respeito das análises que realizam. Isso também auxilia a compreender o que está acontecendo ao utilizar determinada função. LEIAM A DOCUMENTAÇÃO SEMPRE!!!\nPara utilizar a ajuda do R você pode ir na aba Help e procurar pelos termos de interesse, ou pode utilizar a função help() dentro do código. Também é possível acessar a documentação de uma função específica colocando uma ? antes da chamada da função. Colocando ?? antes de uma palavra faz uma busca em toda a documentação pelo termo informado. Execute os códigos abaixo.\n\n# Ajuda sobre a função soma sum()\n\nhelp(sum)\n\n# Mesma coisa de maneira diferente\n\n?sum\n\n# Busca pelo termo `sum`\n\n??sum",
+    "crumbs": [
+      "R e RStudio"
+    ]
+  },
+  {
+    "objectID": "01_r_rstudio.html#footnotes",
+    "href": "01_r_rstudio.html#footnotes",
+    "title": "R e RStudio",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nSintaxe, em linguagem de programação, refere-se ao conjunto de regras e estruturas que definem a forma correta de escrever código em uma linguagem específica. Assim como a gramática em uma língua natural, a sintaxe determina como os comandos, instruções e expressões devem ser organizados e escritos para que o código seja compreendido e executado corretamente pelo compilador ou interpretador da linguagem.↩︎",
+    "crumbs": [
+      "R e RStudio"
+    ]
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Introdução ao GNU/Linux",
+    "title": "Introdução ao  com tidyverse",
     "section": "",
-    "text": "Este é um curso introdutório ao sistema operacional GNU/Linux ministrado para o Grupo de Pesquisas em Conservação (GACOM) na Universidade Estadual do Sudoeste da Bahia (UESB), campus Jequié. O objetivo deste curso é oferecer aos alun@s um primeiro contato com o sistema operacional, apresentando suas principais características, sistema de arquivos e diretórios e operações comuns em um terminal de comando.",
+    "text": "Este é um curso introdutório a Linguagem de Programação  com tidyverse. Esse material foi desenvolvido como suporte as atividades do Grupo de Pesquisas em Genômica Aplicada a Conservação e Melhoramento (GACOM) na Universidade Estadual do Sudoeste da Bahia (UESB), campus Jequié. O objetivo deste curso é oferecer aos alun@s um primeiro contato com a linguagem. Este material pode ser compartilhado desde que não seja comercializado. Agradecemos qualquer comentário e sugestão de correção ou melhoria do material.",
     "crumbs": [
       "Bem-vind@s!"
     ]
@@ -12,31 +102,161 @@
   {
     "objectID": "index.html#apresentacao",
     "href": "index.html#apresentacao",
-    "title": "Introdução ao GNU/Linux",
+    "title": "Introdução ao  com tidyverse",
     "section": "",
-    "text": "Este é um curso introdutório ao sistema operacional GNU/Linux ministrado para o Grupo de Pesquisas em Conservação (GACOM) na Universidade Estadual do Sudoeste da Bahia (UESB), campus Jequié. O objetivo deste curso é oferecer aos alun@s um primeiro contato com o sistema operacional, apresentando suas principais características, sistema de arquivos e diretórios e operações comuns em um terminal de comando.",
+    "text": "Este é um curso introdutório a Linguagem de Programação  com tidyverse. Esse material foi desenvolvido como suporte as atividades do Grupo de Pesquisas em Genômica Aplicada a Conservação e Melhoramento (GACOM) na Universidade Estadual do Sudoeste da Bahia (UESB), campus Jequié. O objetivo deste curso é oferecer aos alun@s um primeiro contato com a linguagem. Este material pode ser compartilhado desde que não seja comercializado. Agradecemos qualquer comentário e sugestão de correção ou melhoria do material.",
     "crumbs": [
       "Bem-vind@s!"
     ]
   },
   {
-    "objectID": "index.html#windows-subsystem-for-linux-wsl",
-    "href": "index.html#windows-subsystem-for-linux-wsl",
-    "title": "Introdução ao GNU/Linux",
-    "section": "Windows Subsystem for Linux (WSL)",
-    "text": "Windows Subsystem for Linux (WSL)\nO WSL é uma ferramenta da Microsoft que permite a instalação de uma distribuição Linux sem a necessidade de dual-boot. Desta maneira o usuário tem acesso a ferramentas do Linux como Bash, integradas ao ambiente de ferramentas do Windows utilizando o PowerShell. A documentação oficial do WSL encontra-se neste link e também no menu ao lado em um tutorial passo-a-passo.",
+    "objectID": "index.html#autor",
+    "href": "index.html#autor",
+    "title": "Introdução ao  com tidyverse",
+    "section": "Autor",
+    "text": "Autor\n\n\n\n\n\n\nMe chamo Paulo Barros, sou Bacharel em Ciências Biológicas com ênfase em Genética pela UESB, Mestre em Genética, Biodiversidade e Conservação pela UESB. Tenho atuado como Cientista de Dados na área da Biologia e Melhoramento Animal desde o final da graduação colaborando em trabalhos das mais diversas áreas. Também tenho experiência oferecendo cursos e mentorias em Análise de Dados com a Linguagem R para estudantes de graduação e pós-graduação, bem como para professores e profissionais de áreas correlatas da Biologia. Atualmente sou aluno de Doutorado no PPG em Zootecnia (PPZ) na área de Melhoramento Animal aplicado a pequenos ruminantes.",
     "crumbs": [
       "Bem-vind@s!"
     ]
   },
   {
-    "objectID": "index.html#quem-ministra",
-    "href": "index.html#quem-ministra",
-    "title": "Introdução ao GNU/Linux",
-    "section": "Quem ministra?",
-    "text": "Quem ministra?\nMe chamo Paulo Barros, sou Bacharel em Ciências Biológicas com ênfase em genética pela UESB, e atualmente aluno de Mestrado nos programas de Pós-Graduação em Estatística Aplicada e Biometria pela Universidade Federal de Viçosa (UFV) e em Genética, Biodiversidade e Conservação pela UESB. Tenho atuado como Cientista de Dados na área da Biologia desde o final da graduação colaborando em trabalhos das mais diversas áreas. Também tenho experiência oferecendo cursos e mentorias em Análise de Dados com a Linguagem R para estudantes de graduação e pós-graduação, bem como para professores e profissionais de áreas correlatas da Biologia.",
+    "objectID": "02_intro_tidy.html",
+    "href": "02_intro_tidy.html",
+    "title": "Introdução ao tidyverse",
+    "section": "",
+    "text": "Como em toda linguagem de programação, respeitando-se a sintaxe, existem diferentes maneiras de se resolver o mesmo problema, e também de escrever código em R.\nA escolha da filosofia de cógido ou estilo de código é puramente pessoal. Há quem prefira programar usando o que chamamos de Base R ou R Base. Esse estilo baseia-se em utilizar puramente a sintaxe original da linguagem, não sendo dependente de pacotes que necessitem de constantes atualizações. Porém, esse também é um caminho com uma curva de aprendizado mais elevada para os que nunca tiveram contato com programação.\nUma filosofia alternativa e que hoje tem se tornado cada vez mais o padrão inicial de introdução ao R é o caminho do tidyverse. Um conjunto de pacotes pensado para tornar a vida do usuário de R mais fácil seus códigos mais intuitivos e legíveis.\nSe você ainda não instalou este pacote pode usar\n\n\n\n\nListing 1: Instalando Pacotes\n\n\ninstall.packages('tidyverse')\n\n\n\n\nE se ainda tem dúvidas de como instalar pacotes no R dá uma olhada aqui..\nSe já estiver tudo instalado podemos carregar o nosso pacote com\n\nlibrary(tidyverse)",
     "crumbs": [
-      "Bem-vind@s!"
+      "Introdução ao _tidyverse_"
+    ]
+  },
+  {
+    "objectID": "02_intro_tidy.html#filosofias-de-código",
+    "href": "02_intro_tidy.html#filosofias-de-código",
+    "title": "Introdução ao tidyverse",
+    "section": "",
+    "text": "Como em toda linguagem de programação, respeitando-se a sintaxe, existem diferentes maneiras de se resolver o mesmo problema, e também de escrever código em R.\nA escolha da filosofia de cógido ou estilo de código é puramente pessoal. Há quem prefira programar usando o que chamamos de Base R ou R Base. Esse estilo baseia-se em utilizar puramente a sintaxe original da linguagem, não sendo dependente de pacotes que necessitem de constantes atualizações. Porém, esse também é um caminho com uma curva de aprendizado mais elevada para os que nunca tiveram contato com programação.\nUma filosofia alternativa e que hoje tem se tornado cada vez mais o padrão inicial de introdução ao R é o caminho do tidyverse. Um conjunto de pacotes pensado para tornar a vida do usuário de R mais fácil seus códigos mais intuitivos e legíveis.\nSe você ainda não instalou este pacote pode usar\n\n\n\n\nListing 1: Instalando Pacotes\n\n\ninstall.packages('tidyverse')\n\n\n\n\nE se ainda tem dúvidas de como instalar pacotes no R dá uma olhada aqui..\nSe já estiver tudo instalado podemos carregar o nosso pacote com\n\nlibrary(tidyverse)",
+    "crumbs": [
+      "Introdução ao _tidyverse_"
+    ]
+  },
+  {
+    "objectID": "02_intro_tidy.html#diretório-de-trabalho",
+    "href": "02_intro_tidy.html#diretório-de-trabalho",
+    "title": "Introdução ao tidyverse",
+    "section": "2 Diretório de Trabalho",
+    "text": "2 Diretório de Trabalho\nO diretório de trabalho é a pasta raiz na qual a sua sessão do R atual está baseada e procurará pelos arquivos de dados, e também aonde salvará arquivos gerados como resultados de alguma função.\nVocê pode definir o seu diretório de trabalho indo no menu Session &gt; Set Working Directory &gt; Change Directory… ou usar o atalho CTRL + Shift + H. Na janela que aparece a seguir, basta escolher a pasta que deseja utilizar como seu diretório de trabalho.\nO passo anterior nada mais é do que uma maneira visual de invocar a função setwd. Esta função recebe como argumento um caminho de diretório e o define como diretório de trabalho.\n\n\n\n\n\n\nAtenção com os caminhos de diretório!\n\n\n\nAo definir os caminhos de diretório via código com setwd é importante prestar atenção a como o caminho é definido no seu sistema operacional.\n C:\\Users\\SeuNome\\Documents\\Projeto\n  /home/SeuNome/Documentos/Projeto\nNote a diferença entre os usos da \\ e / nos diferentes sistemas. Qualquer erro na escrita do caminho acarretará em um erro na função já que não será possível encontrar o diretório especificado.\nAo criar diretórios em seu computador evite usar caracteres especiais, nomes longos e espaços. Torne sua vida mais fácil!",
+    "crumbs": [
+      "Introdução ao _tidyverse_"
+    ]
+  },
+  {
+    "objectID": "02_intro_tidy.html#projetos-em-r",
+    "href": "02_intro_tidy.html#projetos-em-r",
+    "title": "Introdução ao tidyverse",
+    "section": "3 Projetos em R",
+    "text": "3 Projetos em R\nUm projeto em R é um arquivo com extensão .Rproj que mantém todos os arquivos em um diretório (scripts, dados, figuras, etc.) em um grupo. Quando criamos um projeto em R automaticamente o nosso diretório de trabalho é definido como a pasta que contém o nosso arquivo .Rproj. Isso facilita o trabalho colaborativo e evita problemas de definição de caminhos de arquivos.\nPara criar um novo projeto voce pode acessar o menu File &gt; New Project… ou usar o botão  no canto superior direito do seu RStudio. Para abrir um projeto existente pode acessar File &gt; Open project… e escolher o projeto que deseja abrir.\nQuando criamos um projeto temos a opção de criar um novo diretório associado ao projeto, ou podemos usar um diretório já criado previamente e associá-lo a nosso projeto.\n\n\n\n\n\n\nOrganização é tudo!\n\n\n\nAcostume-se a organizar o seu diretório de trabalho criando subdiretórios para armazenar os diferentes arquivos do seu projeto. Você pode por exemplo usar uma pasta para os scripts, uma para os seus dados, outras para os resultados, etc.",
+    "crumbs": [
+      "Introdução ao _tidyverse_"
+    ]
+  },
+  {
+    "objectID": "02_intro_tidy.html#entrada-de-dados",
+    "href": "02_intro_tidy.html#entrada-de-dados",
+    "title": "Introdução ao tidyverse",
+    "section": "4 Entrada de Dados",
+    "text": "4 Entrada de Dados\nNo R é possível fazer o carregamento de dados nos mais diversos formatos. Os arquivos em formato de texto (.csv,.txt) são os mais compatíveis entre diferentes plataformas. Mas é possível também carregar por exemplo arquivos em formato de planilhas como .xls e .xlsx.\nEmbora seja possível fazer o carregamento dos arquivos de maneira visual usando o botão  na aba Environment, é recomendado que você se acostume a carregar os seus dados diretamente via script uma vez que em determinadas aplicações você não terá acesso a interface do RStudio para executar um fluxo de análises em um servidor remoto por exemplo.\n\n4.1 Importando arquivos de texto\nPara importar um arquivo .csv é preciso ter atenção ao tipo de arquivo. CSV significa Comma Separated Values ou Arquivo separado por vírgulas, entretanto, é comum principalmente no Windows que arquivos .csv sejam gerados utilizando ; como separador de campos.\nPara os exemplos a seguir utilizaremos alguns conjuntos de dados de exemplo, no meu setup estes arquivos estão dentro de um diretório chamado data. Podemos usar o comando list.files para visualizar os arquivos disponíveis nessa pasta:\n\nlist.files(path = \"data\")\n\n[1] \"data_cows.txt\"       \"dietas_galinha.xlsx\" \"P365.csv\"           \n[4] \"P550.csv\"            \"Peso365.csv\"         \"PN.csv\"             \n\n\nO argumento path informa em qual pasta desejo listar os meus arquivos, se omitirmos esse argumento o comando fará a busca no diretório raiz que está setado como diretório de trabalho na sessão atual.\nVocê pode consultar qual diretório é o atual de trabalho com o comando getwd:\n\ngetwd()\n\n[1] \"/home/paulo/Insync/pbarrosbio@gmail.com/Google Drive/PROJECTS/intro_r_tidyverse\"\n\n\nVamos importar o arquivo Peso365.csv, este é um arquivo .csv padrão que tem os campos separados por vírgulas. Você pode abrir o arquivo para inspecioná-lo em um editor de texto por exemplo.\n\np365 &lt;- read.csv(file = \"data/Peso365.csv\")\n\nNo comando acima estamos fazendo a leitura do nosso arquivo e armazenando em um objeto chamado p365. Podemos testar se a nossa importação foi bem sucedida pedindo para exibir as linhas iniciais e finais do nosso arquivo com os comandos head e tail respectivamente.\n\nhead(p365)\n\n  Animal Pai P365\n1      1   A  322\n2      2   A  324\n3      3   A  321\n4      4   A  330\n5      5   A  327\n6      6   A  325\n\ntail(p365)\n\n   Animal Pai P365\n31     31   F  311\n32     32   F  333\n33     33   F  317\n34     34   F  315\n35     35   F  330\n36     36   F  318\n\n\n\n\n\n\n\n\nPerguntar não custa nada!\n\n\n\nLembre-se que você pode pedir ajuda ao R sobre qualquer função.\nhelp(head) help(tail)\n\n\nNem todo arquivo de texto é separado por algum caracter especial, alguns utilizam espaços ou tabulações para separar os campos. Agora iremos importar o arquivo data_cows.txt.\n\ncows &lt;- read.table(file = \"data/data_cows.txt\",\n                   header = TRUE)\n\nObserve que neste caso precisamos informar o argumento header que indica para a função se o nosso arquivo possui um cabeçalho de colunas ou não. Esse é um detalhe importante na hora de importar arquivos no R, uma vez que se não informamos a presença de uma linha de cabeçalho a função criará novos nomes para as colunas e a linha de cabeçalho sera interpretada como uma linha de dados.\n\nhead(cows)\n\n  animal   iron      infect weight day\n1    A01 NoIron NonInfected    110 122\n2    A01 NoIron NonInfected    135 150\n3    A01 NoIron NonInfected    150 166\n4    A01 NoIron NonInfected    160 179\n5    A01 NoIron NonInfected    170 219\n6    A01 NoIron NonInfected    175 247\n\ntail(cows)\n\n    animal iron   infect weight day\n593    A26 Iron Infected    325 627\n594    A26 Iron Infected    325 655\n595    A26 Iron Infected    325 668\n596    A26 Iron Infected    340 723\n597    A26 Iron Infected    335 751\n598    A26 Iron Infected    345 781\n\n\n\n\n4.2 Importando arquivos de Excel\nPara importar arquivos no formato do Excel é necessário a utilização do pacote readxl. Se não tiver instalado faça a instalação:\n\ninstall.packages(\"readxl\")\n\nUma vez instalado podemos carregaro pacote e fazer a importação do nosso arquivo dietas_galinhas.xslx.\n\nlibrary(readxl)\n\ngalinhas &lt;- read_xlsx(path = \"data/dietas_galinha.xlsx\")\n\n\nhead(galinhas)\n\n# A tibble: 6 × 6\n    rep `Dieta A` `Dieta B` `Dieta C` `Dieta D` `Dieta E`\n  &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;\n1     1       179       309       243       423       368\n2     2       160       229       230       340       390\n3     3       136       181       248       392       379\n4     4       227       141       327       339       260\n5     5       217       260       329       341       404\n6     6       168       203       250       226       318\n\ntail(galinhas)\n\n# A tibble: 6 × 6\n    rep `Dieta A` `Dieta B` `Dieta C` `Dieta D` `Dieta E`\n  &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;\n1     1       179       309       243       423       368\n2     2       160       229       230       340       390\n3     3       136       181       248       392       379\n4     4       227       141       327       339       260\n5     5       217       260       329       341       404\n6     6       168       203       250       226       318",
+    "crumbs": [
+      "Introdução ao _tidyverse_"
+    ]
+  },
+  {
+    "objectID": "02_intro_tidy.html#alguns-comandos-úteis",
+    "href": "02_intro_tidy.html#alguns-comandos-úteis",
+    "title": "Introdução ao tidyverse",
+    "section": "5 Alguns comandos úteis",
+    "text": "5 Alguns comandos úteis\nAlguns comandos básicos são bastante úteis para verificar a sanidade dos dados na hora da importação. Se você olhar na sua aba Environment vai perceber que todos os objetos que criamos ao importar os dados agora estão listados.\nPodemos visualizar os nossos dados dando um duplo clique sobre o objeto desejado ou usando a função View. Isso abrirá nosso conjunto de dados no visualizador do RStudio.\n\nView(p365)\n\n\n\n\n\n\n\nAtenção!\n\n\n\nCuidado ao tentar visualizar conjuntos de dados muito grandes, isso pode consumir uma quantidade significativa de memória e até mesmo causar uma parada da sua sessão no R.\n\n\nAlguns outros comandos úteis incluem:\n\n# Exibe os nomes das colunas de um data.frame\n\nnames(p365)\n\n[1] \"Animal\" \"Pai\"    \"P365\"  \n\n# Exibe informações sobre a estrutura do conjunto de dados\n\nstr(galinhas)\n\ntibble [6 × 6] (S3: tbl_df/tbl/data.frame)\n $ rep    : num [1:6] 1 2 3 4 5 6\n $ Dieta A: num [1:6] 179 160 136 227 217 168\n $ Dieta B: num [1:6] 309 229 181 141 260 203\n $ Dieta C: num [1:6] 243 230 248 327 329 250\n $ Dieta D: num [1:6] 423 340 392 339 341 226\n $ Dieta E: num [1:6] 368 390 379 260 404 318\n\n# Exibe o tipo de objeto\n\nclass(p365)\n\n[1] \"data.frame\"\n\nclass(galinhas)\n\n[1] \"tbl_df\"     \"tbl\"        \"data.frame\"\n\n\nPercebeu a diferença entre o tipo de objeto p365 e galinhas? O primeiro é do tipo data.frame que é o objeto padrão de tabelas do R. O segundo é do tipo tbl_df que é um tipo especial de data.frame com algumas melhorias. A este tipo de tabela é chamada de tibble, e é o formato padrão de tabelas utilizados pelo pacote tidyverse. A partir daqui comecaremos a utilizar as funções deste pacote, então se ainda não instalou veja o código em Listing 1.",
+    "crumbs": [
+      "Introdução ao _tidyverse_"
+    ]
+  },
+  {
+    "objectID": "02_intro_tidy.html#selecionando-variáveis",
+    "href": "02_intro_tidy.html#selecionando-variáveis",
+    "title": "Introdução ao tidyverse",
+    "section": "6 Selecionando variáveis",
+    "text": "6 Selecionando variáveis\nSe ainda não carregou o tidyverse a hora é agora.\n\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.1     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.1\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\n\nSeleção de variáveis é uma das tarefas mais triviais na edição de dados. Muitas das vezes precisamos fazer recortes nos dados, ou selecionar um conjunto específico de variáveis ou até mesmo uma única variável para executar operações.\nPara isso podemos utilizar a função select que é parte do pacote dplyr, um dos componentes do tidyverse. Vamos relembrar os nomes das nossas colunas no dataset galinhas\n\nnames(galinhas)\n\n[1] \"rep\"     \"Dieta A\" \"Dieta B\" \"Dieta C\" \"Dieta D\" \"Dieta E\"\n\n\n\nselect(galinhas,\"Dieta A\",\"Dieta C\",\"Dieta E\")\n\n# A tibble: 6 × 3\n  `Dieta A` `Dieta C` `Dieta E`\n      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;\n1       179       243       368\n2       160       230       390\n3       136       248       379\n4       227       327       260\n5       217       329       404\n6       168       250       318\n\n\nObserve que na hora de informar as colunas a selecionar eu precisei usar \"\" já no nome das variáveis existe um espaço sendo usado. Por isso que é sempre recomendado evitar este tipo de nomes de variáveis, quanto mais pudermos facilitar a nossa vida melhor! Mas essa é uma boa oportunidade para apresentar mais um pacote útil.\n\ninstall.packages(\"janitor\")\n\nO pacote janitor é muito útil na hora de realizar tarefas de sanitização de dados. Vamos usar esse pacote para renomear as nossas colunas de uma maneira mais legível e compatível com a sintaxe do R.\n\nlibrary(janitor)\n\n\nAttaching package: 'janitor'\n\n\nThe following objects are masked from 'package:stats':\n\n    chisq.test, fisher.test\n\nclean_names(galinhas)\n\n# A tibble: 6 × 6\n    rep dieta_a dieta_b dieta_c dieta_d dieta_e\n  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;\n1     1     179     309     243     423     368\n2     2     160     229     230     340     390\n3     3     136     181     248     392     379\n4     4     227     141     327     339     260\n5     5     217     260     329     341     404\n6     6     168     203     250     226     318\n\n\nPercebam que embora tenhamos utilizado a função clean_names nosso conjunto de dados continua o mesmo já que não atualizamos o nosso objeto para fixar as mudanças que fizemos.\nMuitas vezes não queremos alterar o nosso objeto original e podemos criar novos objetos, ou simplesmente sobrescrever o objeto antigo com o novo com as mudanças aplicadas. Vamos atualizar o nosso objeto.\n\n# limpando os nomes das colunas e sobrescrevendo o nosso objeto\n\ngalinhas &lt;- clean_names(galinhas)\n\n# fazendo novamente a seleção das variáveis agora com \n# as colunas renomeadas\n\nselect(galinhas,dieta_a, dieta_c,dieta_e)\n\n# A tibble: 6 × 3\n  dieta_a dieta_c dieta_e\n    &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;\n1     179     243     368\n2     160     230     390\n3     136     248     379\n4     227     327     260\n5     217     329     404\n6     168     250     318\n\n\nObservem que agora que compatibilizamos o nome das nossas colunas o uso de \"\" não é mais necessário, podemos simplesmente passar pra função o nome das colunas.\n\n6.1 Seleção de intervalos\nEm R o caracter : é utilizado para gerar um intervalo. Por exemplo:\n\n1:10\n\n [1]  1  2  3  4  5  6  7  8  9 10\n\n\nPodemos utilizar esse operador também para selecionar intervalos de colunas/variáveis:\n\nselect(galinhas, dieta_a:dieta_c)\n\n# A tibble: 6 × 3\n  dieta_a dieta_b dieta_c\n    &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;\n1     179     309     243\n2     160     229     230\n3     136     181     248\n4     227     141     327\n5     217     260     329\n6     168     203     250\n\n\nO tipo de seleção com a função select sempre retorna um data.frame ou uma tibble. Mas podemos também querer acessar os valores de determinada coluna como um vetor. Para isso podemos usar $ para indexar a coluna que quisermos.\n\ngalinhas$rep\n\n[1] 1 2 3 4 5 6\n\ngalinhas$dieta_a\n\n[1] 179 160 136 227 217 168\n\n\nA notação $ é do R Base, mas podemos realizar a mesma operação usando a função pull do dplyr.\n\npull(galinhas, rep)\n\n[1] 1 2 3 4 5 6",
+    "crumbs": [
+      "Introdução ao _tidyverse_"
+    ]
+  },
+  {
+    "objectID": "02_intro_tidy.html#filtros",
+    "href": "02_intro_tidy.html#filtros",
+    "title": "Introdução ao tidyverse",
+    "section": "7 Filtros",
+    "text": "7 Filtros\nA função filter nos permite selecionar subgrupos dos nossos dados baseado em critérios fornecidos. Os filtros podem ser baseados em operadores matemáticos\n\n&lt; menor que\n&gt; maior que\n== igual\n!= diferente\n\nou pode também usar outras funções condicionais como is.na() que testa se uma variável contém dados faltantes NA, ou between(a,b) que checa se os valores estão em um determinado intevalo definido.\n\nfilter(p365,\n       Pai == \"A\")\n\n  Animal Pai P365\n1      1   A  322\n2      2   A  324\n3      3   A  321\n4      4   A  330\n5      5   A  327\n6      6   A  325\n\nsummary(p365$P365)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  298.0   318.8   323.0   322.2   328.0   338.0 \n\nfilter(p365,\n       between(P365, 280, 310))\n\n  Animal Pai P365\n1     19   D  306\n2     23   D  300\n3     24   D  298",
+    "crumbs": [
+      "Introdução ao _tidyverse_"
+    ]
+  },
+  {
+    "objectID": "02_intro_tidy.html#pipe",
+    "href": "02_intro_tidy.html#pipe",
+    "title": "Introdução ao tidyverse",
+    "section": "8 Pipe",
+    "text": "8 Pipe\nEm um fluxo de análises é comum realizarmos tarefas sequenciais. O operador Pipe |&gt; nos permite combinar funções em sequência retornando ao final o objeto modificado pela série de operações que realizamos. Isso nos poupa tempo e evita que sejam criados objetos intermediários para armazenar o resultado das diversas operações.\nAlgumas regras são importantes de se notar:\n\nO |&gt; opera da esquerda para a direita, ou seja, o nosso objeto de entrada está sempre a esquerda.\n\n\n# o nosso data.frame inicia a linha de código a esquerda\n\np365 |&gt; head()\n\n  Animal Pai P365\n1      1   A  322\n2      2   A  324\n3      3   A  321\n4      4   A  330\n5      5   A  327\n6      6   A  325\n\n\n\nO |&gt; sempre é o último item em uma linha de código quando quebramos as linhas para tornar a sequência mais legível.\n\n\n# Podemos quebrar o código em múltiplas linhas\n# mas o operador de pipe sempre ao final de cada linha\n\np365 |&gt;\n  filter(Pai == \"B\" & P365 &gt;= 320 ) |&gt;\n  pull(P365)\n\n[1] 323 328 320 328 324 322",
+    "crumbs": [
+      "Introdução ao _tidyverse_"
+    ]
+  },
+  {
+    "objectID": "02_intro_tidy.html#criando-ou-modificando-variáveis",
+    "href": "02_intro_tidy.html#criando-ou-modificando-variáveis",
+    "title": "Introdução ao tidyverse",
+    "section": "9 Criando ou Modificando Variáveis",
+    "text": "9 Criando ou Modificando Variáveis\nA função mutate nos permite modificar uma variável ou criar novas variáveis, sejam elas a partir de novos valores ou derivadas de nossas variáveis originais.\nPor exemplo, no dataset p365 a variável P365 está em Kg, podemos criar uma nova variável a partir desta que expresse o peso dos animais em arrobas (1 arroba = 15 Kg)\n\np365 |&gt;\n  mutate(P365_ARR = P365/15) |&gt;\n  head()\n\n  Animal Pai P365 P365_ARR\n1      1   A  322 21.46667\n2      2   A  324 21.60000\n3      3   A  321 21.40000\n4      4   A  330 22.00000\n5      5   A  327 21.80000\n6      6   A  325 21.66667\n\n\nPor padrão nossas novas variáveis serão incluídas ao final do nosso conjunto de dados, mas este comportamento pode ser modificado passando argumentos para a função. Quer saber como? Dá uma olhada na documentação da função usando ?mutate.\nVale ressaltar mais uma vez que para que as mudanças sejam fixadas, precisamos ou atualizar o nosso conjunto de dados ou criar um novo objeto para salvar estas mudanças.\nDuas funções muito úteis que são comumente utilizadas em conjunto com o mutate são case_when e if_else. Estas funções nos permite utilizar filtros ou condições para realizar mudanças no banco de dados. São muito úteis quando precisamos criar novas variáveis como classes, ou alterar observações nos dados que estão dentro de faixas específicas de valores/classes.\nNovamente, fique a vontade pra consultar a documentação destas duas funções.",
+    "crumbs": [
+      "Introdução ao _tidyverse_"
+    ]
+  },
+  {
+    "objectID": "02_intro_tidy.html#salvando-dados",
+    "href": "02_intro_tidy.html#salvando-dados",
+    "title": "Introdução ao tidyverse",
+    "section": "10 Salvando dados",
+    "text": "10 Salvando dados\nComo mencionado anteriormente, formatos de texto são sempre os mais compatíveis entre plataformas e portanto os mais recomendados.\nAs funções write_csv e write.table nos permitem salvar arquivos em .csv e em .txt respectivamente. A diferença básica entre os dois é que ao salvar em csv a função padroniza o arquivo separado por vírgulas. Ja em formato texto é possível definir o separador de valores do arquivo.\n\n# Salvando em .csv\n\np365 |&gt;\n  mutate(P365_ARR = P365/15) |&gt;\n  write_csv(file = \"p365_novo.csv\")\n\n# Salvando como .txt\n\np365 |&gt;\n  mutate(P365_ARR = P365/15) |&gt;\n  write.table(file = \"p365_novo.txt\")\n\nImportante lembrar que os arquivos serão salvos na pasta raiz do projeto, ou no diretório configurado como diretório de trabalho.\nExiste uma função write_delim do pacote readr que é similar a write.table, fique a vontade para explorar a documentação e comparar as características das duas funções.",
+    "crumbs": [
+      "Introdução ao _tidyverse_"
+    ]
+  },
+  {
+    "objectID": "03_data_editing.html",
+    "href": "03_data_editing.html",
+    "title": "Processamento de Dados",
+    "section": "",
+    "text": "O processamento de dados é sem dúvida a etapa mais importante e que mais consome tempo em um fluxo de análises. Nesta seção vamos abordar algumas funções básicas do tidyverse que auxiliam bastante na realização de tarefas triviais de edição de dados.",
+    "crumbs": [
+      "Processamento de Dados"
+    ]
+  },
+  {
+    "objectID": "03_data_editing.html#combinando-datasets",
+    "href": "03_data_editing.html#combinando-datasets",
+    "title": "Processamento de Dados",
+    "section": "1 Combinando Datasets",
+    "text": "1 Combinando Datasets\n\nlibrary(tidyverse)\n\nEm muitas situações é comum que seja necessário combinar múltiplas fontes de dados. Em melhoramento animal por exemplo é comum que informações dos mesmos animais estejam dispersas por arquivos de dados individuais.\nVamos dar uma olhada nos datasets que temos disponíveis? Se lembram como fazer?\n\nlist.files(path = \"data\", pattern = \"NEL.*.csv\")\n\n[1] \"NELP365.csv\" \"NELP550.csv\" \"NELPN.csv\"  \n\n\nOs arquivos NELPN.csv, NELP365.csv e NELP550.csv possuem dados de 50 animais com respectivas medidas biométricas para Peso ao Nascimento (PN), Peso a um ano (P365) e Peso ao Sobreano (P550). Estes dados foram simulados com base em animais da raça Nelore.\nUma vez que os mesmos animais estão nos três conjuntos de dados, nosso objetivo é unir estes arquivos em um único conjunto de dados. Vamos fazer isso de duas maneiras diferentes.\n\n1.1 Modo Básico\n\nCarregamos os arquivos individualmente cada um em um objeto\nUsamos as funções de join do tidyverse para unir os objetos\n\n\npn &lt;- read_csv(\"data/NELPN.csv\")\n\nRows: 50 Columns: 2\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (1): ID\ndbl (1): PN\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\nglimpse(pn)\n\nRows: 50\nColumns: 2\n$ ID &lt;chr&gt; \"RV143\", \"YB821\", \"QA008\", \"WT997\", \"IT185\", \"PD544\", \"SL754\", \"MC3…\n$ PN &lt;dbl&gt; 36.04, 31.09, 32.33, 28.35, 25.06, 37.53, 33.23, 24.19, 30.05, 37.9…\n\np365 &lt;- read_csv(\"data/NELP365.csv\")\n\nRows: 50 Columns: 2\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (1): ID\ndbl (1): P365\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\nglimpse(p365)\n\nRows: 50\nColumns: 2\n$ ID   &lt;chr&gt; \"RV143\", \"YB821\", \"QA008\", \"WT997\", \"IT185\", \"PD544\", \"SL754\", \"M…\n$ P365 &lt;dbl&gt; 211.15, 194.81, 186.59, 192.42, 202.37, 189.50, 197.18, 160.95, 2…\n\np550 &lt;- read_csv(\"data/NELP550.csv\")\n\nRows: 50 Columns: 2\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (1): ID\ndbl (1): P550\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\nglimpse(p550)\n\nRows: 50\nColumns: 2\n$ ID   &lt;chr&gt; \"RV143\", \"YB821\", \"QA008\", \"WT997\", \"IT185\", \"PD544\", \"SL754\", \"M…\n$ P550 &lt;dbl&gt; 290.43, 304.21, 305.59, 285.34, 331.91, 273.09, 295.91, 335.95, 2…\n\n\nA função glimpse é bastante útil pra nos mostrar uma prévia dos nossos dados.\nAgora que nossos arquivos já foram carregados, podemos fazer a combinação (merge) dos dados. Para este tipo de operação no qual temos os mesmos animais e variáveis medidas em arquivos separados, usaremos a ID de cada animal como uma chave de identificação entre os conjuntos de dados, desta maneira sabemos que teremos cada observação de cada animal corretamente alocada no nosso novo conjunto de dados.\nNo nosso caso usaremos a função inner_join do dplyr. Esta função recebe dois conjuntos de dados e combina as observações somente para os índices em comum em ambos os arquivos. Como temos três datasets, usaremos o pipe para fazer a operação em um único fluxo de código.\n\ndados_nelore &lt;- inner_join(pn,p365, by = join_by(ID)) |&gt;\n  inner_join(p550, by = join_by(ID))\n\ndados_nelore |&gt;\n  head()\n\n# A tibble: 6 × 4\n  ID       PN  P365  P550\n  &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 RV143  36.0  211.  290.\n2 YB821  31.1  195.  304.\n3 QA008  32.3  187.  306.\n4 WT997  28.4  192.  285.\n5 IT185  25.1  202.  332.\n6 PD544  37.5  190.  273.\n\n\nParece confuso, mas é bem simples. Vamos por partes.\ninner_join(pn,p365, by = join_by(ID)) : primeiro passamos os nossos conjuntos de dados como argumentos para a função inner_join, e com o argumento by fazemos a definição de qual variável será nossa chave de identificação ou índice, neste caso com by = join_by(ID) estamos informando que a coluna ID é a chave.\nAo fazermos isso já criamos um novo objeto que é a junção dos dados de PN e P365, e como mencionamos anteriormente, o |&gt; lê sempre da esquerda para a direita, assim o nosso novo conjunto de dados do merge se torna a entrada da próxima função\ninner_join(p550, by = join_by(ID)) : aqui o raciocínio é o mesmo, com a diferença de que como estamos no fluxo do pipe, o primeiro argumento é omitido pois o R já sabe que esse argumento vem do pipe anterior, e informamos então o conjunto de dados restante p550, a chave continua a mesma. E assim nosso merge está completo!\nExistem outros tipos de joins no dplyr e você pode como sempre consultar a documentação para saber os detalhes e diferenças entre eles e quando utilizar cada tipo.\n\n\n\nTipos de Join. Fonte: pozdniakov.github.io\n\n\n\n\n1.2 Modo Otimizado\nNo nosso exemplo temos somente três datasets que desejamos unir, mas existem situações aonde o número de datasets pode ser grande bem como o volume de dados contidos neles. Nessas situações podemos lançar mão de funções otimizadas para realizar tarefas repetitivas. A função map do pacote purrr é nossa amiga!\nVamos realizar a mesma operação do modo anterior mas de uma maneira mais eficiente tanto do ponto de vista de código quanto de gerenciamento de recursos do computador.\n\nnelore &lt;- list.files(path = \"data\",\n                     pattern = \"NEL.*.csv\",\n                     full.names = TRUE) |&gt;\n  map(read_csv) |&gt;\n  reduce(inner_join, by = join_by(ID)) |&gt;\n  select(ID,PN,P365,P550)\n\nRows: 50 Columns: 2\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (1): ID\ndbl (1): P365\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\nRows: 50 Columns: 2\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (1): ID\ndbl (1): P550\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\nRows: 50 Columns: 2\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (1): ID\ndbl (1): PN\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\nnelore |&gt; head()\n\n# A tibble: 6 × 4\n  ID       PN  P365  P550\n  &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 RV143  36.0  211.  290.\n2 YB821  31.1  195.  304.\n3 QA008  32.3  187.  306.\n4 WT997  28.4  192.  285.\n5 IT185  25.1  202.  332.\n6 PD544  37.5  190.  273.\n\n\nVamos por parte novamente!\nO primeiro passo foi gerar uma lista de arquivos a serem lidos automaticamente usando a função list.files. Com o argumento pattern = \"NEL.*.csv\" nós informamos que queremos listar somente os arquivos que comecem com NEL e sejam .csv. E por fim usamos full.names = TRUE para que ele nos retorne o caminho completo do arquivo incluindo o diretóriom p.e. data/NELPN.csv.\nCom isso passamos o nosso vetor contendo os nomes dos arquivos para a função map. Esta função recebe uma lista/vetor e caminha pelos itens desta lista realizando a operação solicitada para cada item, no nosso caso irá executar a função read_csv para cada nome de arquivo informado no nosso vetor.\nA função map retorna uma lista por padrão, no nosso caso uma lista de data.frame. Por isso ao final invocamos a função reduce para reduzir a nossa lista aplicando a função inner_join da mesma maneira que fizemos no modo anterior.\nNeste exemplo pode parecer que o Modo 1 tem menos linhas de código e seja mais fácil, e de fato é. Entretanto, imagine se precisássemos ler 50 arquivos ao invés de três? Precisariamos criar 50 objetos e fazer o join individualmente destes, o que aumentaria substancialmente o número de linhas e também a quantidade de memória utilizada na operação.",
+    "crumbs": [
+      "Processamento de Dados"
+    ]
+  },
+  {
+    "objectID": "03_data_editing.html#transformando-dados",
+    "href": "03_data_editing.html#transformando-dados",
+    "title": "Processamento de Dados",
+    "section": "2 Transformando Dados",
+    "text": "2 Transformando Dados\nUma outra operação muito comum em edição de dados é transformar o formato do conjunto de dados entre formato longo (long) e formato largo (wide). Para demonstrar isso vamos recuperar nosso dataset de galinhas.\n\nlibrary(readxl)\nlibrary(janitor)\n\n\nAttaching package: 'janitor'\n\n\nThe following objects are masked from 'package:stats':\n\n    chisq.test, fisher.test\n\ngalinhas &lt;- read_xlsx(\"data/dietas_galinha.xlsx\") |&gt;\n  clean_names()\n\nhead(galinhas)\n\n# A tibble: 6 × 6\n    rep dieta_a dieta_b dieta_c dieta_d dieta_e\n  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;\n1     1     179     309     243     423     368\n2     2     160     229     230     340     390\n3     3     136     181     248     392     379\n4     4     227     141     327     339     260\n5     5     217     260     329     341     404\n6     6     168     203     250     226     318\n\n\nEste dataset contem peso de galinhas submetidas a diferentes dietas. Como podemos observar ele se encontra no formato que chamamos de largo (wide), uma vez que cada dieta que seria o nosso tratamento está representada em uma coluna separada.\nNa filosofia do tidyverse, para um dataset ser considerado tidy ou “arrumado”, cada célula deve ser uma observação completa. Para isso podemos transformar o nosso formato para formato longo (long).\n\ngal_long &lt;- galinhas |&gt;\n  pivot_longer(dieta_a:dieta_e, names_to = \"dieta\", values_to = \"peso\") |&gt;\n  arrange(dieta)\n\ngal_long |&gt;\n  head()\n\n# A tibble: 6 × 3\n    rep dieta    peso\n  &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;\n1     1 dieta_a   179\n2     2 dieta_a   160\n3     3 dieta_a   136\n4     4 dieta_a   227\n5     5 dieta_a   217\n6     6 dieta_a   168\n\n\nA função pivot_longer recebe um intervalo de colunas dieta_a:dieta_e no nosso caso, e transforma em uma nova variável que chamamos de dieta e os valores em uma outra chamada peso. Por fim usamos a função arrange para ordenar nossos dados pela coluna da dieta.\nTambém podemos fazer o caminho inverso agora.\n\ngal_long |&gt;\n  pivot_wider(names_from = dieta, values_from = peso) |&gt;\n  head()\n\n# A tibble: 6 × 6\n    rep dieta_a dieta_b dieta_c dieta_d dieta_e\n  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;\n1     1     179     309     243     423     368\n2     2     160     229     230     340     390\n3     3     136     181     248     392     379\n4     4     227     141     327     339     260\n5     5     217     260     329     341     404\n6     6     168     203     250     226     318\n\n\nAqui a função pivot_wider recebe uma coluna com valores categóricos e cria colunas individuais para cada valor na variável, associando o valor de peso correspondente. Desta forma recuperamos o formato wide que existia nos dados originais.",
+    "crumbs": [
+      "Processamento de Dados"
     ]
   }
 ]

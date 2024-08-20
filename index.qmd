@@ -1,17 +1,32 @@
 ---
-title: "Introdução ao GNU/Linux"
-subtitle: "Sistema de arquivos e Operações básicas em linha de comando" 
-lang: pt-BR
+title: "Introdução ao {{< fa brands r-project >}} com `tidyverse`"
+author:
+  - name: Paulo Barros
+    orcid: 0000-0001-9839-0796
+    email: pbarrosbio@gmail.com
+    affiliations:
+      - name: PPZ - UESB - GACOM
+number-sections: false
+toc: false
 ---
+
+
 
 ## Apresentação {#apresentacao}
 
-Este é um curso introdutório ao sistema operacional GNU/Linux ministrado para o Grupo de Pesquisas em Conservação (GACOM) na Universidade Estadual do Sudoeste da Bahia (UESB), campus Jequié. O objetivo deste curso é oferecer aos alun\@s um primeiro contato com o sistema operacional, apresentando suas principais características, sistema de arquivos e diretórios e operações comuns em um terminal de comando.
+Este é um curso introdutório a Linguagem de Programação {{< fa brands r-project >}} com `tidyverse`. Esse material foi desenvolvido como suporte as atividades do Grupo de Pesquisas em Genômica Aplicada a Conservação e Melhoramento (GACOM) na Universidade Estadual do Sudoeste da Bahia (UESB), campus Jequié. O objetivo deste curso é oferecer aos alun\@s um primeiro contato com a linguagem. Este material pode ser compartilhado desde que não seja comercializado. Agradecemos qualquer comentário e sugestão de correção ou melhoria do material.
 
-## Windows Subsystem for Linux (WSL)
 
-O WSL é uma ferramenta da Microsoft que permite a instalação de uma distribuição Linux sem a necessidade de *dual-boot*. Desta maneira o usuário tem acesso a ferramentas do Linux como Bash, integradas ao ambiente de ferramentas do Windows utilizando o PowerShell. A documentação oficial do WSL encontra-se [neste link](https://docs.microsoft.com/en-us/windows/wsl/install) e também no menu ao lado em um tutorial passo-a-passo.
+## Autor
 
-## Quem ministra?
+:::{.columns}
+:::{.column  width="20%"}
+![](images/avatarNew.png)
+:::
+:::{.column  width="10%"}
+:::
+:::{.column  width="70%"}
+Me chamo Paulo Barros, sou Bacharel em Ciências Biológicas com ênfase em Genética pela UESB, Mestre em Genética, Biodiversidade e Conservação pela UESB. Tenho atuado como Cientista de Dados na área da Biologia e Melhoramento Animal desde o final da graduação colaborando em trabalhos das mais diversas áreas. Também tenho experiência oferecendo cursos e mentorias em Análise de Dados com a Linguagem R para estudantes de graduação e pós-graduação, bem como para professores e profissionais de áreas correlatas da Biologia. Atualmente sou aluno de Doutorado no PPG em Zootecnia (PPZ) na área de Melhoramento Animal aplicado a pequenos ruminantes.
+:::
+:::
 
-Me chamo Paulo Barros, sou Bacharel em Ciências Biológicas com ênfase em genética pela UESB, e atualmente aluno de Mestrado nos programas de Pós-Graduação em Estatística Aplicada e Biometria pela Universidade Federal de Viçosa (UFV) e em Genética, Biodiversidade e Conservação pela UESB. Tenho atuado como Cientista de Dados na área da Biologia desde o final da graduação colaborando em trabalhos das mais diversas áreas. Também tenho experiência oferecendo cursos e mentorias em Análise de Dados com a Linguagem R para estudantes de graduação e pós-graduação, bem como para professores e profissionais de áreas correlatas da Biologia.

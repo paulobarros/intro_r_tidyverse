@@ -10,11 +10,11 @@ website:
   repo-actions: [issue]
   
   page-footer:
-    right: "This page is built with ❤️ and [Quarto](https://quarto.org/)."
-    left: "![Caption](images/FrogPB.png)    &copy; CC-By Paulo Barros, 2022"
+    left: "![](images/MM.png){width=45}"
+    right: "&copy; CC-By Paulo Barros, 2024"
     
   sidebar:
-    logo: "images/LogoTux.png"
+    logo: "images/LogoTidy.png"
     pinned: true
     align: center
     tools: 
@@ -32,8 +32,9 @@ website:
     search: true
     collapse-level: 1
     contents:
-      - href: index.qmd
+      - href: index.qmd 
         text: Bem-vind@s!
+      - auto: "*.qmd"
       
 
 format:
@@ -43,11 +44,27 @@ format:
       dark: [darkly, pbstyle.scss]
     code-copy: true
     code-overflow: wrap
-    code-block-bg: "#1A3434"
-    code-block-border-left: "#FFF0B0"
+    code-block-border-left: false
+    code-block-bg: "#ececec"
     code-line-numbers: true
-    highlight-style: dracula
+    highlight-style: tango
     toc: true
+    number-sections: true
+  pdf:
+    documentclass: scrartcl
+    include-in-header: 
+       text: |
+         \usepackage{fvextra}
+         \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+    include-before-body:
+      text: |
+        \RecustomVerbatimEnvironment{verbatim}{Verbatim}{
+          showspaces = false,
+          showtabs = false,
+          breaksymbolleft={},
+          breaklines
+        }
 
 execute:
   freeze: auto
+  
