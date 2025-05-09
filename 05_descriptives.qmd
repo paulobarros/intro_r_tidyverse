@@ -1,0 +1,443 @@
+---
+title: "Estatísticas Descritivas"
+author:
+  - name: Paulo Barros
+    orcid: 0000-0001-9839-0796
+    email: pbarrosbio@gmail.com
+    affiliations:
+      - name: PPZ - UESB - GACOM
+editor_options: 
+  chunk_output_type: console
+csl: abnt_ipea.csl
+bibliography: ref.bib
+---
+
+Uma parte crucial em todo fluxo de análise de dados é o que chamamos de Análise 
+Exploratória dos Dados, ou EDA (_Exploratory Data Analysis_). Essa é uma etapa 
+fundamental que se feita corretamente evita dores de cabeça futuras na hora das
+análises ou modelagem.
+
+Parte da EDA, as Estatísticas Descritivas são obrigatórias e nos ajudam a descrever,
+como o próprio nome já indica, a natureza dos nossos dados. Nesta sessão vamos 
+conhecer funções nativas do R para o cálculo de estatísticas descritivas, bem como
+alguns pacotes que são muito úteis e facilitam bastante a vida.
+
+## Pacotes
+
+Nesta sessão utilizaremos três pacotes novos, o `rstatix`, `pastecs` e `DescTools`,
+todos com funções muito úteis para EDA. Você pode instalar os pacotes rodando o 
+código abaixo:
+
+```{r}
+#| eval: false
+
+install.packages("rstatix")
+install.packages("pastecs")
+install.packages("DescTools")
+```
+
+Vimos na seção de introdução que podemos usar `library()` para carregar um pacote,
+é como temos feito com o `tidyverse` até então por exemplo. Mas existem ocasiões nas
+quais não queremos ter acesso a todo o pacote, e sim a algumas funções específicas.
+Para isso, para evitar utilizar memória desnecessária, ao inves de carregar o pacote,
+podemos fazer a invocação da função diretamente com `nome_do_pacote::função`. Veremos
+isso na prática nesta sessão.
+
+## Medidas de Posição
+
+Medidas de posição (ou medidas de tendência central) descrevem brevemente a localização dos dados na reta dos números reais. **Elas indicam um ponto central em torno do qual os dados tendem a se agrupar.** As medidas de posição mais importantes são a **média** e a **mediana** [@oleksy2018data].
+
+### Média Aritmética
+
+A média aritmética é a medida de posição mais comum. Se $n$ é o número de
+observações de $x_i$, com $i=1$, definimos a média como:
+
+$$\Large \bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_i$$
+
+Ou seja, a média é o somatório das observações, dividido pelo número total de
+observações.
+
+No R, a função `mean()` calcula a média aritmética.
+
+```{r}
+obs <- c(22, 0, 7, 12, 5, 33, 14, 8, 0, 9)
+
+mean(obs)
+
+```
+
+No caso de dados faltantes (_missing_), geralmente representados por `NA`, precisamos
+informar a função para remover estes valores ao fazer o cálculo, se não fizermos
+isso obteremos `NA` como média, o que não está correto.
+
+
+
+```{r}
+obs <- c(22, 0, 7, 12, 5, 33, 14, 8, 0, 9, NA)
+
+mean(obs)
+
+```
+
+Para isso utilizaremos o argumento `na.rm = TRUE` na função:
+
+```{r}
+obs <- c(22, 0, 7, 12, 5, 33, 14, 8, 0, 9, NA)
+
+mean(obs, na.rm = TRUE)
+
+```
+
+### Mediana
+
+**A mediana é o valor da observação central**, quando os dados estão ordenados em ordem crescente ou decrescente. Se o número de observações $(n)$ for ímpar, então a mediana é a observação na posição $(n + 1) / 2$. Já se o número de observações for par, haverá duas observações centrais — nas posições $n/2$ e $(n/2) + 1$ — e a mediana será a média aritmética desses dois valores [@oleksy2018data].
+
+- Se $n$ for ímpar:
+
+$\text{Mediana} = \Large x_{\left( \frac{n+1}{2} \right)}$
+
+- Se $n$ for par:
+
+$\text{Mediana} = \Large \frac{x_{(n/2)} + x_{(n/2 + 1)}}{2}$
+
+
+Considere os valores $\{2, 8 ,16, 17, 21, 33, 33, 35, 37\}$
+
+```{r}
+obs <- c(2,8,16,17,21,33,33,35,37)
+
+median(obs)
+```
+
+
+Quando nossa distribuição é simétrica, a média e a mediana se aproximam. Entretanto,
+quando temos uma distribuição assimétrica, a mediana talvez seja a medida de posição
+mais recomendada uma vez que 50% das oservações estarão acima, e 50% abaixo da mediana.
+
+## Medidas de Dispersão
+
+Dispersão refere-se a medidas de quão espalhados estão os dados. Geralmente, são
+estatísticas cujos valores próximos de zero indicam pouca dispersão (dados concentrados),
+e cujos valores elevados (em termos relativos) indicam que os dados estão muito dispersos [@oleksy2018data].
+
+As medidas de tendência (média, mediana,..) não são capazes de nos dizer nada sobre
+a **variabilidade** nos nossos dados. 
+
+### Mínimo, Máximo e Amplitude
+
+```{r}
+obs <- c(2,8,16,17,21,33,33,35,37)
+
+min(obs)
+max(obs)
+range(obs)
+
+```
+
+Percebam que `range()` nos retorna os valores de Máximo e Mínimo. Se quisermos 
+calcular o intervalo, ou a diferença entre o mínimo e o máximo, podemos lançar
+mão da função `diff()`.
+
+```{r}
+diff(range(obs))
+```
+
+### Quartis
+
+Os quartis são medidas de posição que dividem um conjunto de dados ordenados em quatro
+partes iguais, cada uma contendo 25% das observações.
+
+* **Q1** (primeiro quartil): separa os 25% menores valores.
+É a mediana da metade inferior dos dados.
+
+* **Q2** (segundo quartil): é a mediana dos dados (50%).
+Divide o conjunto ao meio.
+
+* **Q3** (terceiro quartil): separa os 75% menores valores.
+É a mediana da metade superior dos dados.
+
+**Porque usamos quartis?**
+
+* Permitem entender a distribuição dos dados.
+
+* Ajudam a identificar dispersão e assimetria.
+
+* São usados para calcular o intervalo interquartil (IQR), que mede a dispersão central:
+
+$$IQR = Q3 - Q1$$
+
+Esse intervalo cobre os 50% centrais dos dados e é útil para detectar outliers. 
+A identificação de outliers em boxplots é feita com base no Intervalo 
+Interquartil (IQR) usando uma regra empírica clássica.
+
+* Limite inferior (LI):
+
+$LI = Q1 - 1.5\times IQR$
+
+* Limite superior (LS):
+
+$LI = Q3 + 1.5\times IQR$
+
+Qualquer valor que esteja abaixo do limite inferior ou acima do limite superior é considerado outlier.
+
+
+Vamos considerar novamente nossos dados de pinguins que trabalhamos na sessão anterior.
+Podemos criar uma visualização que mostre a distribuição dos dados e os respectivos
+quartis.
+
+```{r}
+#| warning: false
+library(tidyverse, quietly = TRUE)
+library(palmerpenguins, quietly = TRUE)
+```
+
+Vamos primeiro calcular os quartis para nossa variável de `bill_length_mm`. Vamos
+utilizar a função `quantile()` lembrando de passar o argumento `na.rm=TRUE` para
+remover os dados faltantes.
+
+```{r}
+quantile(penguins$bill_length_mm, na.rm = TRUE)
+```
+
+Podemos agora salvar com algumas transformações em um objeto que usaremos na 
+nossa visualização:
+
+```{r}
+quartis_bico <- quantile(penguins$bill_length_mm, na.rm = TRUE) |>
+  as_tibble() |>
+  mutate(quartil = c("Min","Q1","Q2","Q3","Max"), .before = 1)
+
+quartis_bico
+  
+```
+
+Vamos agora plotar um histograma, e colocar os nossos quartis pra ver como está
+distribuída a nossa variável:
+
+```{r}
+ggplot(penguins,aes(x=bill_length_mm)) +
+  geom_histogram(fill = "grey90",
+                 color = "grey60",
+                 alpha = .85,
+                 bins = 45) +
+  geom_vline(data = quartis_bico, aes(xintercept = value),
+             linetype = 2) +
+  scale_y_continuous(expand = c(0,0)) +
+  annotate("text",x = quartis_bico$value -0.1, y = 25, label = quartis_bico$quartil,
+           hjust=.5,
+           vjust = 0,
+           angle = 90) +
+  coord_cartesian(ylim = c(0,30),clip = "off") +
+  theme_classic() +
+  theme(axis.title.x = element_text(margin = margin(t = 20, r = 0, b = 0, l = 0))) +
+  labs(x = "Comprimento do Bico (mm)", y = "")
+```
+
+Como vimos anteriormente, o Q2 é a mediana dos dados. Será que nossa distribuição
+é simétrica? Podemos comparar a média com a mediana visualmente nos nossos dados
+e teremos uma noção da simetria de nossa distribuição.
+
+```{r}
+media <- mean(penguins$bill_length_mm, na.rm = TRUE)
+
+ggplot(penguins,aes(x=bill_length_mm)) +
+  geom_histogram(fill = "grey90",
+                 color = "grey60",
+                 alpha = .85,
+                 bins = 45) +
+  geom_vline(data = quartis_bico, aes(xintercept = value),
+             linetype = 2) +
+  geom_vline(xintercept = media, linetype = 1, color = "darkblue") +
+  scale_y_continuous(expand = c(0,0)) +
+  annotate("text",x = quartis_bico$value +0.2, y = 25, label = quartis_bico$quartil,
+           hjust=.5,
+           vjust = 1,
+           angle = 90,
+           size = 4) +
+  annotate("text",x = media -0.15, y = 25, label = "Média",
+           hjust=.5,
+           vjust = 0,
+           angle = 90,
+           size = 4,
+           color = "darkblue") +
+  coord_cartesian(ylim = c(0,30),clip = "off") +
+  theme_classic() +
+  theme(axis.title.x = element_text(margin = margin(t = 20, r = 0, b = 0, l = 0))) +
+  labs(x = "Comprimento do Bico (mm)", y = "")
+
+```
+
+Como podemos ver, nossa média se aproxima bastante do nosso Q2, mostrando que nossa
+distribuição é bem simétrica.
+
+### Variância
+
+A variância $s^2$ de uma amostra de $n$ observações é dada por:
+
+$$
+s^2 = \frac{1}{n - 1} \sum_{i=1}^{n} (x_i - \bar{x})^2
+$$
+
+Quando falamos da variância populacional $\sigma^2$ temos que: 
+
+$$
+\sigma^2 = \frac{1}{N} \sum_{i=1}^{n} (x_i - \bar{x})^2
+$$
+
+A mudança em utilizar $n-1$ no denominador da variância amostral é conhecida como
+**Correção de Bessel**, e visa corrigir o viés da estimativa da variância. Uma vez
+que por usarmos a média amostral $\bar{x}$ ao invés da média populacional $\mu$,
+acabamos por subestimar a verdadeira variância, e utilizar $n-1$ aumenta ligeiramente
+o valor estimado por reduzir o denominador, fazendo assim que $s^2$ seja um **estimador
+não viesado** de $\sigma^2$.
+
+No R podemos calcular a variância utilizando a função  `var()`.
+
+```{r}
+var(penguins$flipper_length_mm, na.rm=TRUE)
+
+var(penguins$bill_length_mm, na.rm=TRUE)
+```
+
+::: {.callout-note}
+
+### Importante!
+
+Vale ressaltar que como a variância é um quadrado ($s^2$), o valor obtido é
+também o quadrado da unidade de medida original. O que dificulta a interpretação
+em determinadas situações.
+:::
+
+
+### Desvio Padrão
+
+O desvio padrão é a raiz quadrada da variância, e nos informa o quanto as observações
+na distribuição se desviam da média. Se não existe variabilidade numa população,
+logo o desvio padrão é zero.
+
+$$
+s = \sqrt{ \frac{1}{n - 1} \sum_{i=1}^{n} (x_i - \bar{x})^2 }
+$$
+
+Podemos utilizar a função `sd()` de _standard deviation_ no R para calcular o DP
+
+```{r}
+sd(penguins$bill_length_mm, na.rm = TRUE)
+
+sd(penguins$flipper_length_mm, na.rm = TRUE)
+```
+
+E agora temos a vantagem de trabalharmos na mesma unidade da medida original,
+facilitando bastante a interpretação.
+
+## Descrevendo Dados
+
+Até agora vimos as funções individuais para obtermos estatísticas básicas como
+média, variância, desvio padrão, entre outras. Agora veremos como combinar essas
+funções pra que possamos sumarizar conjuntos de dados, bem como outros pacotes
+úteis para obtenção de estatísticas descritivas.
+
+### `summary()`
+
+Esta função base do R nos fornece um sumário simples de um conjunto de dados
+como um todo, ou de uma variável específica.
+
+```{r}
+summary(penguins)
+summary(penguins$bill_length_mm)
+```
+
+
+### `summarize()`
+
+Com o `dplyr` podemos utilizar a função `summarize()`
+
+```{r}
+desc_nadadeira <- penguins |>
+  select(flipper_length_mm) |>
+  drop_na() |> # remove os dados faltantes NA
+  summarise(media = mean(flipper_length_mm),
+            dp = sd(flipper_length_mm),
+            var = var(flipper_length_mm),
+            min = min(flipper_length_mm),
+            max = max(flipper_length_mm),
+            amplitude = diff(range(flipper_length_mm)),
+            n = n())
+
+desc_nadadeira
+
+```
+
+Embora seja muito simples, para múltiplas variáveis esse fluxo se torna muito
+repetitivo. Por isso podemos usar pacotes que já facilitam nossa vida nesse sentido.
+
+### `rstatix`
+
+A função `get_summary_stats()` deste pacote nos permite calcular várias estatísticas
+descritivas para múltiplas variáveis de uma só vez. É uma das minhas funções favoritas
+em EDA.
+
+```{r}
+penguins |>
+  rstatix::get_summary_stats(bill_length_mm:body_mass_g,
+                             type = "full")
+```
+
+Recomendo que deem uma boa olhada na documentação desta função para aproveitarem
+todo o seu potencial. No exemplo acima eu pedi as descritivas completas com o
+argumento  `type = full` para todas as minhas variáveis numéricas utilizando a
+notação de intervalo do `tidyverse` com o argumento `bill_length_mm:body_mass_g`.
+
+Como podem ver, a função me retorna o N, mínimo, máximo, mediana, quartis, IQR,
+média, desvio, erro padrão da média e intervalo de confiança.
+
+### `pastecs`
+
+A função `stat.desc()` nos fornece um rol completo de estatísticas descritivas
+para variáveis numéricas.
+
+```{r}
+penguins |>
+  select(bill_length_mm:body_mass_g) |>
+pastecs::stat.desc()
+```
+
+Para alterar a notação científica no resultado podemos usar `options(scipen = 999)`
+
+```{r}
+options(scipen = 999)
+penguins |>
+  select(bill_length_mm:body_mass_g) |>
+pastecs::stat.desc()
+```
+
+```{r}
+options(scipen = 0)
+```
+
+E se quisermos retornar a configuração padrão `options(scipen = 0)`. 
+
+Outra maneira é salvar nossas descritivas em um objeto e formatá-lo posteriormente:
+
+```{r}
+descritivas <- penguins |>
+  select(bill_length_mm:body_mass_g) |>
+pastecs::stat.desc()
+
+format(descritivas, scientific = FALSE, digits = 2)
+```
+
+### `DescTools`
+
+De todos, o mais completo em EDA. Oferece além das estatísticas descritivas para
+variáveis numéricas, também contempla as categóricas. Além de fornecer ótimas
+visualizações das estatísticas. Pacote realmente muito bom!
+
+```{r}
+DescTools::Desc(penguins)
+```
+
+
+Com certeza existem diversos outros pacotes que fazem as mesmas coisas ou até
+mais. Vale uma busca no CRAN ou na internet para encontrar pacotes que sejam
+adequados para seus objetivos. Se encontrar algum outro legal me avisa!

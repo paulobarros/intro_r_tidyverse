@@ -6,7 +6,8 @@ author:
     email: pbarrosbio@gmail.com
     affiliations:
       - name: PPZ - UESB - GACOM
-
+editor_options: 
+  chunk_output_type: console
 ---
 
 O processamento de dados é sem dúvida a etapa mais importante e que mais consome

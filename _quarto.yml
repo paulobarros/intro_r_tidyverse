@@ -10,7 +10,7 @@ website:
   repo-actions: [issue]
   
   page-footer:
-    left: "![](images/MM.png){width=45}"
+    left: "![](images/pb_logo.png){width=45}"
     right: "&copy; CC-By Paulo Barros, 2024"
     
   sidebar:
@@ -49,6 +49,7 @@ format:
     code-line-numbers: true
     highlight-style: tango
     toc: true
+    toc-depth: 3
     number-sections: true
   pdf:
     documentclass: scrartcl
