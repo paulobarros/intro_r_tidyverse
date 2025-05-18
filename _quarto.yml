@@ -5,7 +5,7 @@ project:
 website:
   page-navigation: true
   title: "Introdução ao R com `tidyverse`"
-  site-url: "https://paulobarros.github.io/introducao-ao-linux"
+  site-url: "https://paulobarros.github.io/intro-r-tidyverse"
   repo-url: "https://github.com/paulobarros/intro-r-tidyverse"
   repo-actions: [issue]
   

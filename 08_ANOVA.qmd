@@ -1,0 +1,13 @@
+---
+title: "Análise de Variância"
+author:
+  - name: Paulo Barros
+    orcid: 0000-0001-9839-0796
+    email: pbarrosbio@gmail.com
+    affiliations:
+      - name: PPZ - UESB - GACOM
+editor_options: 
+  chunk_output_type: console
+csl: abnt_ipea.csl
+bibliography: ref.bib
+---

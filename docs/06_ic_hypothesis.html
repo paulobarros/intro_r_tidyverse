@@ -8,7 +8,7 @@
 
 <meta name="author" content="Paulo Barros">
 
-<title>Introdução ao  com tidyverse – Introdução ao R com `tidyverse`</title>
+<title>Teste de Hipótese – Introdução ao R com tidyverse</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,6 +21,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,7 +65,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./01_r_rstudio.html" rel="next">
+<link href="./07_t_test.html" rel="next">
+<link href="./05_descriptives.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -45,8 +81,6 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap-f6c545d13580b2f99a60e1ac3ac16c62.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark-46a206dc17bfd38894417ae33144dfad.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <link href="site_libs/bootstrap/bootstrap-f6c545d13580b2f99a60e1ac3ac16c62.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
-<link href="site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -75,6 +109,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -248,7 +311,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Bem-vind@s!</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06_ic_hypothesis.html">Teste de Hipótese</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -281,7 +344,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Bem-vind@s!</span></a>
   </div>
 </li>
@@ -317,7 +380,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06_ic_hypothesis.html" class="sidebar-item-text sidebar-link">
+  <a href="./06_ic_hypothesis.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Teste de Hipótese</span></a>
   </div>
 </li>
@@ -339,14 +402,22 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#intervalos-de-confiança" id="toc-intervalos-de-confiança" class="nav-link active" data-scroll-target="#intervalos-de-confiança"><span class="header-section-number">1</span> Intervalos de Confiança</a></li>
+  <li><a href="#margem-de-erro-e" id="toc-margem-de-erro-e" class="nav-link" data-scroll-target="#margem-de-erro-e"><span class="header-section-number">2</span> Margem de Erro <span class="math inline">\(E\)</span></a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/paulobarros/intro-r-tidyverse/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="06_ic_hypothesis.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Introdução ao <i class="fa-brands fa-r-project" aria-label="r-project"></i> com <code>tidyverse</code></h1>
+<h1 class="title">Teste de Hipótese</h1>
 </div>
 
 
@@ -376,21 +447,109 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="apresentacao" class="level2">
-<h2 class="anchored" data-anchor-id="apresentacao">Apresentação</h2>
-<p>Este é um curso introdutório a Linguagem de Programação <i class="fa-brands fa-r-project" aria-label="r-project"></i> com <code>tidyverse</code>. Esse material foi desenvolvido como suporte as atividades do Grupo de Pesquisas em Genômica Aplicada a Conservação e Melhoramento (GACOM) na Universidade Estadual do Sudoeste da Bahia (UESB), campus Jequié. O objetivo deste curso é oferecer aos alun@s um primeiro contato com a linguagem. Este material pode ser compartilhado desde que não seja comercializado. Agradecemos qualquer comentário e sugestão de correção ou melhoria do material.</p>
+<p>Nesta sessão discutiremos brevemente os conceitos de Intevalo de Confiança, Teste de Hipótese, p-valor e nível de significância. Compreender esses conceitos é fundamental uma vez que eles são a base dos testes estatísticos que utilizaremos daqui pra frente.</p>
+<p>Esse material não tem a intenção de ser uma discussão aprofundada sobre estes conceitos, para os mais interessados sugiro a leitura de fontes complementares a exemplo dos livros:</p>
+<ul>
+<li><p>Inferência Estatística - Casella e Berger</p></li>
+<li><p>Estatística Prática para Cientistas de Dados - Bruce e Bruce - O’Reilly</p></li>
+</ul>
+<section id="intervalos-de-confiança" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="intervalos-de-confiança"><span class="header-section-number">1</span> Intervalos de Confiança</h2>
+<p>Estimativas como a média amostral <span class="math inline">\(\large (\bar{x})\)</span> nos <em>fornecem um único valor plausível para um parâmetro</em>. Estas estatísticas são chamadas de <strong>estimativas pontuais</strong>. Mas sabemos que existe um erro associado a toda estimativa, e o próximo passo natural seria fornecer um <em>intervalo plausível de valores</em> para o parâmetro, isto é o que chamamos de <strong>intervalo de confiança (IC)</strong>.</p>
+<p>A porcentagem associada ao IC é chamada <strong>nível de confiança</strong>. Quanto maior o nível de confiança, maior o intervalo, e quanto menor a amostra, maior o intervalo, ou seja, maior a incerteza. Os níveis de confiança mais comuns são 90%, 95% ou 99%.</p>
+<p>Mas o que de fato <em>“95% de confiança”</em> significa?</p>
+<p>O real significado de confiança deve ser compreendido a partir do ponto de vista de um processo generativo. Imagine que amostramos muitas (infinitas) amostras de uma população, e construimos ICs de 95% para cada amostra. Assim, 95% destes ICs que foram construídos provavelmente contém o atual valor do parâmetro que queremos estimar.</p>
 </section>
-<section id="autor" class="level2">
-<h2 class="anchored" data-anchor-id="autor">Autor</h2>
+<section id="margem-de-erro-e" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="margem-de-erro-e"><span class="header-section-number">2</span> Margem de Erro <span class="math inline">\(E\)</span></h2>
+<p>A diferença entre a estimativa pontual <span class="math inline">\(\bar{x}\)</span> e o parâmetro populacional <span class="math inline">\(\mu\)</span> é chamada de <strong>erro de amostragem</strong> ou <strong>erro amostral</strong>.</p>
+<p>Para uma média populacional <span class="math inline">\(\mu\)</span> em que conhecemos o <span class="math inline">\(\sigma\)</span>, dado um nível de confianaça <span class="math inline">\(c\)</span>, podemos estimar <span class="math inline">\(E\)</span> com:</p>
+<p><span class="math display">\[
+E = Z_c\frac{\sigma}{\sqrt{n}}
+\]</span></p>
+<p>Desde que atendidas duas condições:</p>
+<ol type="1">
+<li><p>A amostra é aleatória;</p></li>
+<li><p>A população é normalmente distribuída ou n <span class="math inline">\(\geq\)</span> 30;</p></li>
+</ol>
+<p>Assim, construímos um intervalo de confiança para <span class="math inline">\(\mu\)</span> como sendo:</p>
+<p><span class="math display">\[\large \bar{x}-E &lt; \mu &lt; \bar{x} + E\]</span></p>
+<p>Em uma distibuição normal padrão, os valores tabelados usuais para <span class="math inline">\(Z_c\)</span> encontram-se na tabela abaixo:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Confidence Level</th>
+<th>90%</th>
+<th>95%</th>
+<th>99%</th>
+<th>99.9%</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(Z \ Value\)</span></td>
+<td>1.65</td>
+<td>1.96</td>
+<td>2.58</td>
+<td>3.291</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p>Entretanto, na maioria das vezes <span class="math inline">\(\sigma\)</span> é desconhecido, e utilizamos o desvio padrão amostral <span class="math inline">\(S\)</span> para estimar <span class="math inline">\(E\)</span>. Quando a variável aleatória é normalmente (ou aproximadamente normalmente) distribuída, a média amostral segue <strong>distribuição <span class="math inline">\(t\)</span></strong> com graus de liberdade <span class="math inline">\(n-1\)</span>.</p>
+<p>Dessa forma, estimamos o erro padrão por:</p>
+<p><span class="math display">\[
+E = t_c\frac{S}{\sqrt{n}}
+\]</span></p>
+<p>Para obtermos o valor de <span class="math inline">\(t_c\)</span> consultamos a tabela de valores da distribuição <span class="math inline">\(t\)</span>. Podemos também obter os valores de <span class="math inline">\(t_c\)</span> usando o R. Por exemplo, se quisermos saber o valor tabelado para um alfa de 0.05 com 14 graus de liberdade.</p>
 <div class="columns">
-<div class="column" style="width:20%;">
-<p><img src="images/avatarNew.png" class="img-fluid"></p>
-</div><div class="column" style="width:10%;">
-
-</div><div class="column" style="width:70%;">
-<p>Me chamo Paulo Barros, sou Bacharel em Ciências Biológicas com ênfase em Genética pela UESB, Mestre em Genética, Biodiversidade e Conservação pela UESB. Tenho atuado como Cientista de Dados na área da Biologia e Melhoramento Animal desde o final da graduação colaborando em trabalhos das mais diversas áreas. Também tenho experiência oferecendo cursos e mentorias em Análise de Dados com a Linguagem R para estudantes de graduação e pós-graduação, bem como para professores e profissionais de áreas correlatas da Biologia. Atualmente sou aluno de Doutorado no PPG em Zootecnia (PPZ) na área de Melhoramento Animal aplicado a pequenos ruminantes.</p>
+<div class="column" style="width:40%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df =</span> <span class="dv">14</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.144787</code></pre>
 </div>
 </div>
+<p>0.975 = 1 - (0.05 / 2), porque é bilateral e você divide α pelas duas caudas</p>
+</div><div class="column" style="width:60%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/ttable.png" class="img-fluid figure-img" width="500"></p>
+<figcaption>Adaptado de Larson e Faber (2016)</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 29%">
+<col style="width: 47%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Tipo de Teste</th>
+<th>Quantos lados?</th>
+<th>Significado</th>
+<th>Quando usar?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Unilateral</td>
+<td>1 cauda</td>
+<td>Testa se a média é <strong>maior ou menor</strong></td>
+<td>Quando você tem uma hipótese com <strong>direção definida</strong> (ex: “maior que”)</td>
+</tr>
+<tr class="even">
+<td>Bilateral</td>
+<td>2 caudas</td>
+<td>Testa se a média é <strong>diferente</strong></td>
+<td>Quando a hipótese alternativa <strong>não tem direção</strong> (ex: “diferente de”)</td>
+</tr>
+</tbody>
+</table>
 
 
 </section>
@@ -810,10 +969,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./05_descriptives.html" class="pagination-link" aria-label="Estatísticas Descritivas">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Estatísticas Descritivas</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./01_r_rstudio.html" class="pagination-link" aria-label="R e RStudio">
-        <span class="nav-page-text">R e RStudio</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./07_t_test.html" class="pagination-link" aria-label="Teste _t_">
+        <span class="nav-page-text">Teste <em>t</em></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -825,7 +987,7 @@ ul.task-list li input[type="checkbox"] {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><ul><li><a href="https://github.com/paulobarros/intro-r-tidyverse/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/paulobarros/intro-r-tidyverse/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>© CC-By Paulo Barros, 2024</p>
 </div>
