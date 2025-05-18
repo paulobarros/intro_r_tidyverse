@@ -1,27 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://paulobarros.github.io/introducao-ao-linux/01_r_rstudio.html</loc>
+    <loc>https://paulobarros.github.io/intro-r-tidyverse/08_ANOVA.html</loc>
+    <lastmod>2025-05-17T23:45:07.892Z</lastmod>
+  </url>
+  <url>
+    <loc>https://paulobarros.github.io/intro-r-tidyverse/01_r_rstudio.html</loc>
     <lastmod>2024-08-20T22:40:39.364Z</lastmod>
   </url>
   <url>
-    <loc>https://paulobarros.github.io/introducao-ao-linux/04_ggplot2.html</loc>
+    <loc>https://paulobarros.github.io/intro-r-tidyverse/04_ggplot2.html</loc>
     <lastmod>2025-05-09T00:25:18.306Z</lastmod>
   </url>
   <url>
-    <loc>https://paulobarros.github.io/introducao-ao-linux/02_intro_tidy.html</loc>
-    <lastmod>2024-08-20T22:40:49.957Z</lastmod>
-  </url>
-  <url>
-    <loc>https://paulobarros.github.io/introducao-ao-linux/05_descriptives.html</loc>
-    <lastmod>2025-05-09T00:54:50.283Z</lastmod>
-  </url>
-  <url>
-    <loc>https://paulobarros.github.io/introducao-ao-linux/index.html</loc>
+    <loc>https://paulobarros.github.io/intro-r-tidyverse/index.html</loc>
     <lastmod>2024-08-20T22:38:57.724Z</lastmod>
   </url>
   <url>
-    <loc>https://paulobarros.github.io/introducao-ao-linux/03_data_editing.html</loc>
+    <loc>https://paulobarros.github.io/intro-r-tidyverse/05_descriptives.html</loc>
+    <lastmod>2025-05-09T00:54:50.283Z</lastmod>
+  </url>
+  <url>
+    <loc>https://paulobarros.github.io/intro-r-tidyverse/02_intro_tidy.html</loc>
+    <lastmod>2024-08-20T22:40:49.957Z</lastmod>
+  </url>
+  <url>
+    <loc>https://paulobarros.github.io/intro-r-tidyverse/06_ic_hypothesis.html</loc>
+    <lastmod>2025-05-09T14:07:02.312Z</lastmod>
+  </url>
+  <url>
+    <loc>https://paulobarros.github.io/intro-r-tidyverse/03_data_editing.html</loc>
     <lastmod>2025-05-08T12:20:41.131Z</lastmod>
+  </url>
+  <url>
+    <loc>https://paulobarros.github.io/intro-r-tidyverse/07_t_test.html</loc>
+    <lastmod>2025-05-18T02:28:15.165Z</lastmod>
   </url>
 </urlset>

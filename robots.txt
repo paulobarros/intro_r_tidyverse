@@ -1,1 +1,1 @@
-Sitemap: https://paulobarros.github.io/introducao-ao-linux/sitemap.xml
+Sitemap: https://paulobarros.github.io/intro-r-tidyverse/sitemap.xml
