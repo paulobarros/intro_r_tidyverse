@@ -8,7 +8,7 @@
 
 <meta name="author" content="Paulo Barros">
 
-<title>Introdução ao  com tidyverse – Introdução ao R com `tidyverse`</title>
+<title>Regressão Linear – Introdução ao R com tidyverse</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,7 +21,62 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -30,7 +85,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./01_r_rstudio_sec-intro.html" rel="next">
+<link href="./10_ANOVA_sec-inf.html" rel="next">
+<link href="./08_correlation_sec-inf.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -45,8 +101,6 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap-becfcb4c67cf4fb2a97ec4ebed44d453.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark-06e9f787a3d90b3a0945b3f575a51333.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <link href="site_libs/bootstrap/bootstrap-becfcb4c67cf4fb2a97ec4ebed44d453.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
-<link href="site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -75,10 +129,39 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
-<body class="nav-sidebar docked quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-sidebar docked slimcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -248,7 +331,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Apresentação</a></li><li class="breadcrumb-item"><a href="./index.html">Boas Vindas!</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06_ic_hypothesis_sec-inf.html">Inferência Estatística</a></li><li class="breadcrumb-item"><a href="./09_regression_sec-inf.html">Regressão Linear</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -281,16 +364,16 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
  <span class="menu-text">Apresentação</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Boas Vindas!</span></a>
   </div>
 </li>
@@ -372,13 +455,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
  <span class="menu-text">Inferência Estatística</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./06_ic_hypothesis_sec-inf.html" class="sidebar-item-text sidebar-link">
@@ -399,7 +482,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./09_regression_sec-inf.html" class="sidebar-item-text sidebar-link">
+  <a href="./09_regression_sec-inf.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Regressão Linear</span></a>
   </div>
 </li>
@@ -417,14 +500,25 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#regressão-linear-simples" id="toc-regressão-linear-simples" class="nav-link active" data-scroll-target="#regressão-linear-simples"><span class="header-section-number">1</span> Regressão Linear Simples</a></li>
+  <li><a href="#exemplo-prático" id="toc-exemplo-prático" class="nav-link" data-scroll-target="#exemplo-prático"><span class="header-section-number">2</span> Exemplo Prático</a>
+  <ul>
+  <li><a href="#interpretando-os-resultados" id="toc-interpretando-os-resultados" class="nav-link" data-scroll-target="#interpretando-os-resultados"><span class="header-section-number">2.1</span> Interpretando os resultados</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/paulobarros/intro-r-tidyverse/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="09_regression_sec-inf.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+    </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Apresentação</a></li><li class="breadcrumb-item"><a href="./index.html">Boas Vindas!</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06_ic_hypothesis_sec-inf.html">Inferência Estatística</a></li><li class="breadcrumb-item"><a href="./09_regression_sec-inf.html">Regressão Linear</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Introdução ao <i class="fa-brands fa-r-project" aria-label="r-project"></i> com <code>tidyverse</code></h1>
+<h1 class="title">Regressão Linear</h1>
 </div>
 
 
@@ -454,26 +548,160 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="apresentacao" class="level2">
-<h2 class="anchored" data-anchor-id="apresentacao">Apresentação</h2>
-<p>Este é um curso introdutório a Linguagem de Programação <i class="fa-brands fa-r-project" aria-label="r-project"></i> com <code>tidyverse</code>. Esse material foi desenvolvido como suporte as atividades do Grupo de Pesquisas em Genômica Aplicada a Conservação e Melhoramento (GACOM) na Universidade Estadual do Sudoeste da Bahia (UESB), campus Jequié. O objetivo deste curso é oferecer aos alun@s um primeiro contato com a linguagem. Este material pode ser compartilhado desde que não seja comercializado. Agradecemos qualquer comentário e sugestão de correção ou melhoria do material.</p>
-</section>
-<section id="autor" class="level2">
-<h2 class="anchored" data-anchor-id="autor">Autor</h2>
-<div class="columns">
-<div class="column" style="width:20%;">
-<p><img src="images/avatarNew.png" class="img-fluid"></p>
-</div><div class="column" style="width:10%;">
-
-</div><div class="column" style="width:70%;">
-<p>Me chamo Paulo Barros, sou Bacharel em Ciências Biológicas com ênfase em Genética pela UESB, Mestre em Genética, Biodiversidade e Conservação pela UESB. Tenho atuado como Cientista de Dados na área da Biologia e Melhoramento Animal desde o final da graduação colaborando em trabalhos das mais diversas áreas. Também tenho experiência oferecendo cursos e mentorias em Análise de Dados com a Linguagem R para estudantes de graduação e pós-graduação, bem como para professores e profissionais de áreas correlatas da Biologia. Atualmente sou aluno de Doutorado no PPG em Zootecnia (PPZ) na área de Melhoramento Animal aplicado a pequenos ruminantes.</p>
+<p>Como vimos na <a href="./08_correlation_sec-inf.html" target="_blank">sessão anterior</a>, a correlação nos ajuda a compreender a força e direção da relação entre duas variáveis. Uma vez identificada a correlação, nosso próximo passo é determinar a equação da reta que melhor modela esta relação. Esta reta é justamente que vimos no exemplo da sessão anterior com os dados de arbusto.</p>
+<div class="cell page-columns page-full">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-cor" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-cap-location="margin">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-cor-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="09_regression_sec-inf_files/figure-html/fig-cor-1.png" class="img-fluid figure-img" width="480">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-cor-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Adaptado de <span class="citation" data-cites="da2022analises">Da Silva <em>et al.</em> (<a href="#ref-da2022analises" role="doc-biblioref">2022</a>)</span>
+</figcaption>
+</figure>
 </div>
 </div>
+</div>
+<section id="regressão-linear-simples" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="regressão-linear-simples"><span class="header-section-number">1</span> Regressão Linear Simples</h2>
+<p>A regressão linear simples é usada para analisar a relação entre uma <strong>variável preditora</strong> (plotada no eixo-X) e uma <strong>variável resposta</strong> (plotada no eixo-Y). As duas variáveis devem ser contínuas. Diferente das correlações, a regressão assume uma relação de causa e efeito entre as variáveis. O valor da variável preditora (X) causa, direta ou indiretamente, o valor da variável resposta (Y). Assim, Y é uma função linear de X <span class="citation" data-cites="da2022analises">(<a href="#ref-da2022analises" role="doc-biblioref">Da Silva <em>et al.</em>, 2022</a>)</span>.</p>
+<p><span class="math display">\[\Large y = \beta_0+\beta_1 X_i + \varepsilon_i\]</span> Este é o modelo matemático que define uma Regressão Linear Simples, onde:</p>
+<ul>
+<li><p><span class="math inline">\(\large y\)</span> é o nosso vetor de observações da nossa variável resposta</p></li>
+<li><p><span class="math inline">\(\large \beta_0\)</span> é o <strong>intercepto</strong> (<em>intercept</em>) que representa o valor da função quando <span class="math inline">\(X = 0\)</span></p></li>
+<li><p><span class="math inline">\(\large \beta_1\)</span> é a <strong>inclinação</strong> (<em>slope</em>) que mede a mudança na variável <span class="math inline">\(y\)</span> para cada mudança de unidade da variável <span class="math inline">\(X\)</span></p></li>
+<li><p><span class="math inline">\(\large \varepsilon_i\)</span> é no nosso vetor de <strong>erros aleatórios</strong> ou <strong>resíduos</strong>, é toda variabilidade em <span class="math inline">\(\large y\)</span> que não pode ser explicada por <span class="math inline">\(X\)</span></p></li>
+</ul>
+<p>A regressão linear também possui premissas:</p>
+<ol type="1">
+<li><p>As amostras devem ser independentes</p></li>
+<li><p>As unidades amostrais são selecionadas aleatoriamente</p></li>
+<li><p>Distribuição normal (gaussiana) <strong>dos resíduos</strong></p></li>
+<li><p>Homogeneidade da variância <strong>dos resíduos</strong></p></li>
+</ol>
+</section>
+<section id="exemplo-prático" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="exemplo-prático"><span class="header-section-number">2</span> Exemplo Prático</h2>
+<p>Mais uma vez utilizaremos o pacote <code>ecodados</code>.</p>
+<p>valiaremos a relação entre o gradiente de temperatura média anual (°C) e o tamanho médio do comprimento rostro-cloacal (CRC em mm) de populações de <em>Dendropsophus minutus</em> (Anura:Hylidae) amostradas em 109 localidades no Brasil.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>den_min <span class="ot">&lt;-</span> ecodados<span class="sc">::</span>regressoes</span>
+<span id="cb1-2"><a href="#cb1-2"></a></span>
+<span id="cb1-3"><a href="#cb1-3"></a>den_min <span class="sc">|&gt;</span> <span class="fu">glimpse</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 109
+Columns: 4
+$ Municipio    &lt;chr&gt; "Acorizal", "Alpinopolis", "Alto_Paraiso", "Americana", "…
+$ CRC          &lt;dbl&gt; 22.98816, 22.91788, 21.97629, 23.32453, 22.83651, 20.8698…
+$ Temperatura  &lt;dbl&gt; 24.13000, 20.09417, 21.86167, 20.28333, 25.47333, 20.1216…
+$ Precipitacao &lt;dbl&gt; 1228.2, 1487.6, 1812.4, 1266.2, 2154.0, 1269.2, 1940.6, 1…</code></pre>
+</div>
+</div>
+<p><strong>Pergunta</strong>: A temperatura afeta o tamanho do CRC de populações de <em>Dendropsophus minutus</em>?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>mod_rls <span class="ot">&lt;-</span> <span class="fu">lm</span>(CRC <span class="sc">~</span> Temperatura, <span class="at">data =</span> den_min)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Utilizando a função <code>plot()</code> podemos fazer a inspeção visual dos resíduos e checar a normalidade e a homogeneidade da variância.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>), <span class="at">oma =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">0</span>))</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="fu">plot</span>(mod_rls)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="09_regression_sec-inf_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Somos apresentados a quatro plots. E aqui vou tomar a liberdade de citar a excelente explicação disponível em <span class="citation" data-cites="da2022analises">Da Silva <em>et al.</em> (<a href="#ref-da2022analises" role="doc-biblioref">2022</a>)</span>, pra que reiventar a roda né?</p>
+<blockquote class="blockquote">
+<p>Os gráficos <em>Residuals vs Fitted</em>, <em>Scale-Location</em>, e <em>Residual vs Leverage</em> estão relacionados com a homogeneidade da variância. Nestes gráficos, esperamos ver os pontos dispersos no espaço sem padrões com formatos em U ou funil. Neste caso, vemos que as linhas vermelhas (que indicam a tendência dos dados) estão praticamente retas, seguindo a linha pontilhada, sugerindo que não exista heterogeneidade de variância dos resíduos. O gráfico Residual vs Leverage, identifica os valores extremos que estejam a mais de uma unidade da distância de Cook (linha pontilhada vermelha). Quando muito discrepantes, esses valores podem influenciar os resultados dos testes estatísticos. Também não temos problemas com esse pressuposto do modelo aqui. O gráfico <em>Normal Q-Q (quantile- quantile plot)</em> mede desvios da normalidade. Neste caso, esperamos que os pontos sigam uma linha reta (i.e., fiquem muito próximos da linha pontilhada) e não apresentem padrões com formatos de S ou arco.</p>
+</blockquote>
+<p>Confirmado que nossos dados atendem as premissas de normalidade e heterocedasticidade dos resíduos, podemos agora ver os resultados da nossa regressão usando as funções <code>anova()</code> e <code>summary()</code>. Falaremos de ANOVA (Análise de Variância) na próxima sessão, mas a função <code>anova()</code> quando fornecida um único modelo nos retorna a famosa Tabela da Anova, que nos mostra se os termos do nosso modelo foram significativos.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">anova</span>(mod_rls)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Response: CRC
+             Df  Sum Sq Mean Sq F value    Pr(&gt;F)    
+Temperatura   1  80.931  80.931   38.92 9.011e-09 ***
+Residuals   107 222.500   2.079                      
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>A nossa velha amiga <code>summary()</code> nos fornece também a significância dos termos do modelo, e ainda os valores dos coeficientes, e do coeficiente de determinação (<span class="math inline">\(R^2\)</span>), que indica o quanto da variação em <span class="math inline">\(y\)</span> é explicada pela nossa variável <span class="math inline">\(X\)</span>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">summary</span>(mod_rls)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = CRC ~ Temperatura, data = den_min)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.4535 -0.7784  0.0888  0.9168  3.1868 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 16.23467    0.91368  17.768  &lt; 2e-16 ***
+Temperatura  0.26905    0.04313   6.239 9.01e-09 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.442 on 107 degrees of freedom
+Multiple R-squared:  0.2667,    Adjusted R-squared:  0.2599 
+F-statistic: 38.92 on 1 and 107 DF,  p-value: 9.011e-09</code></pre>
+</div>
+</div>
+<p>Podemos apresentar nossos resultados por meio de um gráfico de dispersão como vimos anteriormente.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> den_min, <span class="fu">aes</span>(<span class="at">x =</span> Temperatura, <span class="at">y =</span> CRC)) <span class="sc">+</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Temperatura média anual (°C)"</span>,</span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="at">y =</span> <span class="st">"Comprimento rostro-cloacal (mm)"</span>) <span class="sc">+</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="fu">geom_smooth</span>(<span class="at">method =</span> lm, <span class="at">se =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb9-5"><a href="#cb9-5"></a>            <span class="at">color =</span> <span class="st">"#413c58"</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">4</span>, <span class="at">shape =</span> <span class="dv">21</span>,</span>
+<span id="cb9-7"><a href="#cb9-7"></a>           <span class="at">fill =</span> <span class="st">"#988683"</span>, <span class="at">color=</span><span class="st">"#5c5c5e"</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a><span class="fu">theme_classic</span>(<span class="at">base_size =</span> <span class="dv">14</span>, <span class="at">base_family =</span> <span class="st">"Ubuntu"</span>) <span class="sc">+</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="09_regression_sec-inf_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="interpretando-os-resultados" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="interpretando-os-resultados"><span class="header-section-number">2.1</span> Interpretando os resultados</h3>
+<p>Aqui vale comentar sobre as diferentes hipóteses que são testadas em cada função.</p>
+<p>A função <code>summary()</code> realiza um teste <span class="math inline">\(t\)</span> para cada um dos betas do modelo, no nosso caso de uma regressão linear simples o intercepto e o slope. A hipótese nula neste caso é:</p>
+<p><span class="math display">\[H_0: \beta_i = 0 \quad versus \quad H_a: \beta_i \neq 0\]</span></p>
+<p>Ou seja, o teste avalia se a variável explicativa <span class="math inline">\(X\)</span> tem efeito significativo sobre <span class="math inline">\(y\)</span> controlando pelas outras variáveis do modelo.</p>
+<p>Já a função <code>anova()</code> está fazendo uma análise de variância (ANOVA) que testa a seguinte hipótese nula global de que todos os coeficientes, exceto o intercepto, são iguais a zero:</p>
+<p><span class="math display">\[H_0: \beta_1 = \beta_2 = \cdots \beta_n =  0\]</span></p>
+<p>Mas como falamos de uma regressão linear <strong>simples</strong>, testamos somente o nosso <span class="math inline">\(\beta_1\)</span>.</p>
+<p>Ou seja, o teste <span class="math inline">\(F\)</span> da ANOVA <strong>avalia se o modelo completo com as variáveis preditoras explica significativamente mais variância do que um modelo nulo</strong> (só com o intercepto).</p>
+<p>Se o valor-p do teste <span class="math inline">\(F\)</span> for pequeno, rejeitamos <span class="math inline">\(H_0\)</span> e concluímos que <strong>pelo menos uma variável tem efeito significativo sobre a resposta</strong>.</p>
+<p>No nosso exemplo, nosso beta para Temperatura (<span class="math inline">\(X\)</span>) foi significativo, então rejeitamos a hipótese nula de que não existe relação entre o tamanho do CRC das populações de <em>D. minutus</em> e a temperatura da localidade onde elas ocorrem (<span class="math inline">\(F_{1,107} = 38,92, P &lt; 0,001\)</span>).</p>
+<p>Neste caso, ao usar o comando <code>coef(modelo_regressao)</code>, obtemos os valores 16,23 e 0,27, respectivamente os valores do intercepto (β0) e da temperatura (β1). O valor de 0,27 indica que a mudança de uma unidade na variável preditora (neste caso, graus), aumenta em 0,27 unidades (neste caso, centímetros) da variável dependente. <span class="citation" data-cites="da2022analises">(<a href="#ref-da2022analises" role="doc-biblioref">Da Silva <em>et al.</em>, 2022</a>)</span></p>
+
 
 
 </section>
+</section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
+<div id="ref-da2022analises" class="csl-entry" role="listitem">
+DA SILVA, F. R. <em>et al.</em> <strong>An<span>á</span>lises ecol<span>ó</span>gicas no r</strong>. [s.l.] Clube de Autores, 2022.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
@@ -888,10 +1116,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./08_correlation_sec-inf.html" class="pagination-link" aria-label="Correlação de Pearson">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Correlação de Pearson</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./01_r_rstudio_sec-intro.html" class="pagination-link" aria-label="R e RStudio">
-        <span class="nav-page-text">R e RStudio</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./10_ANOVA_sec-inf.html" class="pagination-link" aria-label="Análise de Variância">
+        <span class="nav-page-text">Análise de Variância</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -903,7 +1134,7 @@ ul.task-list li input[type="checkbox"] {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><ul><li><a href="https://github.com/paulobarros/intro-r-tidyverse/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/paulobarros/intro-r-tidyverse/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>© CC-By Paulo Barros, 2024</p>
 </div>

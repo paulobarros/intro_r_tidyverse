@@ -8,7 +8,7 @@
 
 <meta name="author" content="Paulo Barros">
 
-<title>Introdução ao  com tidyverse – Introdução ao R com `tidyverse`</title>
+<title>Processamento de Dados – Introdução ao R com tidyverse</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,6 +21,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,7 +65,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./01_r_rstudio_sec-intro.html" rel="next">
+<link href="./04_ggplot2_sec-dataviz.html" rel="next">
+<link href="./02_intro_tidy_sec-tidy.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -45,8 +81,6 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap-becfcb4c67cf4fb2a97ec4ebed44d453.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark-06e9f787a3d90b3a0945b3f575a51333.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <link href="site_libs/bootstrap/bootstrap-becfcb4c67cf4fb2a97ec4ebed44d453.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
-<link href="site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -248,7 +282,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Apresentação</a></li><li class="breadcrumb-item"><a href="./index.html">Boas Vindas!</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02_intro_tidy_sec-tidy.html">Processamento de Dados</a></li><li class="breadcrumb-item"><a href="./03_data_editing_sec-tidy.html">Processamento de Dados</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -281,16 +315,16 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
  <span class="menu-text">Apresentação</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Boas Vindas!</span></a>
   </div>
 </li>
@@ -315,13 +349,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
  <span class="menu-text">Processamento de Dados</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02_intro_tidy_sec-tidy.html" class="sidebar-item-text sidebar-link">
@@ -330,7 +364,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03_data_editing_sec-tidy.html" class="sidebar-item-text sidebar-link">
+  <a href="./03_data_editing_sec-tidy.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Processamento de Dados</span></a>
   </div>
 </li>
@@ -417,14 +451,26 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#combinando-datasets" id="toc-combinando-datasets" class="nav-link active" data-scroll-target="#combinando-datasets"><span class="header-section-number">1</span> Combinando <em>Datasets</em></a>
+  <ul>
+  <li><a href="#modo-básico" id="toc-modo-básico" class="nav-link" data-scroll-target="#modo-básico"><span class="header-section-number">1.1</span> Modo Básico</a></li>
+  <li><a href="#modo-otimizado" id="toc-modo-otimizado" class="nav-link" data-scroll-target="#modo-otimizado"><span class="header-section-number">1.2</span> Modo Otimizado</a></li>
+  </ul></li>
+  <li><a href="#transformando-dados" id="toc-transformando-dados" class="nav-link" data-scroll-target="#transformando-dados"><span class="header-section-number">2</span> Transformando Dados</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/paulobarros/intro-r-tidyverse/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="03_data_editing_sec-tidy.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Apresentação</a></li><li class="breadcrumb-item"><a href="./index.html">Boas Vindas!</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02_intro_tidy_sec-tidy.html">Processamento de Dados</a></li><li class="breadcrumb-item"><a href="./03_data_editing_sec-tidy.html">Processamento de Dados</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Introdução ao <i class="fa-brands fa-r-project" aria-label="r-project"></i> com <code>tidyverse</code></h1>
+<h1 class="title">Processamento de Dados</h1>
 </div>
 
 
@@ -454,21 +500,245 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="apresentacao" class="level2">
-<h2 class="anchored" data-anchor-id="apresentacao">Apresentação</h2>
-<p>Este é um curso introdutório a Linguagem de Programação <i class="fa-brands fa-r-project" aria-label="r-project"></i> com <code>tidyverse</code>. Esse material foi desenvolvido como suporte as atividades do Grupo de Pesquisas em Genômica Aplicada a Conservação e Melhoramento (GACOM) na Universidade Estadual do Sudoeste da Bahia (UESB), campus Jequié. O objetivo deste curso é oferecer aos alun@s um primeiro contato com a linguagem. Este material pode ser compartilhado desde que não seja comercializado. Agradecemos qualquer comentário e sugestão de correção ou melhoria do material.</p>
-</section>
-<section id="autor" class="level2">
-<h2 class="anchored" data-anchor-id="autor">Autor</h2>
-<div class="columns">
-<div class="column" style="width:20%;">
-<p><img src="images/avatarNew.png" class="img-fluid"></p>
-</div><div class="column" style="width:10%;">
+<p>O processamento de dados é sem dúvida a etapa mais importante e que mais consome tempo em um fluxo de análises. Nesta seção vamos abordar algumas funções básicas do <code>tidyverse</code> que auxiliam bastante na realização de tarefas triviais de edição de dados.</p>
+<section id="combinando-datasets" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="combinando-datasets"><span class="header-section-number">1</span> Combinando <em>Datasets</em></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Em muitas situações é comum que seja necessário combinar múltiplas fontes de dados. Em melhoramento animal por exemplo é comum que informações dos mesmos animais estejam dispersas por arquivos de dados individuais.</p>
+<p>Vamos dar uma olhada nos datasets que temos disponíveis? Se lembram como fazer?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">"data"</span>, <span class="at">pattern =</span> <span class="st">"NEL.*.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "NELP365.csv" "NELP550.csv" "NELPN.csv"  </code></pre>
+</div>
+</div>
+<p>Os arquivos <code>NELPN.csv</code>, <code>NELP365.csv</code> e <code>NELP550.csv</code> possuem dados de 50 animais com respectivas medidas biométricas para Peso ao Nascimento (PN), Peso a um ano (P365) e Peso ao Sobreano (P550). Estes dados foram simulados com base em animais da raça Nelore.</p>
+<p>Uma vez que os mesmos animais estão nos três conjuntos de dados, nosso objetivo é unir estes arquivos em um único conjunto de dados. Vamos fazer isso de duas maneiras diferentes.</p>
+<section id="modo-básico" class="level3" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="modo-básico"><span class="header-section-number">1.1</span> Modo Básico</h3>
+<ul>
+<li><p>Carregamos os arquivos individualmente cada um em um objeto</p></li>
+<li><p>Usamos as funções de <em>join</em> do <code>tidyverse</code> para unir os objetos</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>pn <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/NELPN.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 50 Columns: 2
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (1): ID
+dbl (1): PN
 
-</div><div class="column" style="width:70%;">
-<p>Me chamo Paulo Barros, sou Bacharel em Ciências Biológicas com ênfase em Genética pela UESB, Mestre em Genética, Biodiversidade e Conservação pela UESB. Tenho atuado como Cientista de Dados na área da Biologia e Melhoramento Animal desde o final da graduação colaborando em trabalhos das mais diversas áreas. Também tenho experiência oferecendo cursos e mentorias em Análise de Dados com a Linguagem R para estudantes de graduação e pós-graduação, bem como para professores e profissionais de áreas correlatas da Biologia. Atualmente sou aluno de Doutorado no PPG em Zootecnia (PPZ) na área de Melhoramento Animal aplicado a pequenos ruminantes.</p>
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">glimpse</span>(pn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 50
+Columns: 2
+$ ID &lt;chr&gt; "RV143", "YB821", "QA008", "WT997", "IT185", "PD544", "SL754", "MC3…
+$ PN &lt;dbl&gt; 36.04, 31.09, 32.33, 28.35, 25.06, 37.53, 33.23, 24.19, 30.05, 37.9…</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>p365 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/NELP365.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 50 Columns: 2
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (1): ID
+dbl (1): P365
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">glimpse</span>(p365)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 50
+Columns: 2
+$ ID   &lt;chr&gt; "RV143", "YB821", "QA008", "WT997", "IT185", "PD544", "SL754", "M…
+$ P365 &lt;dbl&gt; 211.15, 194.81, 186.59, 192.42, 202.37, 189.50, 197.18, 160.95, 2…</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>p550 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/NELP550.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 50 Columns: 2
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (1): ID
+dbl (1): P550
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">glimpse</span>(p550)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 50
+Columns: 2
+$ ID   &lt;chr&gt; "RV143", "YB821", "QA008", "WT997", "IT185", "PD544", "SL754", "M…
+$ P550 &lt;dbl&gt; 290.43, 304.21, 305.59, 285.34, 331.91, 273.09, 295.91, 335.95, 2…</code></pre>
 </div>
 </div>
+<p>A função <code>glimpse</code> é bastante útil pra nos mostrar uma prévia dos nossos dados.</p>
+<p>Agora que nossos arquivos já foram carregados, podemos fazer a combinação (<em>merge</em>) dos dados. Para este tipo de operação no qual temos os mesmos animais e variáveis medidas em arquivos separados, usaremos a ID de cada animal como uma chave de identificação entre os conjuntos de dados, desta maneira sabemos que teremos cada observação de cada animal corretamente alocada no nosso novo conjunto de dados.</p>
+<p>No nosso caso usaremos a função <code>inner_join</code> do <code>dplyr</code>. Esta função recebe dois conjuntos de dados e combina as observações somente para os índices em comum em ambos os arquivos. Como temos três datasets, usaremos o pipe para fazer a operação em um único fluxo de código.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>dados_nelore <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(pn,p365, <span class="at">by =</span> <span class="fu">join_by</span>(ID)) <span class="sc">|&gt;</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a>  <span class="fu">inner_join</span>(p550, <span class="at">by =</span> <span class="fu">join_by</span>(ID))</span>
+<span id="cb16-3"><a href="#cb16-3"></a></span>
+<span id="cb16-4"><a href="#cb16-4"></a>dados_nelore <span class="sc">|&gt;</span></span>
+<span id="cb16-5"><a href="#cb16-5"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 4
+  ID       PN  P365  P550
+  &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 RV143  36.0  211.  290.
+2 YB821  31.1  195.  304.
+3 QA008  32.3  187.  306.
+4 WT997  28.4  192.  285.
+5 IT185  25.1  202.  332.
+6 PD544  37.5  190.  273.</code></pre>
+</div>
+</div>
+<p>Parece confuso, mas é bem simples. Vamos por partes.</p>
+<p><code>inner_join(pn,p365, by = join_by(ID))</code> : primeiro passamos os nossos conjuntos de dados como argumentos para a função <code>inner_join</code>, e com o argumento <code>by</code> fazemos a definição de qual variável será nossa chave de identificação ou índice, neste caso com <code>by = join_by(ID)</code> estamos informando que a coluna <code>ID</code> é a chave.</p>
+<p>Ao fazermos isso já criamos um novo objeto que é a junção dos dados de PN e P365, e como mencionamos anteriormente, o <code>|&gt;</code> lê sempre da esquerda para a direita, assim o nosso novo conjunto de dados do merge se torna a entrada da próxima função</p>
+<p><code>inner_join(p550, by = join_by(ID))</code> : aqui o raciocínio é o mesmo, com a diferença de que como estamos no fluxo do pipe, o primeiro argumento é omitido pois o R já sabe que esse argumento vem do pipe anterior, e informamos então o conjunto de dados restante <code>p550</code>, a chave continua a mesma. E assim nosso merge está completo!</p>
+<p>Existem outros tipos de <em>joins</em> no <code>dplyr</code> e você pode como sempre <a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" target="_blank">consultar a documentação</a> para saber os detalhes e diferenças entre eles e quando utilizar cada tipo.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://pozdniakov.github.io/tidy_stats_eng/images/joins.png" class="img-fluid figure-img" width="400"></p>
+<figcaption>Tipos de <em>Join</em>. Fonte: <a href="https://pozdniakov.github.io/tidy_stats_eng/images/joins.png" target="_blank">pozdniakov.github.io</a></figcaption>
+</figure>
+</div>
+</section>
+<section id="modo-otimizado" class="level3" data-number="1.2">
+<h3 data-number="1.2" class="anchored" data-anchor-id="modo-otimizado"><span class="header-section-number">1.2</span> Modo Otimizado</h3>
+<p>No nosso exemplo temos somente três datasets que desejamos unir, mas existem situações aonde o número de datasets pode ser grande bem como o volume de dados contidos neles. Nessas situações podemos lançar mão de funções otimizadas para realizar tarefas repetitivas. A função <code>map</code> do pacote <code>purrr</code> é nossa amiga!</p>
+<p>Vamos realizar a mesma operação do modo anterior mas de uma maneira mais eficiente tanto do ponto de vista de código quanto de gerenciamento de recursos do computador.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>nelore <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">"data"</span>,</span>
+<span id="cb18-2"><a href="#cb18-2"></a>                     <span class="at">pattern =</span> <span class="st">"NEL.*.csv"</span>,</span>
+<span id="cb18-3"><a href="#cb18-3"></a>                     <span class="at">full.names =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb18-4"><a href="#cb18-4"></a>  <span class="fu">map</span>(read_csv) <span class="sc">|&gt;</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a>  <span class="fu">reduce</span>(inner_join, <span class="at">by =</span> <span class="fu">join_by</span>(ID)) <span class="sc">|&gt;</span></span>
+<span id="cb18-6"><a href="#cb18-6"></a>  <span class="fu">select</span>(ID,PN,P365,P550)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 50 Columns: 2
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (1): ID
+dbl (1): P365
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 50 Columns: 2
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (1): ID
+dbl (1): P550
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 50 Columns: 2
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (1): ID
+dbl (1): PN
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>nelore <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 4
+  ID       PN  P365  P550
+  &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 RV143  36.0  211.  290.
+2 YB821  31.1  195.  304.
+3 QA008  32.3  187.  306.
+4 WT997  28.4  192.  285.
+5 IT185  25.1  202.  332.
+6 PD544  37.5  190.  273.</code></pre>
+</div>
+</div>
+<p>Vamos por parte novamente!</p>
+<p>O primeiro passo foi gerar uma lista de arquivos a serem lidos automaticamente usando a função <code>list.files</code>. Com o argumento <code>pattern = "NEL.*.csv"</code> nós informamos que queremos listar somente os arquivos que comecem com NEL e sejam <code>.csv</code>. E por fim usamos <code>full.names = TRUE</code> para que ele nos retorne o caminho completo do arquivo incluindo o diretóriom p.e. <code>data/NELPN.csv</code>.</p>
+<p>Com isso passamos o nosso vetor contendo os nomes dos arquivos para a função <code>map</code>. Esta função recebe uma lista/vetor e caminha pelos itens desta lista realizando a operação solicitada para cada item, no nosso caso irá executar a função <code>read_csv</code> para cada nome de arquivo informado no nosso vetor.</p>
+<p>A função <code>map</code> retorna uma lista por padrão, no nosso caso uma lista de <code>data.frame</code>. Por isso ao final invocamos a função <code>reduce</code> para reduzir a nossa lista aplicando a função <code>inner_join</code> da mesma maneira que fizemos no modo anterior.</p>
+<p>Neste exemplo pode parecer que o Modo 1 tem menos linhas de código e seja mais fácil, e de fato é. Entretanto, imagine se precisássemos ler 50 arquivos ao invés de três? Precisariamos criar 50 objetos e fazer o join individualmente destes, o que aumentaria substancialmente o número de linhas e também a quantidade de memória utilizada na operação.</p>
+</section>
+</section>
+<section id="transformando-dados" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="transformando-dados"><span class="header-section-number">2</span> Transformando Dados</h2>
+<p>Uma outra operação muito comum em edição de dados é transformar o formato do conjunto de dados entre <strong>formato longo (<em>long</em>)</strong> e <strong>formato largo (<em>wide</em>)</strong>. Para demonstrar isso vamos recuperar nosso dataset de galinhas.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="fu">library</span>(janitor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'janitor'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:stats':
+
+    chisq.test, fisher.test</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>galinhas <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"data/dietas_galinha.xlsx"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a>  <span class="fu">clean_names</span>()</span>
+<span id="cb25-3"><a href="#cb25-3"></a></span>
+<span id="cb25-4"><a href="#cb25-4"></a><span class="fu">head</span>(galinhas)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 6
+    rep dieta_a dieta_b dieta_c dieta_d dieta_e
+  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+1     1     179     309     243     423     368
+2     2     160     229     230     340     390
+3     3     136     181     248     392     379
+4     4     227     141     327     339     260
+5     5     217     260     329     341     404
+6     6     168     203     250     226     318</code></pre>
+</div>
+</div>
+<p>Este dataset contem peso de galinhas submetidas a diferentes dietas. Como podemos observar ele se encontra no formato que chamamos de <strong>largo (<em>wide</em>)</strong>, uma vez que cada dieta que seria o nosso tratamento está representada em uma coluna separada.</p>
+<p>Na filosofia do <code>tidyverse</code>, para um dataset ser considerado <strong><em>tidy</em></strong> ou “arrumado”, cada célula deve ser uma <strong>observação completa</strong>. Para isso podemos transformar o nosso formato para formato <strong>longo (<em>long</em>)</strong>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>gal_long <span class="ot">&lt;-</span> galinhas <span class="sc">|&gt;</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a>  <span class="fu">pivot_longer</span>(dieta_a<span class="sc">:</span>dieta_e, <span class="at">names_to =</span> <span class="st">"dieta"</span>, <span class="at">values_to =</span> <span class="st">"peso"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb27-3"><a href="#cb27-3"></a>  <span class="fu">arrange</span>(dieta)</span>
+<span id="cb27-4"><a href="#cb27-4"></a></span>
+<span id="cb27-5"><a href="#cb27-5"></a>gal_long <span class="sc">|&gt;</span></span>
+<span id="cb27-6"><a href="#cb27-6"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+    rep dieta    peso
+  &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;
+1     1 dieta_a   179
+2     2 dieta_a   160
+3     3 dieta_a   136
+4     4 dieta_a   227
+5     5 dieta_a   217
+6     6 dieta_a   168</code></pre>
+</div>
+</div>
+<p>A função <code>pivot_longer</code> recebe um intervalo de colunas <code>dieta_a:dieta_e</code> no nosso caso, e transforma em uma nova variável que chamamos de <code>dieta</code> e os valores em uma outra chamada <code>peso</code>. Por fim usamos a função <code>arrange</code> para ordenar nossos dados pela coluna da dieta.</p>
+<p>Também podemos fazer o caminho inverso agora.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>gal_long <span class="sc">|&gt;</span></span>
+<span id="cb29-2"><a href="#cb29-2"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> dieta, <span class="at">values_from =</span> peso) <span class="sc">|&gt;</span></span>
+<span id="cb29-3"><a href="#cb29-3"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 6
+    rep dieta_a dieta_b dieta_c dieta_d dieta_e
+  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+1     1     179     309     243     423     368
+2     2     160     229     230     340     390
+3     3     136     181     248     392     379
+4     4     227     141     327     339     260
+5     5     217     260     329     341     404
+6     6     168     203     250     226     318</code></pre>
+</div>
+</div>
+<p>Aqui a função <code>pivot_wider</code> recebe uma coluna com valores categóricos e cria colunas individuais para cada valor na variável, associando o valor de <code>peso</code> correspondente. Desta forma recuperamos o formato <em>wide</em> que existia nos dados originais.</p>
 
 
 </section>
@@ -888,10 +1158,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./02_intro_tidy_sec-tidy.html" class="pagination-link" aria-label="Introdução ao `tidyverse`">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Introdução ao <code>tidyverse</code></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./01_r_rstudio_sec-intro.html" class="pagination-link" aria-label="R e RStudio">
-        <span class="nav-page-text">R e RStudio</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./04_ggplot2_sec-dataviz.html" class="pagination-link" aria-label="Gráficos com `ggplot2`">
+        <span class="nav-page-text">Gráficos com <code>ggplot2</code></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -903,7 +1176,7 @@ ul.task-list li input[type="checkbox"] {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><ul><li><a href="https://github.com/paulobarros/intro-r-tidyverse/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/paulobarros/intro-r-tidyverse/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>© CC-By Paulo Barros, 2024</p>
 </div>

@@ -1,39 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://paulobarros.github.io/intro-r-tidyverse/08_ANOVA.html</loc>
-    <lastmod>2025-05-17T23:45:07.892Z</lastmod>
-  </url>
-  <url>
-    <loc>https://paulobarros.github.io/intro-r-tidyverse/01_r_rstudio.html</loc>
-    <lastmod>2024-08-20T22:40:39.364Z</lastmod>
-  </url>
-  <url>
-    <loc>https://paulobarros.github.io/intro-r-tidyverse/04_ggplot2.html</loc>
-    <lastmod>2025-05-09T00:25:18.306Z</lastmod>
-  </url>
-  <url>
-    <loc>https://paulobarros.github.io/intro-r-tidyverse/index.html</loc>
-    <lastmod>2024-08-20T22:38:57.724Z</lastmod>
-  </url>
-  <url>
-    <loc>https://paulobarros.github.io/intro-r-tidyverse/05_descriptives.html</loc>
+    <loc>https://paulobarros.github.io/intro-r-tidyverse/05_descriptives_sec-eda.html</loc>
     <lastmod>2025-05-09T00:54:50.283Z</lastmod>
   </url>
   <url>
-    <loc>https://paulobarros.github.io/intro-r-tidyverse/02_intro_tidy.html</loc>
-    <lastmod>2024-08-20T22:40:49.957Z</lastmod>
+    <loc>https://paulobarros.github.io/intro-r-tidyverse/07_t_test_sec-inf.html</loc>
+    <lastmod>2025-05-18T23:47:25.159Z</lastmod>
   </url>
   <url>
-    <loc>https://paulobarros.github.io/intro-r-tidyverse/06_ic_hypothesis.html</loc>
-    <lastmod>2025-05-09T14:07:02.312Z</lastmod>
+    <loc>https://paulobarros.github.io/intro-r-tidyverse/index.html</loc>
+    <lastmod>2025-05-19T13:11:21.236Z</lastmod>
   </url>
   <url>
-    <loc>https://paulobarros.github.io/intro-r-tidyverse/03_data_editing.html</loc>
+    <loc>https://paulobarros.github.io/intro-r-tidyverse/09_regression_sec-inf.html</loc>
+    <lastmod>2025-05-19T13:40:51.143Z</lastmod>
+  </url>
+  <url>
+    <loc>https://paulobarros.github.io/intro-r-tidyverse/04_ggplot2_sec-dataviz.html</loc>
+    <lastmod>2025-05-19T13:49:25.569Z</lastmod>
+  </url>
+  <url>
+    <loc>https://paulobarros.github.io/intro-r-tidyverse/02_intro_tidy_sec-tidy.html</loc>
+    <lastmod>2025-05-19T13:49:28.566Z</lastmod>
+  </url>
+  <url>
+    <loc>https://paulobarros.github.io/intro-r-tidyverse/08_correlation_sec-inf.html</loc>
+    <lastmod>2025-05-19T13:06:21.695Z</lastmod>
+  </url>
+  <url>
+    <loc>https://paulobarros.github.io/intro-r-tidyverse/10_ANOVA_sec-inf.html</loc>
+    <lastmod>2025-05-19T13:08:17.028Z</lastmod>
+  </url>
+  <url>
+    <loc>https://paulobarros.github.io/intro-r-tidyverse/01_r_rstudio_sec-intro.html</loc>
+    <lastmod>2024-08-20T22:40:39.364Z</lastmod>
+  </url>
+  <url>
+    <loc>https://paulobarros.github.io/intro-r-tidyverse/03_data_editing_sec-tidy.html</loc>
     <lastmod>2025-05-08T12:20:41.131Z</lastmod>
   </url>
   <url>
-    <loc>https://paulobarros.github.io/intro-r-tidyverse/07_t_test.html</loc>
-    <lastmod>2025-05-18T02:28:15.165Z</lastmod>
+    <loc>https://paulobarros.github.io/intro-r-tidyverse/06_ic_hypothesis_sec-inf.html</loc>
+    <lastmod>2025-05-09T14:07:02.312Z</lastmod>
   </url>
 </urlset>

@@ -8,7 +8,7 @@
 
 <meta name="author" content="Paulo Barros">
 
-<title>Introdução ao  com tidyverse – Introdução ao R com `tidyverse`</title>
+<title>Gráficos com ggplot2 – Introdução ao R com `tidyverse`</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,6 +21,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,7 +65,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./01_r_rstudio_sec-intro.html" rel="next">
+<link href="./05_descriptives_sec-eda.html" rel="next">
+<link href="./03_data_editing_sec-tidy.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -45,8 +81,6 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap-becfcb4c67cf4fb2a97ec4ebed44d453.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark-06e9f787a3d90b3a0945b3f575a51333.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <link href="site_libs/bootstrap/bootstrap-becfcb4c67cf4fb2a97ec4ebed44d453.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
-<link href="site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -248,7 +282,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Apresentação</a></li><li class="breadcrumb-item"><a href="./index.html">Boas Vindas!</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04_ggplot2_sec-dataviz.html">Visualização de Dados</a></li><li class="breadcrumb-item"><a href="./04_ggplot2_sec-dataviz.html">Gráficos com <code>ggplot2</code></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -281,16 +315,16 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
  <span class="menu-text">Apresentação</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Boas Vindas!</span></a>
   </div>
 </li>
@@ -338,16 +372,16 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
  <span class="menu-text">Visualização de Dados</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04_ggplot2_sec-dataviz.html" class="sidebar-item-text sidebar-link">
+  <a href="./04_ggplot2_sec-dataviz.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Gráficos com <code>ggplot2</code></span></a>
   </div>
 </li>
@@ -417,14 +451,23 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-grammar-of-graphics" id="toc-the-grammar-of-graphics" class="nav-link active" data-scroll-target="#the-grammar-of-graphics"><span class="header-section-number">1</span> <em>The grammar of graphics</em></a></li>
+  <li><a href="#nosso-primeiro-plot" id="toc-nosso-primeiro-plot" class="nav-link" data-scroll-target="#nosso-primeiro-plot"><span class="header-section-number">2</span> Nosso primeiro plot</a></li>
+  <li><a href="#geometrias" id="toc-geometrias" class="nav-link" data-scroll-target="#geometrias"><span class="header-section-number">3</span> Geometrias</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/paulobarros/intro-r-tidyverse/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="04_ggplot2_sec-dataviz.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Apresentação</a></li><li class="breadcrumb-item"><a href="./index.html">Boas Vindas!</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04_ggplot2_sec-dataviz.html">Visualização de Dados</a></li><li class="breadcrumb-item"><a href="./04_ggplot2_sec-dataviz.html">Gráficos com <code>ggplot2</code></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Introdução ao <i class="fa-brands fa-r-project" aria-label="r-project"></i> com <code>tidyverse</code></h1>
+<h1 class="title">Gráficos com <code>ggplot2</code></h1>
 </div>
 
 
@@ -454,21 +497,308 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="apresentacao" class="level2">
-<h2 class="anchored" data-anchor-id="apresentacao">Apresentação</h2>
-<p>Este é um curso introdutório a Linguagem de Programação <i class="fa-brands fa-r-project" aria-label="r-project"></i> com <code>tidyverse</code>. Esse material foi desenvolvido como suporte as atividades do Grupo de Pesquisas em Genômica Aplicada a Conservação e Melhoramento (GACOM) na Universidade Estadual do Sudoeste da Bahia (UESB), campus Jequié. O objetivo deste curso é oferecer aos alun@s um primeiro contato com a linguagem. Este material pode ser compartilhado desde que não seja comercializado. Agradecemos qualquer comentário e sugestão de correção ou melhoria do material.</p>
+<p>Gerar visualizações de dados é tarefa comum em qualquer processo de análise. Inspecionar visualmente nossas variáveis nos permite observar padrões, detectar erros, identificar <em>outliers</em>, etc. Embora o R conte com sua máquina padrão para gerar visualizações, é possível obter gráficos muito mais elaborados e de maneira mais simples com o pacote <code>ggplot2</code> que faz parte do <code>tidyverse</code>.</p>
+<p>Nessa sessão teremos uma breve introdução ao <code>ggplot2</code>, um pacote muito útil que implementa a <em>gramática dos gráficos</em> (<em>grammar of graphics</em>), um sistema coerente e elegante na descrição e construção de visualizações. Veremos como gerar alguns dos tipos de visualizações mais comuns, bem como modificar aspectos estéticos e textuais dos nossos gráficos. Isso nos ajudará na nossa próxima sessão onde discutiremos estatísticas descritivas.</p>
+<section id="the-grammar-of-graphics" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="the-grammar-of-graphics"><span class="header-section-number">1</span> <em>The grammar of graphics</em></h2>
+<p>Todo gráfico em <code>ggplot2</code> é construído em um sistema de camadas que se combinam para formar uma visualização de dados.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/grammar_of_graphics.png" class="img-fluid figure-img" width="450"></p>
+<figcaption>Grammar Of Graphics/</figcaption>
+</figure>
+</div>
+<p>Ao longo deste material provalmente utilizaremos todas as camadas da imagem acima, no entanto, nosso foco no momento são as camadas principais de <strong>Data</strong>, <strong>Aesthetics</strong> e <strong>Geometries</strong>.</p>
+<ul>
+<li><p><strong>Data</strong>: Aqui informamos qual conjunto de dados utilizaremos para o gráfico.</p></li>
+<li><p><strong>Aesthetics</strong>: Nesta camada <strong>mapeamos</strong> cada variável aos eixos X e Y do gráfico.</p></li>
+<li><p><strong>Geometries</strong>: Aqui decidimos qual tipo de gráfico (geometria) utilizar. Barras, Linhas, Pontos, Célula, etc.</p></li>
+</ul>
+<p>Definidas estas três camadas, temos uma visualização básica em <code>ggplot</code>.</p>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Importante!
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Como mencionamos anteriormente, o <code>ggplot</code> usa um <strong>sistema de camadas</strong>, e por isso <strong>a ordem das camadas importa!</strong> Na construção do gráfico é como se empilhassemos uma sobre a outra, assim, a camada adicionada por último fica no “topo” da visualização.</p>
+</div>
+</div>
 </section>
-<section id="autor" class="level2">
-<h2 class="anchored" data-anchor-id="autor">Autor</h2>
-<div class="columns">
-<div class="column" style="width:20%;">
-<p><img src="images/avatarNew.png" class="img-fluid"></p>
-</div><div class="column" style="width:10%;">
+<section id="nosso-primeiro-plot" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="nosso-primeiro-plot"><span class="header-section-number">2</span> Nosso primeiro plot</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(palmerpenguins, <span class="at">quietly =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'palmerpenguins'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:datasets':
 
-</div><div class="column" style="width:70%;">
-<p>Me chamo Paulo Barros, sou Bacharel em Ciências Biológicas com ênfase em Genética pela UESB, Mestre em Genética, Biodiversidade e Conservação pela UESB. Tenho atuado como Cientista de Dados na área da Biologia e Melhoramento Animal desde o final da graduação colaborando em trabalhos das mais diversas áreas. Também tenho experiência oferecendo cursos e mentorias em Análise de Dados com a Linguagem R para estudantes de graduação e pós-graduação, bem como para professores e profissionais de áreas correlatas da Biologia. Atualmente sou aluno de Doutorado no PPG em Zootecnia (PPZ) na área de Melhoramento Animal aplicado a pequenos ruminantes.</p>
+    penguins, penguins_raw</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.2     ✔ tibble    3.2.1
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+✔ purrr     1.0.4     </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
 </div>
+<p>Para nossos exemplos nessa sessão vamos utilizar os dados do pacote <code>palmerpenguins</code>, caso não tenha o pacote pode instalá-lo com <code>install.packages("palmerpenguins")</code>.</p>
+<p>O pacote contém dados morfométricos de diferentes espécies de pinguins coletados em diferentes ilhas. Vamos dar uma olhada nos dados?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">glimpse</span>(penguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 344
+Columns: 8
+$ species           &lt;fct&gt; Adelie, Adelie, Adelie, Adelie, Adelie, Adelie, Adel…
+$ island            &lt;fct&gt; Torgersen, Torgersen, Torgersen, Torgersen, Torgerse…
+$ bill_length_mm    &lt;dbl&gt; 39.1, 39.5, 40.3, NA, 36.7, 39.3, 38.9, 39.2, 34.1, …
+$ bill_depth_mm     &lt;dbl&gt; 18.7, 17.4, 18.0, NA, 19.3, 20.6, 17.8, 19.6, 18.1, …
+$ flipper_length_mm &lt;int&gt; 181, 186, 195, NA, 193, 190, 181, 195, 193, 190, 186…
+$ body_mass_g       &lt;int&gt; 3750, 3800, 3250, NA, 3450, 3650, 3625, 4675, 3475, …
+$ sex               &lt;fct&gt; male, female, female, NA, female, male, female, male…
+$ year              &lt;int&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007…</code></pre>
+</div>
+</div>
+<p>Vamos construir nosso gráfico passo a passo. Primeiro, vamos definir nossa primeira camada, a de dados. A função <code>ggplot()</code> é a que utilizaremos para construir nosso gráfico base, e todas as camadas subsequentes serão adicionadas, literalmente, ao nosso gráfico utilizando um <code>+</code> ao final de cada linha do gráfico.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04_ggplot2_sec-dataviz_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Estranho? Nosso gráfico só exibe até o momento nosso <strong>canvas</strong>, é como se nosso gráfico fosse uma folha em branco. Vamos adicionar agora nossa camada de mapeamento dos dados (<strong>aesthetics</strong>).</p>
+<p>Será que existe alguma relação entre as variáveis <code>bill_length_mm</code> e <code>flipper_length_mm</code>? Pinguins com um bico maior também possuem maiores nadadeiras?</p>
+<p>Para isso vamos usar o argumento <code>aes()</code> dentro da nossa função <code>ggplot()</code> e mapear cada variável em um eixo do gráfico.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins, <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm, <span class="at">y =</span> flipper_length_mm))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04_ggplot2_sec-dataviz_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Nosso gráfico começa a tomar forma. Já podemos ver as unidades adicionadas em cada eixo, bem como os rótulos das nossas variáveis. Que tal utilizarmos um gráfico de pontos, ou <strong>gráfico de dispersão</strong> para observamos a relação entre essas duas variáveis? Para isso vamos adicionar agora uma camada de <strong>geometry</strong> de pontos com a função <code>geom_point()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins, <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm, <span class="at">y =</span> flipper_length_mm)) <span class="sc">+</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 2 rows containing missing values or values outside the scale range
+(`geom_point()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04_ggplot2_sec-dataviz_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Realmente parece haver uma relação positiva entre as duas variáveis baseado na inspeção visual. Mas ainda podemos melhorar nosso gráfico.</p>
+<p>Além de mapear nossas observações nos eixos, também podemos mapear variáveis categóricas facilitando assim a visualização de diferentes grupos nos dados. Para isso podemos declarar dentro do <code>aes()</code> uma variável categórica como <code>species</code> para colorir os grupos de observações.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins, </span>
+<span id="cb13-2"><a href="#cb13-2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm,</span>
+<span id="cb13-3"><a href="#cb13-3"></a>           <span class="at">y =</span> flipper_length_mm,</span>
+<span id="cb13-4"><a href="#cb13-4"></a>           <span class="at">color =</span> species)) <span class="sc">+</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 2 rows containing missing values or values outside the scale range
+(`geom_point()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04_ggplot2_sec-dataviz_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Muito mais intuitivo não? Além do atributo <code>color</code>, ainda podemos mapear categorias a outros atributos como <code>shape</code>, para mapear um tipo de ponto para cada grupo dentro de <code>species</code>. Vamos tentar?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins, </span>
+<span id="cb15-2"><a href="#cb15-2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm,</span>
+<span id="cb15-3"><a href="#cb15-3"></a>           <span class="at">y =</span> flipper_length_mm,</span>
+<span id="cb15-4"><a href="#cb15-4"></a>           <span class="at">color =</span> species,</span>
+<span id="cb15-5"><a href="#cb15-5"></a>           <span class="at">shape =</span> species)) <span class="sc">+</span></span>
+<span id="cb15-6"><a href="#cb15-6"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 2 rows containing missing values or values outside the scale range
+(`geom_point()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04_ggplot2_sec-dataviz_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Simples não? Podemos também modificar atributos específicos da camada de geometria, como seu tamanho, opacidade, etc. Vamos aumentar um pouco o tamanho dos pontos no nosso gráfico para ficar mais legível, e diminuir a opacidade de modo que os pontos que estejam sobrepostos possam ser visualizados.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins, </span>
+<span id="cb17-2"><a href="#cb17-2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm,</span>
+<span id="cb17-3"><a href="#cb17-3"></a>           <span class="at">y =</span> flipper_length_mm,</span>
+<span id="cb17-4"><a href="#cb17-4"></a>           <span class="at">color =</span> species,</span>
+<span id="cb17-5"><a href="#cb17-5"></a>           <span class="at">shape =</span> species)) <span class="sc">+</span></span>
+<span id="cb17-6"><a href="#cb17-6"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">4</span>,</span>
+<span id="cb17-7"><a href="#cb17-7"></a>             <span class="at">alpha =</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 2 rows containing missing values or values outside the scale range
+(`geom_point()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04_ggplot2_sec-dataviz_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Podemos melhorar também a parte textual do nosso gráfico, incluindo um título principal, e também dando melhores títulos a nossos eixos. Para isso usamos outra camada, a de <code>labs()</code>, ou rótulos.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins, </span>
+<span id="cb19-2"><a href="#cb19-2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm,</span>
+<span id="cb19-3"><a href="#cb19-3"></a>           <span class="at">y =</span> flipper_length_mm,</span>
+<span id="cb19-4"><a href="#cb19-4"></a>           <span class="at">color =</span> species,</span>
+<span id="cb19-5"><a href="#cb19-5"></a>           <span class="at">shape =</span> species)) <span class="sc">+</span></span>
+<span id="cb19-6"><a href="#cb19-6"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">4</span>,</span>
+<span id="cb19-7"><a href="#cb19-7"></a>             <span class="at">alpha =</span> <span class="fl">0.5</span>)<span class="sc">+</span></span>
+<span id="cb19-8"><a href="#cb19-8"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Relação entre Comprimento de Nadadeira e Bico em Pinguins de 3 espécies"</span>,</span>
+<span id="cb19-9"><a href="#cb19-9"></a>       <span class="at">x =</span> <span class="st">"Comprimento do Bico (mm)"</span>,</span>
+<span id="cb19-10"><a href="#cb19-10"></a>       <span class="at">y =</span> <span class="st">"Comprimento de Nadadeira"</span>,</span>
+<span id="cb19-11"><a href="#cb19-11"></a>       <span class="at">color =</span> <span class="st">"Espécies"</span>,</span>
+<span id="cb19-12"><a href="#cb19-12"></a>       <span class="at">shape =</span> <span class="st">"Espécies"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 2 rows containing missing values or values outside the scale range
+(`geom_point()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04_ggplot2_sec-dataviz_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="geometrias" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="geometrias"><span class="header-section-number">3</span> Geometrias</h2>
+<p>Outra visualização muito comum são gráficos de barra. A lógica segue a mesma, definimos os dados, o mapeamento e a geometria. Aqui temos uma diferença, já que queremos mapear em um dos eixos nossas espécies, e em outro nossa variável de interesse.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins, </span>
+<span id="cb21-2"><a href="#cb21-2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> species,</span>
+<span id="cb21-3"><a href="#cb21-3"></a>           <span class="at">y =</span> flipper_length_mm,</span>
+<span id="cb21-4"><a href="#cb21-4"></a>           <span class="at">fill =</span> species)) <span class="sc">+</span></span>
+<span id="cb21-5"><a href="#cb21-5"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">"identity"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 2 rows containing missing values or values outside the scale range
+(`geom_bar()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04_ggplot2_sec-dataviz_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Aqui precisamos adicionar ao <code>geom_bar()</code> o argumento <code>stat="identity"</code>, isso porque como não queremos calcular nenhuma estatística (frequência por exemplo), precisamos explicitar ao <code>ggplot</code> para que use os valores fornecidos pela nossa própria variável.</p>
+<p>Em outras sessões veremos maneiras de manipular nossos conjuntos de dados de maneira que possamos plotar múltiplas variáveis em um único gráfico de barras.</p>
+<p>Uma outra representação muito comum é o <strong>Histograma</strong>, que nos permite visualizar como estão distribuídas as observações de determinada variável. Podemos modificar diversos aspectos da geometria tornando o gráfico mais visualmente interessante.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins, </span>
+<span id="cb23-2"><a href="#cb23-2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> flipper_length_mm)) <span class="sc">+</span></span>
+<span id="cb23-3"><a href="#cb23-3"></a>  <span class="fu">geom_histogram</span>(<span class="at">fill =</span> <span class="st">"skyblue"</span>, <span class="at">color =</span> <span class="st">"darkblue"</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 2 rows containing non-finite outside the scale range
+(`stat_bin()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04_ggplot2_sec-dataviz_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Gráficos de linha são excelentes visualizações para comparar mudanças ao longo de um gradiente como tempo, concentrações, etc. Para criarmos uma série de dados que possam ser plotadas em um gráfico de linhas vamos fazer algumas transformações nos nossos dados, mas não se preocupe se não entender as operações agora, ao longo do material você irá explorar esses conceitos e operações com detalhes.</p>
+<p>Eu quero comparar como o peso corporal <code>body_mass_g</code> variou ao longo do tempo <code>year</code> entre as espécies.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a>  <span class="fu">group_by</span>(species,year) <span class="sc">|&gt;</span></span>
+<span id="cb26-3"><a href="#cb26-3"></a>  <span class="fu">mutate</span>(<span class="at">body_mass_kg =</span> body_mass_g<span class="sc">/</span><span class="dv">1000</span>) <span class="sc">|&gt;</span></span>
+<span id="cb26-4"><a href="#cb26-4"></a>  <span class="fu">summarize</span>(<span class="at">mean_bm =</span> <span class="fu">mean</span>(body_mass_kg, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb26-5"><a href="#cb26-5"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(year), <span class="at">y =</span> mean_bm, <span class="at">group =</span> species, <span class="at">color =</span> species)) <span class="sc">+</span></span>
+<span id="cb26-6"><a href="#cb26-6"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb26-7"><a href="#cb26-7"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Peso corporal de Pinguins de 3 ilhas"</span>,</span>
+<span id="cb26-8"><a href="#cb26-8"></a>       <span class="at">x =</span> <span class="st">"Ano"</span>,</span>
+<span id="cb26-9"><a href="#cb26-9"></a>       <span class="at">y =</span> <span class="st">"Peso Médio (kg)"</span>,</span>
+<span id="cb26-10"><a href="#cb26-10"></a>       <span class="at">color =</span> <span class="st">"Espécie:"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'species'. You can override using the
+`.groups` argument.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04_ggplot2_sec-dataviz_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Uma outra camada do <code>ggplot</code> é a de temas. Podemos aplicar temas pré-definidos no pacote, ou em pacotes extras como <code>ggthemes</code>, bem como podemos construir temas do zero. Para utilizar um tema pré definido basta invocar <code>theme_</code> e as opções aparecerão. Experimente e veja as diferenças e aplicabilidades de cada tema.</p>
+<p><img src="images/ggplot_themes.png" class="img-fluid" data-with="300px"></p>
+<p>Não abordarei a construção de temas nesse material, mas é bem fácil encontrar na própria documentação do pacote como fazê-lo.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a>  <span class="fu">group_by</span>(species,year) <span class="sc">|&gt;</span></span>
+<span id="cb28-3"><a href="#cb28-3"></a>  <span class="fu">mutate</span>(<span class="at">body_mass_kg =</span> body_mass_g<span class="sc">/</span><span class="dv">1000</span>) <span class="sc">|&gt;</span></span>
+<span id="cb28-4"><a href="#cb28-4"></a>  <span class="fu">summarize</span>(<span class="at">mean_bm =</span> <span class="fu">mean</span>(body_mass_kg, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb28-5"><a href="#cb28-5"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(year), <span class="at">y =</span> mean_bm, <span class="at">group =</span> species, <span class="at">color =</span> species)) <span class="sc">+</span></span>
+<span id="cb28-6"><a href="#cb28-6"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb28-7"><a href="#cb28-7"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Peso corporal de Pinguins de 3 ilhas"</span>,</span>
+<span id="cb28-8"><a href="#cb28-8"></a>       <span class="at">x =</span> <span class="st">"Ano"</span>,</span>
+<span id="cb28-9"><a href="#cb28-9"></a>       <span class="at">y =</span> <span class="st">"Peso Médio (kg)"</span>,</span>
+<span id="cb28-10"><a href="#cb28-10"></a>       <span class="at">color =</span> <span class="st">"Espécie:"</span>) <span class="sc">+</span></span>
+<span id="cb28-11"><a href="#cb28-11"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'species'. You can override using the
+`.groups` argument.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04_ggplot2_sec-dataviz_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>A versatilidade do <code>ggplot</code> permite a criação de visualizações de dados complexas e bastante informativas. Uma coisa importante é sempre ter em mente que planejar o objetivo de sua visualização é o mais fundamental. Uma vez que se sabe a ideia que desejamos transmitir, transformar os dados para o formato ideal e montar a imagem é bastante intuitivo. Ao longo deste curso praticaremos bastante a criação de gráficos.</p>
 
 
 </section>
@@ -888,10 +1218,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./03_data_editing_sec-tidy.html" class="pagination-link" aria-label="Processamento de Dados">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Processamento de Dados</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./01_r_rstudio_sec-intro.html" class="pagination-link" aria-label="R e RStudio">
-        <span class="nav-page-text">R e RStudio</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./05_descriptives_sec-eda.html" class="pagination-link" aria-label="Estatísticas Descritivas">
+        <span class="nav-page-text">Estatísticas Descritivas</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -903,7 +1236,7 @@ ul.task-list li input[type="checkbox"] {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><ul><li><a href="https://github.com/paulobarros/intro-r-tidyverse/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/paulobarros/intro-r-tidyverse/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>© CC-By Paulo Barros, 2024</p>
 </div>

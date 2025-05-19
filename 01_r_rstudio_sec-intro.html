@@ -8,7 +8,7 @@
 
 <meta name="author" content="Paulo Barros">
 
-<title>Introdução ao  com tidyverse – Introdução ao R com `tidyverse`</title>
+<title>R e RStudio – Introdução ao R com tidyverse</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,6 +21,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,7 +65,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./01_r_rstudio_sec-intro.html" rel="next">
+<link href="./02_intro_tidy_sec-tidy.html" rel="next">
+<link href="./index.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -248,7 +284,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Apresentação</a></li><li class="breadcrumb-item"><a href="./index.html">Boas Vindas!</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01_r_rstudio_sec-intro.html">Introdução ao R</a></li><li class="breadcrumb-item"><a href="./01_r_rstudio_sec-intro.html">R e RStudio</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -281,16 +317,16 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
  <span class="menu-text">Apresentação</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Boas Vindas!</span></a>
   </div>
 </li>
@@ -298,16 +334,16 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
  <span class="menu-text">Introdução ao R</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01_r_rstudio_sec-intro.html" class="sidebar-item-text sidebar-link">
+  <a href="./01_r_rstudio_sec-intro.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">R e RStudio</span></a>
   </div>
 </li>
@@ -417,14 +453,36 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#instalação" id="toc-instalação" class="nav-link active" data-scroll-target="#instalação"><span class="header-section-number">1</span> Instalação</a></li>
+  <li><a href="#interface-do-rstudio" id="toc-interface-do-rstudio" class="nav-link" data-scroll-target="#interface-do-rstudio"><span class="header-section-number">2</span> Interface do RStudio</a></li>
+  <li><a href="#vamos-praticar" id="toc-vamos-praticar" class="nav-link" data-scroll-target="#vamos-praticar"><span class="header-section-number">3</span> <i class="fa-solid fa-laptop-code" aria-label="laptop-code"></i> Vamos praticar?</a></li>
+  <li><a href="#a-sintaxe-do-r" id="toc-a-sintaxe-do-r" class="nav-link" data-scroll-target="#a-sintaxe-do-r"><span class="header-section-number">4</span> A sintaxe do R</a></li>
+  <li><a href="#objetos-e-funções" id="toc-objetos-e-funções" class="nav-link" data-scroll-target="#objetos-e-funções"><span class="header-section-number">5</span> Objetos e Funções</a>
+  <ul>
+  <li><a href="#objetos" id="toc-objetos" class="nav-link" data-scroll-target="#objetos"><span class="header-section-number">5.1</span> Objetos</a></li>
+  <li><a href="#funções" id="toc-funções" class="nav-link" data-scroll-target="#funções"><span class="header-section-number">5.2</span> Funções</a></li>
+  </ul></li>
+  <li><a href="#pacotes" id="toc-pacotes" class="nav-link" data-scroll-target="#pacotes"><span class="header-section-number">6</span> Pacotes</a>
+  <ul>
+  <li><a href="#sec-inst-pkg" id="toc-sec-inst-pkg" class="nav-link" data-scroll-target="#sec-inst-pkg"><span class="header-section-number">6.1</span> Instalando Pacotes</a></li>
+  <li><a href="#carregando-pacotes" id="toc-carregando-pacotes" class="nav-link" data-scroll-target="#carregando-pacotes"><span class="header-section-number">6.2</span> Carregando pacotes</a></li>
+  <li><a href="#mensagens-de-aviso-e-erro" id="toc-mensagens-de-aviso-e-erro" class="nav-link" data-scroll-target="#mensagens-de-aviso-e-erro"><span class="header-section-number">6.3</span> Mensagens de Aviso e Erro</a></li>
+  </ul></li>
+  <li><a href="#ajuda-do-r" id="toc-ajuda-do-r" class="nav-link" data-scroll-target="#ajuda-do-r"><span class="header-section-number">7</span> Ajuda do R</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/paulobarros/intro-r-tidyverse/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="01_r_rstudio_sec-intro.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Apresentação</a></li><li class="breadcrumb-item"><a href="./index.html">Boas Vindas!</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01_r_rstudio_sec-intro.html">Introdução ao R</a></li><li class="breadcrumb-item"><a href="./01_r_rstudio_sec-intro.html">R e RStudio</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Introdução ao <i class="fa-brands fa-r-project" aria-label="r-project"></i> com <code>tidyverse</code></h1>
+<h1 class="title">R e RStudio</h1>
 </div>
 
 
@@ -454,26 +512,163 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="apresentacao" class="level2">
-<h2 class="anchored" data-anchor-id="apresentacao">Apresentação</h2>
-<p>Este é um curso introdutório a Linguagem de Programação <i class="fa-brands fa-r-project" aria-label="r-project"></i> com <code>tidyverse</code>. Esse material foi desenvolvido como suporte as atividades do Grupo de Pesquisas em Genômica Aplicada a Conservação e Melhoramento (GACOM) na Universidade Estadual do Sudoeste da Bahia (UESB), campus Jequié. O objetivo deste curso é oferecer aos alun@s um primeiro contato com a linguagem. Este material pode ser compartilhado desde que não seja comercializado. Agradecemos qualquer comentário e sugestão de correção ou melhoria do material.</p>
+<section id="instalação" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="instalação"><span class="header-section-number">1</span> Instalação</h2>
+<p>O <i class="fa-brands fa-r-project" aria-label="r-project"></i> é um ambiente de software para computação estatística, distribuído como software livre e gratuito, está disponível para diversas plataformas como Windows, MacOS e Linux.</p>
+<p>O <strong>RStudio</strong> é um ambiente de desenvolvimento integrado (IDE) desenvolvida pela Posit criado para facilitar a programação em R oferecendo diversos recursos para o usuário.</p>
+<p>É necessário que ambos estejam instalados em sua máquina, você pode realizar o download do R no site do <a href="https://cran.r-project.org/" target="_blank"><i class="fa-solid fa-link" aria-label="link"></i> CRAN</a> e o RStudio no site da <a href="https://posit.co/download/rstudio-desktop/" target="_blank"><i class="fa-solid fa-link" aria-label="link"></i> POSIT</a>.</p>
 </section>
-<section id="autor" class="level2">
-<h2 class="anchored" data-anchor-id="autor">Autor</h2>
-<div class="columns">
-<div class="column" style="width:20%;">
-<p><img src="images/avatarNew.png" class="img-fluid"></p>
-</div><div class="column" style="width:10%;">
-
-</div><div class="column" style="width:70%;">
-<p>Me chamo Paulo Barros, sou Bacharel em Ciências Biológicas com ênfase em Genética pela UESB, Mestre em Genética, Biodiversidade e Conservação pela UESB. Tenho atuado como Cientista de Dados na área da Biologia e Melhoramento Animal desde o final da graduação colaborando em trabalhos das mais diversas áreas. Também tenho experiência oferecendo cursos e mentorias em Análise de Dados com a Linguagem R para estudantes de graduação e pós-graduação, bem como para professores e profissionais de áreas correlatas da Biologia. Atualmente sou aluno de Doutorado no PPG em Zootecnia (PPZ) na área de Melhoramento Animal aplicado a pequenos ruminantes.</p>
+<section id="interface-do-rstudio" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="interface-do-rstudio"><span class="header-section-number">2</span> Interface do RStudio</h2>
+<p>O Rstudio é composto de quatro janelas principais:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/rstudio_ide.png" class="img-fluid figure-img"></p>
+<figcaption>Crédito: Sophie Lee</figcaption>
+</figure>
+</div>
+<p><i class="fa-solid fa-a" aria-label="a"></i> <strong>: Editor (<em>Source</em>)</strong></p>
+<p>O editor é o local onde escrevemos e organizamos os nossos códigos (<em>scripts</em>) em R para serem executados. Isso permite que seja possível organizar nosso fluxo de trabalho nas análises e termos em mão os códigos sempre que necessário para rodar novamente os comandos, atualizar o nosso código e compartilhar o trabalho com parceiros.</p>
+<p>Para criar um novo arquivo de script acesse o menu em <em>File &gt; New File &gt; R Script</em> ou clique no <img src="images/new_file_shortcut.png" class="img-fluid">. Isso criará um novo arquivo em branco no qual você pode editar o seu código em R. Você pode editar múltiplos arquivos simultaneamente.</p>
+<p>Os códigos no script precisam ser executados explicitamente, eles não rodam de maneira automática. Para rodar os comandos você pode pressionar simultaneamente <code>CTRL + Enter</code> no Windows/Linux ou <code>COMANDO + Enter</code> no MacOS. Você também pode selecionar o código que deseja executar e pressionar o botão <img src="images/run_shortcut.png" class="img-fluid"> no canto superior direito do editor de scripts.</p>
+<p>Você pode executar a linha atual posicionando o cursor em qualquer ponto da linha, ou selecionando uma parte específica do código que deseja executar. É possível executar multiplos comandos em sequência selecionando os respectivos trechos desejados no código.</p>
+<p>Você vai perceber que todo código é executado no <em>Console</em>, e a grande vantagem do arquivo de script é ter um registro do fluxo de códigos, já que o console armazenda os comandos mas só nos permite executar o último comando executado por vez.</p>
+<p>Para salvar o seu arquivo de código você pode acessar o menu <em>File &gt; Save as…</em> ou clicar no <img src="images/save_shortcut.png" class="img-fluid"> no topo da janela. Uma vez que o arquivo tenha sido salvo uma primeira vez e nomeado, você pode utilizar o atalho <code>CTRL + s</code> para salvar o arquivo.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Dica de estilo
 </div>
 </div>
+<div class="callout-body-container callout-body">
+<p>Nomes de arquivos devem ser significativos, escritos em minúsculo e terminados em <code>.R</code> se um arquivo de script, <code>.Rmd</code> se de <code>Rmarkdown</code> ou <code>.qmd</code> se <code>Quarto</code>.</p>
+<p>Evite utilizar caracteres especiais (acentos, virgulas, pontos…) e espaços, use <code>_</code> ao inves disso. Se os arquivos precisam ser executados em uma ordem específica, enumere-os sequencialmente.</p>
+<p><code>01-primeiro_script.R</code>, <code>02-segundo_script.R</code> …</p>
+</div>
+</div>
+<p>Você pode abrir arquivos salvos previamente indo no menu <em>File &gt; Open File…</em> e selecionando o(s) arquivo(s) que deseja, ou no ícone <img src="images/open_shortcut.png" class="img-fluid">. No teclado, pode usar <code>CTRL + o</code>.</p>
+<p><i class="fa-solid fa-b" aria-label="b"></i> <strong>: Console</strong></p>
+<p>O Console é onde todos os comandos em R são executados e os resultados exibidos, com exceção dos gráficos. Você vai notar o símbolo <code>&gt;</code>, os comandos podem ser inseridos diretamente no console e executados pressionando <code>Enter</code>. Mas escrever código diretamente no console não é lá muito prático.</p>
+<p>A cada vez que uma sessão do R é inicializada, no Console são exibidas informações como a versão do R sendo utilizada. Para limpar o console voce pode usar o atalho <code>CTRL + l</code>. Lembre-se que ao limpar o console os resultados exibidos nele também são perdidos.</p>
+<p><i class="fa-solid fa-c" aria-label="c"></i> <strong>: Environment and history</strong></p>
+<p>Na aba <em>Environment</em> você encontrará todos os objetos criados durante a execução dos códigos. Variáveis criadas, dados importados, tudo isso é exibido em um formato de lista nesta aba. Na aba <em>history</em> consta o histórico de comandos executados na sessão atual do R.</p>
+<p><i class="fa-solid fa-d" aria-label="d"></i> <strong>:Files, plots, packages and help</strong></p>
+<p>Neste conjunto de abas fica o explorador de arquivos, são exibidos os gráficos que criamos (plots), a lista de pacotes disponíveis e também são exibidos os arquivos de ajuda do R.</p>
+<p>Estas janelas (A,B,C,D) podem ser configuradas ao gosto do usuário, para isso você pode acessar o menu <em>View &gt; Pane &gt; Pane Layout</em> e configurar seu ambiente de trabalho da forma que achar melhor.</p>
+</section>
+<section id="vamos-praticar" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="vamos-praticar"><span class="header-section-number">3</span> <i class="fa-solid fa-laptop-code" aria-label="laptop-code"></i> Vamos praticar?</h2>
+<ol type="1">
+<li>Crie um novo arquivo de script no editor.</li>
+<li>Salve o seu arquivo em um local apropriado.</li>
+</ol>
+</section>
+<section id="a-sintaxe-do-r" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="a-sintaxe-do-r"><span class="header-section-number">4</span> A sintaxe do R</h2>
+<p>O R assim como qualquer linguagem de programação segue uma <strong>sintaxe</strong><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Importante lembrar que o R é <strong><em>case sensitive</em></strong>, ou seja, a linguagem faz diferenciação entre caracteres maiúsculos e minúsculos. Isso é essencial na hora de invocar funções e objetos.</p>
+<p>Seu script deve sempre fazer sentido pra você para qualquer um que vá ler o seu código, pra isso utilizamos algumas convenções na hora de escrever código em R. Você pode utilizar o <code>#</code> para incluir comentários no seu código. Comentários são trechos de texto que não são interpretados como comandos no R e ajudam a organizar e até mesmo a explicar partes do código no script.</p>
+<p>Combinando <code>#</code> com <code>-</code> você pode criar seções dentro do script, gerando automaticamente um menu de navegação que facilita a movimentação em um script longo. Você pode ver este menu clicando no botão <img src="images/outline.png" class="img-fluid"> no canto superior direito do seu script.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Carregando dados ----</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="co"># Editando os dados ----</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Quando escrever o seu código evite linhas muito longas, quebre o código em múltiplas linhas pra torná-lo mais legível e permitir assim o uso inclusive de comentários no meio do fluxo de código.</p>
+</section>
+<section id="objetos-e-funções" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="objetos-e-funções"><span class="header-section-number">5</span> Objetos e Funções</h2>
+<section id="objetos" class="level3" data-number="5.1">
+<h3 data-number="5.1" class="anchored" data-anchor-id="objetos"><span class="header-section-number">5.1</span> Objetos</h3>
+<p>Tudo em R é um objeto. Objetos podem ser de várias classes como vetores, listas, matrizes, gráficos e inclusive conjuntos de dados completos.</p>
+<p>Os nomes dos objetos em R são bem flexíveis, entretanto como comentado anteriormente, R é <em>case sensitive</em> e faz dinstinção entre letras maíusculas e minúsculas. Nomes de objetos em R podem conter letras, números (desde que não no início do nome), e caracteres especiais como <code>_</code> e <code>.</code>.</p>
+<p>Para definirmos um objeto em R podemos utilizar <code>&lt;-</code> ou <code>=</code>, estes são os operadores de atribuição.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span>
+<span id="cb2-2"><a href="#cb2-2"></a>a</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 2 3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>b <span class="ot">=</span> <span class="st">"Eu sou um objeto em R!"</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Eu sou um objeto em R!"</code></pre>
+</div>
+</div>
+<p>Se você observar a aba <em>Environment</em> que já discutimos antes, verá que os objetos que criamos aparecem nesta aba. E no código acima para exibir o valor contido no objeto, basta chamar o nome do objeto como fizemos e executar a linha.</p>
+</section>
+<section id="funções" class="level3" data-number="5.2">
+<h3 data-number="5.2" class="anchored" data-anchor-id="funções"><span class="header-section-number">5.2</span> Funções</h3>
+<p>Uma Função em linguagem de programação nada mais é do que um conjunto de operações que recebe <strong>argumentos</strong> e exibe um resultado. Funções requerem que os argumentos sejam informados entre <code>()</code>. Vamos tentar ilustrar de maneira mais fácil. Imagine uma Cafeteira como uma função. Para fazer Café (nosso <strong>resultado</strong>), precisamos fornecer a cafeteira água e pó (<strong>argumentos</strong>). A cafeteira então esquenta a água, despeja sobre o pó e coa (<strong>operações</strong>). E no final obtemos o nosso <i class="fa-solid fa-mug-hot" aria-label="mug-hot"></i>!!</p>
+</section>
+</section>
+<section id="pacotes" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="pacotes"><span class="header-section-number">6</span> Pacotes</h2>
+<section id="sec-inst-pkg" class="level3" data-number="6.1">
+<h3 data-number="6.1" class="anchored" data-anchor-id="sec-inst-pkg"><span class="header-section-number">6.1</span> Instalando Pacotes</h3>
+<p>Quando temos um conjunto grande de funções, podemos combiná-las em um Pacote R. O R é composto de inúmeros pacotes que desempenham as mais diversas funções. A instalação básica do R já conta com muitos pacotes disponíveis, e podemos instalar pacotes adicionais sempre que necessário utilizando pacotes oficiais no repositório do <a href="https://cran.r-project.org/" target="_blank"><i class="fa-solid fa-link" aria-label="link"></i> CRAN</a> ou disponíveis em repositórios no GitHub.</p>
+<p>Para instalar um ou mais pacotes no R podemos utilizar o comando <code>install.packages</code>. Ou você também pode instalar os pacotes na aba <em>Packages</em> clicando em <img src="images/inst_packages.png" class="img-fluid"> e procurando na barra pelo nome do pacote. Para instalar mais de um pacote de uma vez basta separar o nome dos pacotes com <code>,</code>.</p>
+<p>Este material utiliza o pacote <code>tidyverse</code> que provavelmente se você instalou o R pela primeira vez pode ser que ainda não o tenha no seu computador, vamos instalar agora então? Basta rodar o código abaixo! Pode demorar alguns minutos a depender da sua configuração de computador e internet, tenha paciência jovem padawan!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="carregando-pacotes" class="level3" data-number="6.2">
+<h3 data-number="6.2" class="anchored" data-anchor-id="carregando-pacotes"><span class="header-section-number">6.2</span> Carregando pacotes</h3>
+<p>Só precisamos instalar os pacotes uma única vez. Os pacotes no R recebem atualizações constantes, então muitas vezes você será perguntado se quer atualizar os seus pacotes.</p>
+<p>Uma vez instalados, para ter acesso as funções em um pacote precisamos carregar ele na nossa sessão no R. Para isso usamos o comando <code>library</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.2     ✔ tibble    3.2.1
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+✔ purrr     1.0.4     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+</div>
+</section>
+<section id="mensagens-de-aviso-e-erro" class="level3" data-number="6.3">
+<h3 data-number="6.3" class="anchored" data-anchor-id="mensagens-de-aviso-e-erro"><span class="header-section-number">6.3</span> Mensagens de Aviso e Erro</h3>
+<p>A maioria dos pacotes em R exibem mensagens de inicialização/carregamento. <strong>É muito importante se familiarizar com estas mensagens!</strong> No momento do carregamento o R avisa sobre erros no processo de inicialização, ou emite alertas importantes sobre conflitos em funções no pacote. Acostume-se a sempre checar as mensagens de inicialização para ter certeza que o pacote foi iniciado corretamente.</p>
+</section>
+</section>
+<section id="ajuda-do-r" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="ajuda-do-r"><span class="header-section-number">7</span> Ajuda do R</h2>
+<p>Todo pacote do R vem acompanhado de sua <strong>documentação</strong>. A documentação é o primeiro lugar no qual você deve procurar ajuda para qualquer dúvida que lhe ocorrer. Muitos problemas para quem está começando a trabalhar com a linguagem vem justamente ao ignorar a documentação das funções e o arquivo de ajuda. Eles servem para te mostrar como a função funciona, quais seus argumentos e formatos de entrada e qual as saídas esperadas.</p>
+<p>Além disso, muitos pacotes oferecem também um vasto conteúdo teórico a respeito das análises que realizam. Isso também auxilia a compreender o que está acontecendo ao utilizar determinada função. <strong>LEIAM A DOCUMENTAÇÃO SEMPRE!!!</strong></p>
+<p>Para utilizar a ajuda do R você pode ir na aba <em>Help</em> e procurar pelos termos de interesse, ou pode utilizar a função <code>help()</code> dentro do código. Também é possível acessar a documentação de uma função específica colocando uma <code>?</code> antes da chamada da função. Colocando <code>??</code> antes de uma palavra faz uma busca em toda a documentação pelo termo informado. Execute os códigos abaixo.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Ajuda sobre a função soma sum()</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="fu">help</span>(sum)</span>
+<span id="cb9-4"><a href="#cb9-4"></a></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="co"># Mesma coisa de maneira diferente</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a></span>
+<span id="cb9-7"><a href="#cb9-7"></a>?sum</span>
+<span id="cb9-8"><a href="#cb9-8"></a></span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="co"># Busca pelo termo `sum`</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a></span>
+<span id="cb9-11"><a href="#cb9-11"></a>??sum</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
 </section>
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Sintaxe, em linguagem de programação, refere-se ao conjunto de regras e estruturas que definem a forma correta de escrever código em uma linguagem específica. Assim como a gramática em uma língua natural, a sintaxe determina como os comandos, instruções e expressões devem ser organizados e escritos para que o código seja compreendido e executado corretamente pelo compilador ou interpretador da linguagem.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
@@ -888,10 +1083,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link" aria-label="Boas Vindas!">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Boas Vindas!</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./01_r_rstudio_sec-intro.html" class="pagination-link" aria-label="R e RStudio">
-        <span class="nav-page-text">R e RStudio</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./02_intro_tidy_sec-tidy.html" class="pagination-link" aria-label="Introdução ao `tidyverse`">
+        <span class="nav-page-text">Introdução ao <code>tidyverse</code></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -903,7 +1101,7 @@ ul.task-list li input[type="checkbox"] {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><ul><li><a href="https://github.com/paulobarros/intro-r-tidyverse/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/paulobarros/intro-r-tidyverse/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>© CC-By Paulo Barros, 2024</p>
 </div>

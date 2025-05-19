@@ -8,7 +8,7 @@
 
 <meta name="author" content="Paulo Barros">
 
-<title>Introdução ao  com tidyverse – Introdução ao R com `tidyverse`</title>
+<title>Correlação de Pearson – Introdução ao R com tidyverse</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,7 +21,62 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -30,7 +85,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./01_r_rstudio_sec-intro.html" rel="next">
+<link href="./09_regression_sec-inf.html" rel="next">
+<link href="./07_t_test_sec-inf.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -45,8 +101,6 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap-becfcb4c67cf4fb2a97ec4ebed44d453.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark-06e9f787a3d90b3a0945b3f575a51333.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <link href="site_libs/bootstrap/bootstrap-becfcb4c67cf4fb2a97ec4ebed44d453.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
-<link href="site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -75,10 +129,39 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
-<body class="nav-sidebar docked quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-sidebar docked slimcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -248,7 +331,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Apresentação</a></li><li class="breadcrumb-item"><a href="./index.html">Boas Vindas!</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06_ic_hypothesis_sec-inf.html">Inferência Estatística</a></li><li class="breadcrumb-item"><a href="./08_correlation_sec-inf.html">Correlação de Pearson</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -281,16 +364,16 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
  <span class="menu-text">Apresentação</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Boas Vindas!</span></a>
   </div>
 </li>
@@ -372,13 +455,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
  <span class="menu-text">Inferência Estatística</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./06_ic_hypothesis_sec-inf.html" class="sidebar-item-text sidebar-link">
@@ -393,7 +476,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./08_correlation_sec-inf.html" class="sidebar-item-text sidebar-link">
+  <a href="./08_correlation_sec-inf.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Correlação de Pearson</span></a>
   </div>
 </li>
@@ -417,14 +500,22 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#correlação" id="toc-correlação" class="nav-link active" data-scroll-target="#correlação"><span class="header-section-number">1</span> Correlação</a></li>
+  <li><a href="#calculando-r" id="toc-calculando-r" class="nav-link" data-scroll-target="#calculando-r"><span class="header-section-number">2</span> Calculando <span class="math inline">\(r\)</span></a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/paulobarros/intro-r-tidyverse/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="08_correlation_sec-inf.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+    </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Apresentação</a></li><li class="breadcrumb-item"><a href="./index.html">Boas Vindas!</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06_ic_hypothesis_sec-inf.html">Inferência Estatística</a></li><li class="breadcrumb-item"><a href="./08_correlation_sec-inf.html">Correlação de Pearson</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Introdução ao <i class="fa-brands fa-r-project" aria-label="r-project"></i> com <code>tidyverse</code></h1>
+<h1 class="title">Correlação de Pearson</h1>
 </div>
 
 
@@ -454,26 +545,218 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="apresentacao" class="level2">
-<h2 class="anchored" data-anchor-id="apresentacao">Apresentação</h2>
-<p>Este é um curso introdutório a Linguagem de Programação <i class="fa-brands fa-r-project" aria-label="r-project"></i> com <code>tidyverse</code>. Esse material foi desenvolvido como suporte as atividades do Grupo de Pesquisas em Genômica Aplicada a Conservação e Melhoramento (GACOM) na Universidade Estadual do Sudoeste da Bahia (UESB), campus Jequié. O objetivo deste curso é oferecer aos alun@s um primeiro contato com a linguagem. Este material pode ser compartilhado desde que não seja comercializado. Agradecemos qualquer comentário e sugestão de correção ou melhoria do material.</p>
+<p>Nesta sessão vamos estudar como descrever e testar a significância das relações entre duas variáveis. Veremos uma introdução a correlação linear, variáveis independentes e dependentes e tipos de correlação. Abordaremos como calcular o coeficiente de Correlação de Pearson e como distinguir correlação e causalidade.</p>
+<section id="correlação" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="correlação"><span class="header-section-number">1</span> Correlação</h2>
+<blockquote class="blockquote">
+<p>Uma <strong>correlação</strong> é uma relação entre duas variáveis. Os dados podem ser representados por pares ordenados (x, y), sendo x a <strong>variável independente</strong> (ou explanatória) e y a <strong>variável dependente</strong> (ou resposta). <span class="citation" data-cites="larson2023estatistica">(<a href="#ref-larson2023estatistica" role="doc-biblioref">Larson and Farber, 2023</a>)</span></p>
+</blockquote>
+<p>Um gráfico de dispersão é uma ótima ferramenta para avaliar a relação entre duas variáveis. Considere o seguinte conjunto de dados:</p>
+<table class="tbl-sixty caption-top table">
+<caption>Dados do PIB e da quantidade de CO<sub>2</sub> emitida de 10 países. Adaptado de <span class="citation" data-cites="larson2023estatistica">Larson and Farber (<a href="#ref-larson2023estatistica" role="doc-biblioref">2023</a>)</span></caption>
+<colgroup>
+<col style="width: 37%">
+<col style="width: 62%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">PIB <br> (em trilhões de dólares)</th>
+<th style="text-align: center;">Emissões de CO<sub>2</sub> <br> (em milhões de toneladas métricas)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1,7</td>
+<td style="text-align: center;">552,6</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">1,2</td>
+<td style="text-align: center;">462,3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">2,5</td>
+<td style="text-align: center;">475,4</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2,8</td>
+<td style="text-align: center;">374,3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3,6</td>
+<td style="text-align: center;">748,5</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2,2</td>
+<td style="text-align: center;">400,9</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">0,8</td>
+<td style="text-align: center;">253,0</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">1,5</td>
+<td style="text-align: center;">318,6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">2,4</td>
+<td style="text-align: center;">496,8</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">5,9</td>
+<td style="text-align: center;">1.180,6</td>
+</tr>
+</tbody>
+</table>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>dados_pib_co2 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb1-2"><a href="#cb1-2"></a>  <span class="at">PIB =</span> <span class="fu">c</span>(<span class="fl">1.7</span>, <span class="fl">1.2</span>, <span class="fl">2.5</span>, <span class="fl">2.8</span>, <span class="fl">3.6</span>, <span class="fl">2.2</span>, <span class="fl">0.8</span>, <span class="fl">1.5</span>, <span class="fl">2.4</span>, <span class="fl">5.9</span>),</span>
+<span id="cb1-3"><a href="#cb1-3"></a>  <span class="at">CO2 =</span> <span class="fu">c</span>(<span class="fl">552.6</span>, <span class="fl">462.3</span>, <span class="fl">475.4</span>, <span class="fl">374.3</span>, <span class="fl">748.5</span>, <span class="fl">400.9</span>, <span class="fl">253.0</span>, <span class="fl">318.6</span>, <span class="fl">496.8</span>, <span class="fl">1180.6</span>)</span>
+<span id="cb1-4"><a href="#cb1-4"></a>)</span>
+<span id="cb1-5"><a href="#cb1-5"></a></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="fu">library</span>(ggtext)</span>
+<span id="cb1-7"><a href="#cb1-7"></a></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="fu">ggplot</span>(dados_pib_co2,</span>
+<span id="cb1-9"><a href="#cb1-9"></a>       <span class="fu">aes</span>(<span class="at">x =</span> PIB, <span class="at">y =</span> CO2)) <span class="sc">+</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a>  <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span><span class="dv">4</span>, <span class="at">fill =</span> <span class="st">"grey70"</span>, <span class="at">color =</span> <span class="st">"black"</span>)<span class="sc">+</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">14</span>, <span class="at">base_family =</span> <span class="st">"Ubuntu"</span>) <span class="sc">+</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>) <span class="sc">+</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">1200</span>,<span class="at">by =</span> <span class="dv">200</span>))<span class="sc">+</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Relação entre PIB e a quantidade de CO2 emitida,</span></span>
+<span id="cb1-15"><a href="#cb1-15"></a><span class="st">       para amostra com 10 países."</span>,</span>
+<span id="cb1-16"><a href="#cb1-16"></a>       <span class="at">x =</span> <span class="st">"PIB &lt;br&gt; (em trilhões de dólares)"</span>,</span>
+<span id="cb1-17"><a href="#cb1-17"></a>       <span class="at">y =</span> <span class="st">"CO&lt;sub&gt;2&lt;/sub&gt; &lt;br&gt; (em milhões de toneladas métricas)"</span>) <span class="sc">+</span></span>
+<span id="cb1-18"><a href="#cb1-18"></a>  <span class="fu">theme</span>(<span class="at">axis.title =</span> <span class="fu">element_markdown</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="08_correlation_sec-inf_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Podemos observar no gráfico uma tendência. As emissões de CO<sub>2</sub> parecem aumentar com o aumento do PIB.</p>
+<p>Mas não podemos garantir que a relação entre as variáveis exista simplesmente por uma inspeção visual. Para tanto precisamos de um <strong>coeficiente de correlação</strong> que nos forneça a informação da força e direção da correlação entre estas variáveis.</p>
+<blockquote class="blockquote">
+<p>O <strong>coeficiente de correlação</strong> é uma medida da força e da direção de uma relação linear entre duas variáveis. O símbolo <span class="math inline">\(r\)</span> representa o coeficiente de correlação amostral. <span class="citation" data-cites="larson2023estatistica">(<a href="#ref-larson2023estatistica" role="doc-biblioref">Larson and Farber, 2023</a>)</span></p>
+</blockquote>
+<p><span class="math display">\[r = \frac{\sum_{i=1}^{n} (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum_{i=1}^{n} (x_i - \bar{x})^2} \sqrt{\sum_{i=1}^{n} (y_i - \bar{y})^2}}
+\]</span> O <strong>coeficiente de correlação de Pearson</strong> foi proposto por Karl Pearson no final do século XIX como <strong>uma medida estatística da força e direção</strong> da relação linear entre duas variáveis quantitativas. O coeficiente, geralmente representado por <span class="math inline">\(r\)</span>, <strong>varia entre -1 e 1</strong>, onde valores próximos a 1 indicam uma correlação positiva forte, valores próximos a -1 indicam uma correlação negativa forte e valores próximos a 0 indicam ausência de correlação linear. A proposta de Pearson representou um avanço importante na estatística, ao permitir quantificar relações entre variáveis de forma objetiva e padronizada, sendo amplamente utilizada até os dias atuais em diversas áreas do conhecimento.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/correlacao.png" class="img-fluid figure-img" style="width:75.0%"></p>
+<figcaption>Tipos de Correlação<br>Adaptado de <span class="citation" data-cites="larson2023estatistica">Larson and Farber (<a href="#ref-larson2023estatistica" role="doc-biblioref">2023</a>)</span></figcaption>
+</figure>
+</div>
+<p><strong>Premissas da Correlação de Pearson:</strong></p>
+<ol type="1">
+<li>As amostras devem ser independentes e pareadas (i.e., as duas variáveis devem ser medidas na mesma unidade amostral)</li>
+<li>As unidades amostrais são selecionadas aleatoriamente</li>
+<li>A relação entre as variáveis tem que ser linear</li>
+</ol>
 </section>
-<section id="autor" class="level2">
-<h2 class="anchored" data-anchor-id="autor">Autor</h2>
-<div class="columns">
-<div class="column" style="width:20%;">
-<p><img src="images/avatarNew.png" class="img-fluid"></p>
-</div><div class="column" style="width:10%;">
+<section id="calculando-r" class="level2 page-columns page-full" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="calculando-r"><span class="header-section-number">2</span> Calculando <span class="math inline">\(r\)</span></h2>
+<p>Mais uma vez usaremos dados do <code>ecodados</code> de <span class="citation" data-cites="da2022analises">(<a href="#ref-da2022analises" role="doc-biblioref">Da Silva <em>et al.</em>, 2022</a>)</span>.</p>
+<p>Neste exemplo, avaliaremos a correlação entre a altura do tronco e o tamanho da raiz medidos em 35 indivíduos de uma espécie vegetal arbustiva.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>arbustos <span class="ot">&lt;-</span> ecodados<span class="sc">::</span>correlacao</span>
+<span id="cb2-2"><a href="#cb2-2"></a></span>
+<span id="cb2-3"><a href="#cb2-3"></a>arbustos <span class="sc">|&gt;</span> <span class="fu">glimpse</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 35
+Columns: 2
+$ Tamanho_raiz   &lt;dbl&gt; 10.177049, 6.622634, 7.773629, 11.055257, 4.487274, 11.…
+$ Tamanho_tronco &lt;dbl&gt; 19.54383, 17.13558, 19.50681, 21.57085, 13.22763, 21.62…</code></pre>
+</div>
+</div>
+<p>Utilizaremos a função <code>cor.test()</code> explicitando que queremos o coeficiente de Pearson no argumento <code>method="pearson"</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">cor.test</span>(arbustos<span class="sc">$</span>Tamanho_raiz,</span>
+<span id="cb4-2"><a href="#cb4-2"></a>         arbustos<span class="sc">$</span>Tamanho_tronco,</span>
+<span id="cb4-3"><a href="#cb4-3"></a>         <span class="at">method =</span> <span class="st">"pearson"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's product-moment correlation
 
-</div><div class="column" style="width:70%;">
-<p>Me chamo Paulo Barros, sou Bacharel em Ciências Biológicas com ênfase em Genética pela UESB, Mestre em Genética, Biodiversidade e Conservação pela UESB. Tenho atuado como Cientista de Dados na área da Biologia e Melhoramento Animal desde o final da graduação colaborando em trabalhos das mais diversas áreas. Também tenho experiência oferecendo cursos e mentorias em Análise de Dados com a Linguagem R para estudantes de graduação e pós-graduação, bem como para professores e profissionais de áreas correlatas da Biologia. Atualmente sou aluno de Doutorado no PPG em Zootecnia (PPZ) na área de Melhoramento Animal aplicado a pequenos ruminantes.</p>
+data:  arbustos$Tamanho_raiz and arbustos$Tamanho_tronco
+t = 11.49, df = 33, p-value = 4.474e-13
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ 0.7995083 0.9457816
+sample estimates:
+      cor 
+0.8944449 </code></pre>
+</div>
+</div>
+<p>A hipótese nula do teste é a de que as variáveis não são correlacionadas, ou seja, <span class="math inline">\(H_0: r = 0\)</span>. Olhando nosso resultado, uma vez que nosso <span class="math inline">\(p-value = 4.474e-13\)</span>, rejeitamos <span class="math inline">\(H_0\)</span>, nossas variáveis são <strong>positivamente</strong> e <strong>fortemente</strong> correlacionadas dado o valor de <span class="math inline">\(r = 0.8944449\)</span>. Podemos comunicar nossos resultados com um gráfico de dispersão.</p>
+<div class="cell page-columns page-full">
+<div id="lst-cor" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored page-columns page-full" data-cap-location="margin">
+<figure class="quarto-float quarto-float-lst figure page-columns page-full">
+<div aria-describedby="lst-cor-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="sourceCode cell-code" id="cb6" data-cap-location="margin"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>arbustos <span class="ot">&lt;-</span> ecodados<span class="sc">::</span>correlacao</span>
+<span id="cb6-2"><a href="#cb6-2"></a></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="fu">ggplot</span>(<span class="at">data =</span> arbustos, <span class="fu">aes</span>(<span class="at">x =</span> Tamanho_raiz,</span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="at">y =</span> Tamanho_tronco)) <span class="sc">+</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Tamanho da raiz (m)"</span>, <span class="at">y =</span> <span class="st">"Altura do tronco (m)"</span>) <span class="sc">+</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"#3e5c76"</span>,</span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="at">linetype =</span> <span class="st">"solid"</span>, <span class="at">linewidth=</span><span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">4</span>, <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">fill =</span> <span class="st">"#dc2f02"</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="fu">annotate</span>(<span class="st">"text"</span>,</span>
+<span id="cb6-10"><a href="#cb6-10"></a>         <span class="at">x =</span> <span class="dv">14</span>, <span class="at">y =</span> <span class="dv">14</span>,</span>
+<span id="cb6-11"><a href="#cb6-11"></a>         <span class="at">label =</span> <span class="st">"r = 0.89, P &lt; 0.001"</span>,</span>
+<span id="cb6-12"><a href="#cb6-12"></a>         <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">5</span>,</span>
+<span id="cb6-13"><a href="#cb6-13"></a>         <span class="at">family =</span> <span class="st">"Ubuntu"</span>) <span class="sc">+</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a></span>
+<span id="cb6-15"><a href="#cb6-15"></a><span class="fu">theme_classic</span>(<span class="at">base_size =</span> <span class="dv">14</span>, <span class="at">base_family =</span> <span class="st">"Ubuntu"</span>) <span class="sc">+</span></span>
+<span id="cb6-16"><a href="#cb6-16"></a><span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-lst margin-caption" id="lst-cor-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;1: Reta de Regressão
+</figcaption>
+</figure>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre data-cap-location="margin"><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display page-columns page-full">
+<div id="fig-cor" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-cap-location="margin">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-cor-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="08_correlation_sec-inf_files/figure-html/fig-cor-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-cor-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Adaptado de <span class="citation" data-cites="da2022analises">Da Silva <em>et al.</em> (<a href="#ref-da2022analises" role="doc-biblioref">2022</a>)</span>
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Importante
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A linha de tendência tracejada no gráfico é apenas para ilustrar a relação positiva entre as variáveis. Ela não é gerada pela análise de correlação, e sim por uma regressão linear que veremos em outra sessão.</p>
 </div>
 </div>
 
 
+
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
+<div id="ref-da2022analises" class="csl-entry" role="listitem">
+DA SILVA, F. R. <em>et al.</em> <strong>An<span>á</span>lises ecol<span>ó</span>gicas no r</strong>. [s.l.] Clube de Autores, 2022.
+</div>
+<div id="ref-larson2023estatistica" class="csl-entry" role="listitem">
+LARSON, R.; FARBER, B. <strong>Estat<span>ı́</span>stica aplicada: Retratando o mundo</strong>. [s.l.] Bookman Editora, 2023.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
@@ -888,10 +1171,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./07_t_test_sec-inf.html" class="pagination-link" aria-label="Teste _t_">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Teste <em>t</em></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./01_r_rstudio_sec-intro.html" class="pagination-link" aria-label="R e RStudio">
-        <span class="nav-page-text">R e RStudio</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./09_regression_sec-inf.html" class="pagination-link" aria-label="Regressão Linear">
+        <span class="nav-page-text">Regressão Linear</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -903,7 +1189,7 @@ ul.task-list li input[type="checkbox"] {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><ul><li><a href="https://github.com/paulobarros/intro-r-tidyverse/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/paulobarros/intro-r-tidyverse/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>© CC-By Paulo Barros, 2024</p>
 </div>
