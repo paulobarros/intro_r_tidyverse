@@ -1,0 +1,286 @@
+---
+title: "Análise de Variância"
+author:
+  - name: Paulo Barros
+    orcid: 0000-0001-9839-0796
+    email: pbarrosbio@gmail.com
+    affiliations:
+      - name: PPZ - UESB - GACOM
+editor_options: 
+  chunk_output_type: console
+csl: abnt_ipea.csl
+bibliography: ref.bib
+---
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+library(tidyverse, quietly = T)
+library(extrafont)
+```
+
+[![Sir Ronald Fisher](https://i.pinimg.com/564x/f1/93/17/f193175b503d4d64f7feee86c613aac1.jpg)]{.aside}
+
+A Análise de Variância (ANOVA) é uma das ferramentas estatísticas mais influentes e amplamente utilizadas **na comparação de médias entre grupos**. Seu desenvolvimento é atribuído ao estatístico britânico Ronald A. Fisher, que a introduziu na década de 1920 como parte de seus trabalhos pioneiros em experimentação agrícola. Fisher buscava uma forma eficiente de **avaliar se diferenças observadas entre médias de grupos eram estatisticamente significativas ou se poderiam ser atribuídas apenas à variação aleatória.**
+
+A grande contribuição de Fisher foi estruturar um método baseado na **decomposição da variabilidade total dos dados em componentes atribuíveis a diferentes fontes (como tratamento e erro)**, permitindo testar hipóteses sobre diferenças entre grupos com base na **razão entre essas variâncias**. Desde então, a ANOVA tornou-se essencial em diversas áreas do conhecimento — da biologia à engenharia, das ciências sociais às ciências da saúde — sempre que se deseja comparar múltiplos grupos sob um desenho experimental ou observacional controlado.
+
+## ANOVA
+
+Análise de variância com um fator é uma técnica de teste de hipótese usada para
+comparar as médias de três ou mais populações. A análise de variância geralmente
+é abreviada como ANOVA.
+
+Como mencionado anteriormente, a ANOVA é um teste de razão de variâncias. O que a
+estatistica do teste avalia de maneira resumida:
+
+$$Estatística \ do \ Teste = \frac{Variância \ dentro \ dos \ grupos}{Variância \ entre \ grupos}$$
+
+A variância entre as amostras mede as diferenças relacionadas ao tratamento/efeito
+atuando em cada amostra. Essa variância também é conhecida como **Quadrado Médio do Tratamento**.
+
+Já a variância dentro das amostras mede as diferenças dentro da amostra, geralmente
+relacionadas com o erro amostral. Essa variância também é chamada de **Quadrado Médio do Resíduo**.
+
+A **Estatística $F$** é o quociente destas duas variâncias, e nossa hipótese nula
+na ANOVA testa se a média dos grupos é igual:
+
+$$\large H_0: \mu_1 = \mu_2 = \cdots \mu_n$$
+
+## Tabela da ANOVA
+
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+library(gt)
+tibble::tribble(
+  ~fv,~gl,~sq,~qm,~stat,
+  md("Tratamento<br>(entre)"),md("$p-1$"),md("$SQ_{Trat}$"),md("$\\frac{SQ_{Trat}}{p-1}$"),
+  md("$\\frac{QM_{Trat}}{QM_{Res}}$"),
+  md("Erro Experimental<br>(dentro)"),md("$n-p$"),md("$SQ_{Res}$"),md("$\\frac{SQ_{Res}}{n-p}$"),NA,
+  md("**Total**"),md("$n-1$"),md("$SQ_{Total}$"),NA,NA
+) |>
+  gt::gt() |>
+  gt::fmt_markdown() |>
+  gt::cols_label(fv = md("**Fontes de Variação (FV)**"),
+                 gl = md("**Graus de Liberdade (GL)**"),
+                 sq = md("**Soma de Quadrados (SQ)**"),
+                 qm = md("**Quadrado Médio (QM)**"),
+                 stat = md("***F***")) |>
+  gt::tab_options(table.width = "90%",
+                  table.font.size = 16) |>
+  tab_style(
+    style = cell_borders(
+      sides = c("top","bottom"),
+      color = "black",
+      weight = px(2),
+      style = "solid"
+    ),
+    locations = list(cells_body(),
+                     cells_stub(),
+                     cells_column_labels()
+                     )
+  ) |>
+  tab_style(
+    style = cell_text(
+      align = "center"
+    ),
+    locations = list(
+      cells_body(columns = c(gl,sq,qm,stat)),
+      cells_column_labels( columns = c(gl,sq,qm,stat))
+      )
+  ) |>
+  sub_missing(
+    columns = 4:5,
+    missing_text = ""
+  )
+```
+
+Esta é a famosa tabela da ANOVA, a mesma tabela que é retornada pelas funções
+que utilizaremos aqui no R. As somas de quadrado podem ser obtidas como:
+
+:::{.columns}
+:::{.column  width=""}
+$\small \displaystyle SQ_{Total} = \sum_{i=1,j=1}^{I,J}Y_{ij}^2 - \frac{\displaystyle \left( \sum_{i=1,j=1}^{I,J}Y_{ij}\right)^2}{IJ}$
+:::
+:::{.column  width=""}
+$\small \displaystyle SQ_{Trat} = \sum_{i=1}^{I}\frac{T_{i}^2}{J} - \frac{\displaystyle \left( \sum_{i=1,j=1}^{I,J}Y_{ij}\right)^2}{IJ}$
+:::
+:::
+
+$\small SQ_{Total} \ = \ SQ_{Trat} + SQ_{Res}$
+
+
+**Premissas da ANOVA**:
+
+1. As amostras devem ser independentes
+2. As unidades amostrais são selecionadas aleatoriamente
+3. Distribuição normal (gaussiana) dos resíduos
+4. Homogeneidade da variância
+
+
+## Anova de um Fator
+
+Para nossos exemplos práticos vamos utilizar os dados do pacote `palmerpenguins`.
+São dados morfométricos de diferentes espécies de pinguins coletados em diferentes
+ilhas. 
+
+Na ANOVA de um fator testamos o efeito de uma única variável categórica (Tratamento)
+sobre nossa variável dependente ($y$).
+
+**Pergunta**: Existe diferença no tamanho do bico (`bill_length_mm`) entre as diferentes
+espécies de pinguim?
+
+```{r}
+pinguins <- palmerpenguins::penguins
+
+pinguins |>
+  head()
+
+```
+
+Diferente da última sessão, utilizaremos a função `aov()` para realizarmos a ANOVA.
+
+```{r}
+anova_bico <- aov(bill_length_mm ~ species, data = pinguins)
+```
+
+### Testando Premissas
+
+Assim como fizemos com nosso modelo de regressão linear podemos avaliar nossos
+resíduos visualmente.
+
+```{r}
+par(mfrow = c(2, 2), oma = c(0, 0, 2, 0))
+plot(anova_bico)
+```
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| include: false
+suppressMessages(dev.off())
+```
+
+Nossos resíduos parecem seguir normalidade e homocedasticidade. Mas podemos confirmar
+realizando os testes de Shapiro-Wilk (normalidade) e Bartlett (homocedasticidade).
+
+[{{< fa circle-exclamation >}} **Lembre-se que sempre testamos os resíduos!**]{.content-visible when-format="html"}
+
+```{r}
+shapiro.test(residuals(anova_bico))
+```
+
+```{r}
+bartlett.test(bill_length_mm ~ species, data = pinguins)
+```
+
+Lembrando que a hipótese nula em ambos os testes é de que os dados seguem 
+normalidade/homocedasticidade. Confirmamos assim o nosso diagnístico visual.
+
+### Tabela Anova
+
+```{r}
+#| lst-label: lst-anova
+#| lst-cap: Tabela ANOVA
+summary(anova_bico)
+```
+
+E aqui obtemos a nossa tabela da ANOVA. E com base no p-valor obtido podemos confirmar
+que existe efeito de Espécie sobre o Tamanho do Bico dos Pinguins. Em relação a nossa
+hipótese nula, isso significa dizer que **pelo menos um dos grupos avaliados possui
+média diferente dos demais**.
+
+### Comparação de Médias
+
+Uma vez sabendo que existe diferença significativa, agora precisamos realizar um
+pós-teste de comparação de médias entre os grupos. Para isso vamos utilizar o
+pacote `agricolae`. Este pacote é excelente por possuir diversos pos-testes para
+anova, entre eles Tukey, SNK, e Duncan. 
+
+### Tukey HSD 
+
+O Teste **Tukey HSD (_honestly significant difference_)** é amplamente reconhecido por controlar de forma rigorosa a taxa de erro familiar, permitindo comparações par a par entre todas as médias com um critério bastante robusto.
+
+```{r}
+
+agricolae::HSD.test(anova_bico,"species", group=TRUE, console=TRUE)
+
+```
+
+
+### SNK
+
+O Teste **Student-Newman-Keuls (SNK)** realiza comparações par a par de maneira sequencial,
+equilibrando a sensibilidade para detectar diferenças com um critério menos conservador
+que o Tukey HSD, mas mais rigoroso que o teste de Duncan.
+
+
+```{r}
+agricolae::SNK.test(anova_bico, "species", group = TRUE, console = TRUE)
+```
+
+
+### Duncan
+
+O Teste de **Duncan** adota uma abordagem mais liberal, facilitando a identificação
+de intervalos de similaridade entre as médias, mas com uma margem maior de
+risco de erro do Tipo I.
+
+```{r}
+agricolae::duncan.test(anova_bico, "species", group = TRUE, console = TRUE)
+```
+
+
+### Dunnet
+
+O Teste **Dunnett** é particularmente útil quando o objetivo principal é comparar
+cada tratamento com um grupo de controle, focando essa análise e ajustando
+as comparações para esse propósito.
+
+Para realizar esse teste usaremos o pacote `multcomp`.
+
+```{r}
+multcomp::glht(anova_bico, linfct = multcomp::mcp(species= "Dunnett"))
+```
+
+
+### Apresentando os resultados
+
+Além da apresentação da @lst-anova podemos reportar nossos resultados graficamente
+com boxplots e adicionar os grupos do teste de Tukey.
+
+```{r}
+library(ggtext)
+
+grupos <- tibble(species = factor(c("Adelie", "Chinstrap", "Gentoo")),
+                 grupos = c("C","A","B"),
+                 ymax = c(48,59,58))
+
+tukey <- tibble(species = "Adelie",
+                label = "<b>TukeyHSD</b><br>MSE: 8.76<br>p < 0.05<br>q<sub>a</sub>: 3.329",
+                y = 55)
+
+pinguins |>
+  ggplot(aes(x=species, y=bill_length_mm, fill = species)) +
+  geom_boxplot(outliers = FALSE)+
+  annotate("text", x=grupos$species,
+           y = grupos$ymax, 
+           label = grupos$grupos,
+           family = "Ubuntu",
+            size = 5) +
+  geom_richtext(data = tukey, aes(x = species, y = 55, label = label),
+                fill = NA) +
+  theme_classic(base_size = 14, base_family = "Ubuntu") +
+  theme(legend.position = "none") +
+  labs(title = "Variação do Comprimento de Bico em Pinguins",
+       x = "Espécies",
+       y = "Comprimento do Bico (mm)")
+```
+
+
+

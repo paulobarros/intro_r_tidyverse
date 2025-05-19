@@ -5,7 +5,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Sanchez:ital@0;1&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Solitreo&display=swap');
 
 // Font Variables
 
@@ -50,4 +50,22 @@ p code:not(.sourceCode), li code:not(.sourceCode), td code:not(.sourceCode) {
         
 .tbl-forty{
   width: 40%;
+}
+
+.tbl-sixty{
+  width: 60%;
+}
+
+p pre code:not(.sourceCode), li pre code:not(.sourceCode), pre code:not(.sourceCode) {
+    /* background-color: initial; */
+    padding: 10px 15px;
+    border-left: 2px solid #999999;
+    border-radius: 0;
+    margin: 2px;
+}
+
+.blockquote {
+  color: rgb(12 45 103);
+  font-family: "Solitreo",sans-serif;
+  font-size: 1.2em;
 }

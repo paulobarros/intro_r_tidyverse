@@ -11,7 +11,6 @@ toc: false
 ---
 
 
-
 ## Apresentação {#apresentacao}
 
 Este é um curso introdutório a Linguagem de Programação {{< fa brands r-project >}} com `tidyverse`. Esse material foi desenvolvido como suporte as atividades do Grupo de Pesquisas em Genômica Aplicada a Conservação e Melhoramento (GACOM) na Universidade Estadual do Sudoeste da Bahia (UESB), campus Jequié. O objetivo deste curso é oferecer aos alun\@s um primeiro contato com a linguagem. Este material pode ser compartilhado desde que não seja comercializado. Agradecemos qualquer comentário e sugestão de correção ou melhoria do material.

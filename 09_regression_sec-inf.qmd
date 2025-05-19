@@ -1,0 +1,210 @@
+---
+title: "Regressão Linear"
+author:
+  - name: Paulo Barros
+    orcid: 0000-0001-9839-0796
+    email: pbarrosbio@gmail.com
+    affiliations:
+      - name: PPZ - UESB - GACOM
+editor_options: 
+  chunk_output_type: console
+csl: abnt_ipea.csl
+bibliography: ref.bib
+---
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+library(tidyverse, quietly = T)
+library(extrafont)
+```
+
+
+
+Como vimos na [sessão anterior](08_correlation_sec-inf.qmd){target="_blank"}, a correlação
+nos ajuda a compreender a força e direção da relação entre duas variáveis. Uma vez
+identificada a correlação, nosso próximo passo é determinar a equação da reta que
+melhor modela esta relação. Esta reta é justamente que vimos no exemplo da sessão
+anterior com os dados de arbusto.
+
+```{r}
+#| echo: false
+#| include: true
+#| fig-cap-location: margin
+#| fig-cap: Adaptado de @da2022analises
+#| label: fig-cor
+#| lst-label: lst-cor
+#| lst-cap: Reta de Regressão
+#| fig-width: 5
+#| fig-height: 4
+
+arbustos <- ecodados::correlacao
+
+ggplot(data = arbustos, aes(x = Tamanho_raiz,
+y = Tamanho_tronco)) +
+labs(x = "Tamanho da raiz (m)", y = "Altura do tronco (m)") +
+  geom_smooth(formula = y ~ x, method = "lm", se = FALSE, color = "#3e5c76",
+linetype = "solid", linewidth=0.7) +
+geom_point(size = 4, shape = 21, fill = "#dc2f02", alpha = 0.8) +
+annotate("text",
+         x = 14, y = 14,
+         label = "r = 0.89, P < 0.001",
+         color = "black", size = 5,
+         family = "Ubuntu") +
+
+theme_classic(base_size = 14, base_family = "Ubuntu") +
+theme(legend.position = "none")
+```
+
+## Regressão Linear Simples
+
+A regressão linear simples é usada para analisar a relação entre uma **variável preditora** (plotada no
+eixo-X) e uma **variável resposta** (plotada no eixo-Y). As duas variáveis devem ser contínuas. Diferente
+das correlações, a regressão assume uma relação de causa e efeito entre as variáveis. O valor da
+variável preditora (X) causa, direta ou indiretamente, o valor da variável resposta (Y). Assim, Y é uma
+função linear de X [@da2022analises].
+
+$$\Large y = \beta_0+\beta_1 X_i + \varepsilon_i$$
+  Este é o modelo matemático que define uma Regressão Linear Simples, onde:
+  
+* $\large y$ é o nosso vetor de observações da nossa variável resposta
+
+* $\large \beta_0$ é o **intercepto** (_intercept_) que representa o valor da função quando $X = 0$
+
+* $\large \beta_1$  é a **inclinação** (_slope_) que mede a mudança na variável $y$ para cada
+mudança de unidade da variável $X$
+
+* $\large \varepsilon_i$ é no nosso vetor de **erros aleatórios** ou **resíduos**, é toda variabilidade
+em $\large y$ que não pode ser explicada por $X$
+
+
+A regressão linear também possui premissas:
+
+
+1. As amostras devem ser independentes
+
+2. As unidades amostrais são selecionadas aleatoriamente
+
+3. Distribuição normal (gaussiana) **dos resíduos**
+
+4. Homogeneidade da variância **dos resíduos**
+
+## Exemplo Prático
+
+Mais uma vez utilizaremos o pacote `ecodados`.
+
+valiaremos a relação entre o gradiente de temperatura média anual (°C) e o tamanho
+médio do comprimento rostro-cloacal (CRC em mm) de populações de _Dendropsophus minutus_
+(Anura:Hylidae) amostradas em 109 localidades no Brasil.
+
+```{r}
+den_min <- ecodados::regressoes
+
+den_min |> glimpse()
+```
+
+
+**Pergunta**: A temperatura afeta o tamanho do CRC de populações de _Dendropsophus minutus_?
+
+```{r}
+mod_rls <- lm(CRC ~ Temperatura, data = den_min)
+```
+
+Utilizando a função `plot()` podemos fazer a inspeção visual dos resíduos e checar
+a normalidade e a homogeneidade da variância.
+
+```{r}
+par(mfrow = c(2, 2), oma = c(0, 0, 2, 0))
+plot(mod_rls)
+```
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| include: false
+suppressMessages(dev.off())
+```
+
+
+Somos apresentados a quatro plots. E aqui vou tomar a liberdade de citar a 
+excelente explicação disponível em @da2022analises, pra que reiventar a roda né?
+
+>Os gráficos _Residuals vs Fitted_, _Scale-Location_, e _Residual vs Leverage_ estão relacionados com a
+homogeneidade da variância. Nestes gráficos, esperamos ver os pontos dispersos no espaço sem
+padrões com formatos em U ou funil. Neste caso, vemos que as linhas vermelhas (que indicam a
+tendência dos dados) estão praticamente retas, seguindo a linha pontilhada, sugerindo que não exista
+heterogeneidade de variância dos resíduos. O gráfico Residual vs Leverage, identifica os valores
+extremos que estejam a mais de uma unidade da distância de Cook (linha pontilhada vermelha).
+Quando muito discrepantes, esses valores podem influenciar os resultados dos testes estatísticos.
+Também não temos problemas com esse pressuposto do modelo aqui. O gráfico _Normal Q-Q (quantile-
+quantile plot)_ mede desvios da normalidade. Neste caso, esperamos que os pontos sigam uma linha
+reta (i.e., fiquem muito próximos da linha pontilhada) e não apresentem padrões com formatos de S
+ou arco.
+
+Confirmado que nossos dados atendem as premissas de normalidade e heterocedasticidade
+dos resíduos, podemos agora ver os resultados da nossa regressão usando as funções
+`anova()` e `summary()`. Falaremos de ANOVA (Análise de Variância) na próxima sessão,
+mas a função `anova()` quando fornecida um único modelo nos retorna a famosa Tabela
+da Anova, que nos mostra se os termos do nosso modelo foram significativos.
+
+```{r}
+anova(mod_rls)
+```
+
+A nossa velha amiga `summary()` nos fornece também a significância dos termos do
+modelo, e ainda os valores dos coeficientes, e do coeficiente de determinação ($R^2$),
+que indica o quanto da variação em $y$ é explicada pela nossa variável $X$.
+
+```{r}
+summary(mod_rls)
+```
+
+Podemos apresentar nossos resultados por meio de um gráfico de dispersão como vimos
+anteriormente.
+
+```{r}
+ggplot(data = den_min, aes(x = Temperatura, y = CRC)) +
+labs(x = "Temperatura média anual (°C)",
+y = "Comprimento rostro-cloacal (mm)") +
+geom_smooth(method = lm, se = FALSE,
+            color = "#413c58", alpha = 0.8) +
+geom_point(size = 4, shape = 21,
+           fill = "#988683", color="#5c5c5e", alpha = 0.8) +
+theme_classic(base_size = 14, base_family = "Ubuntu") +
+theme(legend.position = "none")
+```
+
+### Interpretando os resultados
+
+Aqui vale comentar sobre as diferentes hipóteses que são testadas em cada função.
+
+A função `summary()` realiza um teste $t$ para cada um dos betas do modelo, no
+nosso caso de uma regressão linear simples o intercepto e o slope. A hipótese nula
+neste caso é:
+
+$$H_0: \beta_i = 0 \quad versus \quad H_a: \beta_i \neq 0$$
+
+Ou seja, o teste avalia se a variável explicativa $X$ tem efeito significativo sobre 
+$y$ controlando pelas outras variáveis do modelo.
+
+Já a função `anova()` está fazendo uma análise de variância (ANOVA) que testa a 
+seguinte hipótese nula global de que todos os coeficientes, exceto o intercepto,
+são iguais a zero:
+
+$$H_0: \beta_1 = \beta_2 = \cdots \beta_n =  0$$
+
+Mas como falamos de uma regressão linear **simples**, testamos somente o nosso $\beta_1$.
+
+Ou seja, o teste $F$ da ANOVA **avalia se o modelo completo com as variáveis preditoras explica significativamente mais variância do que um modelo nulo** (só com o intercepto).
+
+Se o valor-p do teste $F$ for pequeno, rejeitamos $H_0$ e concluímos que **pelo menos 
+uma variável tem efeito significativo sobre a resposta**.
+
+No nosso exemplo, nosso beta para Temperatura ($X$) foi significativo, então rejeitamos a hipótese nula de que não existe relação entre o tamanho do CRC das populações de _D. minutus_ e a temperatura da localidade onde elas ocorrem ($F_{1,107} = 38,92, P < 0,001$).
+
+Neste caso, ao usar o comando `coef(modelo_regressao)`, obtemos os valores 16,23
+e 0,27, respectivamente os valores do intercepto (β0) e da temperatura (β1). O valor de 0,27 indica
+que a mudança de uma unidade na variável preditora (neste caso, graus), aumenta em 0,27 unidades
+(neste caso, centímetros) da variável dependente. [@da2022analises]

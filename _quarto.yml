@@ -32,9 +32,21 @@ website:
     search: true
     collapse-level: 1
     contents:
-      - href: index.qmd 
-        text: Bem-vind@s!
-      - auto: "*.qmd"
+      - section: "Apresentação"
+        contents:
+          - href: index.qmd 
+            text: Boas Vindas!
+      - section: "Introdução ao R"
+        contents: "*_sec-intro.qmd"
+      - section: "Processamento de Dados"
+        contents: "*_sec-tidy.qmd"
+      - section: "Visualização de Dados"
+        contents: "*_sec-dataviz.qmd"
+      - section: "Análises Exploratórias"
+        contents: "*_sec-eda.qmd"
+      - section: "Inferência Estatística"
+        contents: "*_sec-inf.qmd"
+        
       
 
 format:
@@ -49,7 +61,7 @@ format:
     code-line-numbers: true
     highlight-style: tango
     toc: true
-    toc-depth: 3
+    toc-depth: 4
     number-sections: true
   pdf:
     documentclass: scrartcl
