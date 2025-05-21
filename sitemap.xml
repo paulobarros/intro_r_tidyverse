@@ -14,11 +14,15 @@
   </url>
   <url>
     <loc>https://paulobarros.github.io/intro-r-tidyverse/09_regression_sec-inf.html</loc>
-    <lastmod>2025-05-19T13:40:51.143Z</lastmod>
+    <lastmod>2025-05-20T05:05:37.767Z</lastmod>
   </url>
   <url>
     <loc>https://paulobarros.github.io/intro-r-tidyverse/04_ggplot2_sec-dataviz.html</loc>
     <lastmod>2025-05-19T13:49:25.569Z</lastmod>
+  </url>
+  <url>
+    <loc>https://paulobarros.github.io/intro-r-tidyverse/slides/intro-tidy-revealjs.html</loc>
+    <lastmod>2025-05-20T06:01:59.632Z</lastmod>
   </url>
   <url>
     <loc>https://paulobarros.github.io/intro-r-tidyverse/02_intro_tidy_sec-tidy.html</loc>
@@ -38,7 +42,7 @@
   </url>
   <url>
     <loc>https://paulobarros.github.io/intro-r-tidyverse/03_data_editing_sec-tidy.html</loc>
-    <lastmod>2025-05-08T12:20:41.131Z</lastmod>
+    <lastmod>2025-05-21T12:42:17.143Z</lastmod>
   </url>
   <url>
     <loc>https://paulobarros.github.io/intro-r-tidyverse/06_ic_hypothesis_sec-inf.html</loc>
