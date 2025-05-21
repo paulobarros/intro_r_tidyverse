@@ -1,0 +1,2951 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-87f6f74a4c9116464fc70a1711beda27.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.7.29">
+
+  <meta name="author" content="PAULO BARROS">
+  <title>Introdução ao R com `tidyverse` – Estatística no R</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #cccccc; background-color: #303030; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ffcfaf; } /* Alert */
+    code span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+    code span.at { } /* Attribute */
+    code span.bn { color: #dca3a3; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #f0dfaf; } /* ControlFlow */
+    code span.ch { color: #dca3a3; } /* Char */
+    code span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+    code span.co { color: #7f9f7f; } /* Comment */
+    code span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+    code span.do { color: #7f9f7f; } /* Documentation */
+    code span.dt { color: #dfdfbf; } /* DataType */
+    code span.dv { color: #dcdccc; } /* DecVal */
+    code span.er { color: #c3bf9f; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #c0bed1; } /* Float */
+    code span.fu { color: #efef8f; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+    code span.kw { color: #f0dfaf; } /* Keyword */
+    code span.op { color: #f0efd0; } /* Operator */
+    code span.ot { color: #efef8f; } /* Other */
+    code span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+    code span.sc { color: #dca3a3; } /* SpecialChar */
+    code span.ss { color: #cc9393; } /* SpecialString */
+    code span.st { color: #cc9393; } /* String */
+    code span.va { } /* Variable */
+    code span.vs { color: #cc9393; } /* VerbatimString */
+    code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+      margin-bottom: 0em;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-c00f0ba61472c04342d35c29183ae561.css">
+  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" data-background-image="../images/LogoTidy.png" data-background-position="80% 50%" data-background-size="300px" class="quarto-title-block center">
+  <h1 class="title">Estatística no R</h1>
+  <p class="subtitle">Ciência de Dados amigável com <strong><em>tidyverse</em></strong></p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+PAULO BARROS 
+</div>
+        <p class="quarto-title-affiliation">
+            PhD candidate Animal Sciences at PPZ-UESB
+          </p>
+    </div>
+</div>
+
+</section>
+<section id="hi-there" class="slide level2">
+<h2>Hi there! <i class="fa-solid fa-hand-peace" aria-label="hand-peace"></i></h2>
+<div class="v-center-container">
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><img data-src="images/ArtePBCartoon.png" width="700"></p>
+</div><div class="column smallbf" style="width:60%;">
+<h3 id="paulo-barros">Paulo Barros</h3>
+<p><br></p>
+<p><i class="fa-solid fa-graduation-cap" aria-label="graduation-cap"></i> <strong>2024 - PhD Zootecnia (Melhoramento Genético Animal) (PPZ-UESB)</strong></p>
+<p><i class="fa-solid fa-graduation-cap" aria-label="graduation-cap"></i> 2024 - MSc Genética, Biodiversidade e Conservação (PPGGBC-UESB)</p>
+<p><i class="fa-solid fa-graduation-cap" aria-label="graduation-cap"></i> 2020 - Biologia com Ênfase em Genética (UESB)</p>
+<p><br></p>
+<hr>
+<div class="center-col">
+<div class="columns">
+<div class="column" style="width:25%;">
+<p><i class="fa-solid fa-crow fa-3x" aria-label="crow"></i></p>
+<p>Consultoria Ambiental</p>
+</div><div class="column" style="width:25%;">
+<p><i class="fa-solid fa-laptop-code fa-3x" aria-label="laptop-code"></i></p>
+<p>Consultoria Estatística</p>
+</div><div class="column" style="width:25%;">
+<p><i class="fa-solid fa-person-chalkboard fa-3x" aria-label="person-chalkboard"></i></p>
+<p>Cursos e Mentorias</p>
+</div><div class="column" style="width:25%;">
+<p><i class="fa-solid fa-box fa-3x" aria-label="box"></i></p>
+<p>Desenvolvimento de Pacotes</p>
+</div></div>
+</div>
+</div></div>
+</div>
+</section>
+<section id="o-que-aprender-pra-aprender-r" class="slide level2">
+<h2>O que aprender pra aprender R…</h2>
+<div class="v-center-container">
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="fragment">
+<h3 id="o-jeito-difícil">O jeito difícil…</h3>
+<p><img data-src="https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/2231d847-adce-477c-bdcc-b05be343eb15_rw_1920.jpg?h=675b39d4a0768d3a05e8f3d90b65b85f" style="width:100.0%"></p>
+</div>
+</div><div class="column" style="width:;">
+<div class="fragment">
+<h3 id="o-jeito-fácil">O jeito fácil…</h3>
+<p><img data-src="images/mist.png" style="width:100.0%"></p>
+</div>
+</div></div>
+</div>
+
+<aside><div>
+<p>Imagem por <a href="https://allisonhorst.com/everything-else" target="_blank">Allison Horst.</a></p>
+</div></aside></section>
+<section id="encontre-sua-motivação-individual" class="slide level2">
+<h2>Encontre sua motivação individual</h2>
+<p><img data-src="https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/d65eb83f-66e4-4760-8c1f-29d336d1d6df.png?h=9b917065e8502455cd1c4791492b2199" style="width:100.0%"></p>
+
+<aside><div>
+<p>Imagem por <a href="https://allisonhorst.com/everything-else" target="_blank">Allison Horst.</a></p>
+</div></aside></section>
+<section id="vantagens-em-aprender-r" class="slide level2">
+<h2>Vantagens em aprender R</h2>
+<div class="v-center-container">
+<div class="columns">
+<div class="column" style="width:;">
+<ul>
+<li class="fragment"><p>Independência pra rodar suas análises</p></li>
+<li class="fragment"><p>Um maior entendimento da sua própria pesquisa</p></li>
+<li class="fragment"><p>Oportunidades de carreira</p></li>
+<li class="fragment"><p><strong>Reproducibilidade:</strong> caminha pra se tornar <em>industry standard</em></p></li>
+</ul>
+</div><div class="column" style="width:;">
+<div class="fragment">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/scott.jpg" class="quarto-figure quarto-figure-center" width="400"></p>
+</figure>
+</div>
+<p><strong>e principalmente…</strong></p>
+<p>Você não ter que sair correndo atrás de alguém faltando 15 dias pra sua qualificação/defesa querendo aprender R pra rodar tuas análises e estatística pra interpretar teus dados.</p>
+</div>
+</div></div>
+</div>
+</section>
+<section>
+<section id="download-instalação" class="title-slide slide level1 center" data-background-color="#2b2d41ff" data-background-image="images/install.png" data-background-size="400px" data-background-position="80% 50%">
+<h1>Download &amp; Instalação</h1>
+
+</section>
+<section id="instalando-r-e-r-studio" class="slide level2">
+<h2>Instalando R e R Studio</h2>
+<div class="v-center-container">
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><i class="fa-brands fa-r-project fa-2x" aria-label="r-project"></i></p>
+<p><a href="https://cran.r-project.org/" target="_blank">The Comprehensive R Archive Network - CRAN</a></p>
+<ul>
+<li><strong>R-4.5.0</strong>
+<ul>
+<li>(2025-04-11, How About a Twenty-Six)</li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:10%;">
+
+</div><div class="column" style="width:40%;">
+<p><img data-src="https://posit.co/wp-content/themes/Posit/assets/images/posit-logo-2024.svg" width="300"></p>
+<p><a href="https://posit.co/downloads/" target="_blank">RStudio IDE</a></p>
+<ul>
+<li>Version 2025.05.0 Build 496</li>
+</ul>
+</div></div>
+</div>
+</section></section>
+<section>
+<section id="r-studio" class="title-slide slide level1 center" data-background-color="#2b2d41ff" data-background-image="https://forum.posit.co/uploads/default/original/3X/c/f/cfd969809f9ee8c5ad30a776ce43728c64cca03d.png" data-background-size="300px" data-background-position="60% 50%">
+<h1>R Studio</h1>
+<p>Ambiente de Desenvolvimento <br> para linguagem R</p>
+</section>
+<section id="o-básico-do-r" class="slide level2">
+<h2>O básico do R</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<p><strong>Matemática Básica</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="dv">1</span> <span class="sc">/</span> <span class="dv">200</span> <span class="sc">*</span> <span class="dv">30</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.15</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>(<span class="dv">59</span> <span class="sc">+</span> <span class="dv">73</span> <span class="sc">+</span> <span class="dv">2</span>) <span class="sc">/</span> <span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 44.66667</code></pre>
+</div>
+</div>
+<p><strong>Comentários</strong></p>
+<p>Qualquer texto precedido de # não é lido como código.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="co"># Comentários são úteis</span></span>
+<span id="cb5-2"><a></a><span class="co"># pra documentar o código</span></span>
+<span id="cb5-3"><a></a></span>
+<span id="cb5-4"><a></a><span class="dv">1</span><span class="sc">:</span><span class="dv">5</span> <span class="co"># cria uma sequência de 1 a 5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 2 3 4 5</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:5%;">
+
+</div><div class="column" style="width:45%;">
+<p><strong>Objetos</strong></p>
+<p><code>object_name &lt;- value</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>primes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">11</span>, <span class="dv">13</span>)</span>
+<span id="cb7-2"><a></a></span>
+<span id="cb7-3"><a></a>primes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  2  3  5  7 11 13</code></pre>
+</div>
+</div>
+<p><code>c()</code> é a função de <strong>c</strong>ombinar elementos.</p>
+<p><strong>Nomes de Objetos</strong></p>
+<p>Todo objeto no R deve ter o nome iniciado por letra, e só podem conter <code>_</code> ou <code>.</code></p>
+<pre><code>i_use_snake_case
+otherPeopleUseCamelCase
+some.people.use.periods
+And_aFew.People_RENOUNCEconvention</code></pre>
+</div></div>
+</section>
+<section id="pacotes" class="slide level2">
+<h2>Pacotes</h2>
+<p>Pacotes são conjuntos de funções combinadas que extendem a capacidade da linguagem R.</p>
+<p>Atualmente são mais de <strong>22 mil pacotes</strong> no <a href="https://cran.r-project.org/web/packages/index.html" target="_blank">CRAN</a></p>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><strong>Instalação</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Carregamento</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><br></p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Atenção</strong></p>
+</div>
+<div class="callout-content">
+<p>Instalamos uma única vez (Por versão do R). Carregamos os pacotes todas as vezes que precisamos utilizar em nossos scripts.</p>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column" style="width:55%;">
+<p><strong>Datasets</strong></p>
+<p>A maioria dos pacotes vem com <em>datasets</em> de exemplos.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="fu">data</span>(<span class="at">package=</span><span class="st">"nome_do_pacote"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Para listar todos os datasets</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="fu">data</span>(<span class="at">package =</span> <span class="fu">.packages</span>(<span class="at">all.available =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div></div>
+</section></section>
+<section>
+<section id="tidyverse" class="title-slide slide level1 center" data-background-color="#FFFFFF" data-background-image="images/tidyverse.png" data-background-size="700px" data-background-position="65% 50%">
+<h1><em>tidyverse</em></h1>
+<p>Porque estatística e programação<br> já são difíceis pra cacete…</p>
+</section>
+<section id="uma-maneira-elegante-e-intuitiva-de-trabalhar-com-dados" class="slide level2">
+<h2>Uma maneira elegante e intuitiva de trabalhar com dados…</h2>
+<p>Vamos dar uma olhada no dataset <code>iris</code> que já vem com o R.</p>
+<p>O comando <code>str()</code> nos diz a <strong>estrutura</strong> dos dados.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="fu">str</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   150 obs. of  5 variables:
+ $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
+ $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
+ $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
+ $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
+ $ Species     : Factor w/ 3 levels "setosa","versicolor",..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
+</div>
+</div>
+<p>O comando <code>head()</code> exibe as primeiras observações de um objeto.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="fu">head</span>(iris, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1           5.1         3.5          1.4         0.2  setosa
+2           4.9         3.0          1.4         0.2  setosa
+3           4.7         3.2          1.3         0.2  setosa
+4           4.6         3.1          1.5         0.2  setosa
+5           5.0         3.6          1.4         0.2  setosa
+6           5.4         3.9          1.7         0.4  setosa
+7           4.6         3.4          1.4         0.3  setosa
+8           5.0         3.4          1.5         0.2  setosa
+9           4.4         2.9          1.4         0.2  setosa
+10          4.9         3.1          1.5         0.1  setosa</code></pre>
+</div>
+</div>
+</section>
+<section id="uma-maneira-elegante-e-intuitiva-de-trabalhar-com-dados-1" class="slide level2">
+<h2>Uma maneira elegante e intuitiva de trabalhar com dados…</h2>
+<div class="fragment">
+<p><strong>Base R</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>setosa_data <span class="ot">&lt;-</span> iris[iris<span class="sc">$</span>Species <span class="sc">==</span> <span class="st">"setosa"</span>, ]</span>
+<span id="cb18-2"><a></a></span>
+<span id="cb18-3"><a></a>sepal_data <span class="ot">&lt;-</span> setosa_data[, <span class="fu">grepl</span>(<span class="st">"^Sepal"</span>,<span class="fu">names</span>(setosa_data))]</span>
+<span id="cb18-4"><a></a></span>
+<span id="cb18-5"><a></a>sepal_means <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(sepal_data)</span>
+<span id="cb18-6"><a></a></span>
+<span id="cb18-7"><a></a><span class="fu">as.data.frame</span>(<span class="fu">t</span>(sepal_means))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>  Sepal.Length Sepal.Width
+1        5.006       3.428</code></pre>
+</div>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:48%;">
+<div class="fragment">
+<p><strong>Tidy Way</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="fu">library</span>(tidyverse, <span class="at">quietly =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a>iris <span class="sc">|&gt;</span></span>
+<span id="cb21-2"><a></a>  <span class="fu">filter</span>(Species <span class="sc">==</span> <span class="st">"setosa"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb21-3"><a></a>  <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">"Sepal"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb21-4"><a></a>  <span class="fu">summarize_all</span>(<span class="fu">list</span>(<span class="at">mean =</span> mean))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Sepal.Length_mean Sepal.Width_mean
+1             5.006            3.428</code></pre>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<p><strong>Em português…</strong></p>
+<p>Com o <em>dataset</em> <code>iris</code> |&gt;</p>
+<p><strong>Filtre</strong> pela <code>species</code> = <code>setosa</code> |&gt;</p>
+<p><strong>Selecione</strong> colunas que <strong>começam com</strong> <code>Sepal</code> |&gt;</p>
+<p><strong>Calcule as médias</strong>.</p>
+</div>
+</div></div>
+</section></section>
+<section>
+<section id="visualização-de-dados" class="title-slide slide level1 center" data-background-color="#170b28ff" data-background-image="images/dataviz.png" data-background-size="400px" data-background-position="65% 50%">
+<h1>Visualização de Dados</h1>
+<p>A gramática dos gráficos com <strong><em>ggplot2</em></strong></p>
+</section>
+<section id="grammar-of-graphics" class="slide level2">
+<h2>Grammar of graphics</h2>
+
+<img data-src="images/grammar_of_graphics.png" width="700" class="r-stretch"></section>
+<section id="estrutura-básica-de-um-ggplot" class="slide level2">
+<h2>Estrutura básica de um <em>ggplot</em></h2>
+<div class="cell" data-layout-align="center" width="6" height="6">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb23-2"><a></a></span>
+<span id="cb23-3"><a></a><span class="fu">ggplot</span>(iris) <span class="sc">+</span></span>
+<span id="cb23-4"><a></a>  <span class="fu">aes</span>(<span class="at">x =</span> Species, <span class="at">y =</span> Sepal.Length) <span class="sc">+</span></span>
+<span id="cb23-5"><a></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">fill =</span> Species)) <span class="sc">+</span></span>
+<span id="cb23-6"><a></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#f7a072"</span>,<span class="st">"#0fa3b1"</span>,<span class="st">"#b5e2fa"</span>))<span class="sc">+</span></span>
+<span id="cb23-7"><a></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Distribuição de Comprimento de Sépala"</span>,</span>
+<span id="cb23-8"><a></a>       <span class="at">x =</span> <span class="st">"Espécies"</span>,</span>
+<span id="cb23-9"><a></a>       <span class="at">y =</span> <span class="st">"Comprimento Sépala"</span>) <span class="sc">+</span></span>
+<span id="cb23-10"><a></a>  <span class="fu">theme_classic</span>(<span class="at">base_size =</span> <span class="dv">14</span>, <span class="at">base_family =</span> <span class="st">"DejaVu Sans"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="intro_tidy_slides_files/figure-revealjs/unnamed-chunk-15-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<section id="visualizando-distribuições" class="slide level2">
+<h2>Visualizando distribuições</h2>
+<div class="columns">
+<div class="column" style="width:;">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb24-2"><a></a></span>
+<span id="cb24-3"><a></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x=</span>Sepal.Width)) <span class="sc">+</span></span>
+<span id="cb24-4"><a></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
+<span id="cb24-5"><a></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">22</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="intro_tidy_slides_files/figure-revealjs/unnamed-chunk-16-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:;">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb25-2"><a></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x=</span>Sepal.Width)) <span class="sc">+</span></span>
+<span id="cb25-3"><a></a>  <span class="fu">geom_histogram</span>(<span class="at">color =</span> <span class="st">"#32746d"</span>,</span>
+<span id="cb25-4"><a></a>                 <span class="at">fill=</span><span class="st">"#cad2c5"</span>,</span>
+<span id="cb25-5"><a></a>                 <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb25-6"><a></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">22</span>,</span>
+<span id="cb25-7"><a></a>           <span class="at">base_family =</span> <span class="st">"Ubuntu"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="intro_tidy_slides_files/figure-revealjs/unnamed-chunk-17-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="relacionamento-entre-variáveis" class="slide level2">
+<h2>Relacionamento entre variáveis</h2>
+<div class="columns">
+<div class="column" style="width:;">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb26-2"><a></a></span>
+<span id="cb26-3"><a></a><span class="fu">ggplot</span>(iris, </span>
+<span id="cb26-4"><a></a>  <span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length,Petal.Length)) <span class="sc">+</span></span>
+<span id="cb26-5"><a></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb26-6"><a></a>  <span class="fu">theme_classic</span>(<span class="at">base_size =</span> <span class="dv">24</span>,</span>
+<span id="cb26-7"><a></a>                <span class="at">base_family =</span> <span class="st">"Ubuntu"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="intro_tidy_slides_files/figure-revealjs/unnamed-chunk-18-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:;">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb27-2"><a></a></span>
+<span id="cb27-3"><a></a><span class="fu">ggplot</span>(iris,</span>
+<span id="cb27-4"><a></a>    <span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length,Petal.Length)) <span class="sc">+</span></span>
+<span id="cb27-5"><a></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">fill =</span> Species),</span>
+<span id="cb27-6"><a></a>             <span class="at">size =</span> <span class="dv">3</span>,</span>
+<span id="cb27-7"><a></a>             <span class="at">shape =</span> <span class="dv">21</span>,</span>
+<span id="cb27-8"><a></a>             <span class="at">alpha =</span> <span class="fl">0.75</span>) <span class="sc">+</span></span>
+<span id="cb27-9"><a></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>,</span>
+<span id="cb27-10"><a></a>              <span class="at">linetype =</span> <span class="dv">2</span>,</span>
+<span id="cb27-11"><a></a>              <span class="at">linewidth =</span> <span class="fl">0.5</span>,</span>
+<span id="cb27-12"><a></a>              <span class="at">color =</span> <span class="st">"grey30"</span>,</span>
+<span id="cb27-13"><a></a>              <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb27-14"><a></a>  <span class="fu">theme_classic</span>(<span class="at">base_size =</span> <span class="dv">24</span>,</span>
+<span id="cb27-15"><a></a>                <span class="at">base_family =</span> <span class="st">"Ubuntu"</span>) <span class="sc">+</span></span>
+<span id="cb27-16"><a></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>,</span>
+<span id="cb27-17"><a></a>        <span class="at">legend.direction =</span> <span class="st">"horizontal"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="intro_tidy_slides_files/figure-revealjs/unnamed-chunk-19-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="ciclo-de-uma-análise-de-dados" class="slide level2">
+<h2>Ciclo de uma Análise de Dados</h2>
+<div class="v-center-container">
+<p><img data-src="images/dc-cicle.png" width="800"></p>
+</div>
+</section></section>
+<section>
+<section id="manipulação-de-dados-com-dplyr" class="title-slide slide level1 center" data-background-color="#FFFFFF" data-background-image="images/dplyr_bg.png" data-background-size="600px" data-background-position="65% 50%">
+<h1>Manipulação de<br>dados com <strong><em>dplyr</em></strong></h1>
+
+</section>
+<section id="importando-dados" class="slide level2">
+<h2>Importando Dados</h2>
+<p>Os tipos de arquivos mais comuns são as planilhas tipo excel (<code>.xls</code>, <code>.xlsx</code>) e arquivos de texto delimitados (<code>.csv</code>,<code>.tsv</code>,<code>.txt</code>).</p>
+<h4 id="planilhas">Planilhas</h4>
+<p>Pacote <code>readxl</code> fornece uma maneira simples de importar arquivos tipo Excel.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a><span class="fu">library</span>(readxl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a>dados <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/dados_var.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Por padrão <code>read_excel()</code> sempre importa <strong>a primeira folha de uma planilha</strong>.</p>
+<p>Posso listar as folhas dentro de uma planilha com <code>excel_sheets()</code> …</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a><span class="fu">excel_sheets</span>(<span class="st">"data/dados_var.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Média--Variância-DP-CV" "Temperatura"           </code></pre>
+</div>
+</div>
+<p>e importar uma folha diferente pelo <strong>nome</strong> ou <strong>ordem</strong> com o argumento <code>sheet</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a>dados_folha_2 <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/dados_var.xlsx"</span>, <span class="at">sheet =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="importando-dados-1" class="slide level2">
+<h2>Importando Dados</h2>
+<h4 id="planilhas-1">Planilhas</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a></a><span class="fu">head</span>(dados)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+  Tabela 2. Número de pacientes homens e mulheres e os motivos que…¹ ...2  ...3 
+  &lt;chr&gt;                                                              &lt;chr&gt; &lt;chr&gt;
+1 &lt;NA&gt;                                                               &lt;NA&gt;  &lt;NA&gt; 
+2 Motivos                                                            Home… Mulh…
+3 Restauração                                                        20    35   
+4 Implante                                                           5     20   
+5 Limpeza                                                            15    30   
+6 Extração                                                           25    15   
+# ℹ abbreviated name:
+#   ¹​`Tabela 2. Número de pacientes homens e mulheres e os motivos que frequentam o consultório odontológico durante o período de um ano.`</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a></a><span class="fu">head</span>(dados_folha_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 13
+  Temperatura     Segunda Terça Quarta Quinta Sexta Sábado Domingo ...9  MÉDIA
+  &lt;chr&gt;             &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt; &lt;lgl&gt; &lt;lgl&gt;
+1 Primeira semana      27    32     31     30    29     30      31 NA    NA   
+2 Segunda semana       25    30     32     27    29     28      32 NA    NA   
+# ℹ 3 more variables: VARIÂNCIA &lt;lgl&gt;, DP &lt;lgl&gt;, CV &lt;lgl&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="importando-dados-2" class="slide level2">
+<h2>Importando Dados</h2>
+<h4 id="planilhas-2">Planilhas</h4>
+<p>Podemos definir além da folha um <strong>intervalo de células</strong> na mesma notação do Excel.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a></a>dados <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/dados_var.xlsx"</span>, <span class="at">sheet =</span> <span class="dv">1</span>, <span class="at">range =</span> <span class="st">"A3:C9"</span>)</span>
+<span id="cb37-2"><a></a></span>
+<span id="cb37-3"><a></a>dados_folha_2 <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/dados_var.xlsx"</span>, <span class="at">sheet =</span> <span class="dv">2</span>, <span class="at">range =</span> <span class="st">"A1:H3"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Agora nossos dados foram importados corretamente <i class="fa-solid fa-thumbs-up" aria-label="thumbs-up"></i></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a></a><span class="fu">head</span>(dados)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+  Motivos     Homens Mulheres
+  &lt;chr&gt;        &lt;dbl&gt;    &lt;dbl&gt;
+1 Restauração     20       35
+2 Implante         5       20
+3 Limpeza         15       30
+4 Extração        25       15
+5 Prótese         15       14
+6 Clareamento      1        4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a></a><span class="fu">head</span>(dados_folha_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 8
+  Temperatura     Segunda Terça Quarta Quinta Sexta Sábado Domingo
+  &lt;chr&gt;             &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+1 Primeira semana      27    32     31     30    29     30      31
+2 Segunda semana       25    30     32     27    29     28      32</code></pre>
+</div>
+</div>
+</section>
+<section id="importando-dados-3" class="slide level2">
+<h2>Importando Dados</h2>
+<h4 id="arquivos-.csv">Arquivos <code>.csv</code></h4>
+<p>São arquivos separados por vírgula. O pacote <code>readr</code> possui duas funções para leitura de arquivos <code>.csv</code>.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a></a>patos <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/dadosPatos.csv"</span>)</span>
+<span id="cb42-2"><a></a></span>
+<span id="cb42-3"><a></a><span class="fu">head</span>(patos)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 7
+  GG      PCC   CPT   APT   LPT   LCX   LSC
+  &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 NM     1850  189.  51.4 110.   66.4 105. 
+2 NM     1645  175.  57.8 109.   62.1 107. 
+3 NM     1935  175.  42.4 123.   55.9 119. 
+4 NM     2015  173.  55.0 121.   58.4 115. 
+5 NF     1145  139.  48.6  92.5  46.1  85.6
+6 NF     1100  151.  45.8  97.6  66.3  75.8</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:5%;">
+
+</div><div class="column" style="width:40%;">
+<p>Em alguns casos nosso arquivo pode não ter um cabeçalho com o nome das variáveis.</p>
+<p>O argumento <code>header = FALSE</code> garante que a primeira linha não seja lida como cabeçalhos neste caso.</p>
+</div></div>
+<p>A função <code>read_csv()</code> faz a leitura de um arquivo padrão <strong>separado por vírgulas</strong>, entretanto, alguns programas exportam <code>.csv</code> com ponto e vírgula como separador.</p>
+<p>Pra isso temos a função <code>read_csv2()</code>. O processo de importação é idêntico.</p>
+</section>
+<section id="comandos-úteis" class="slide level2">
+<h2>Comandos úteis</h2>
+<p><code>str()</code> exibe a estrutura dos dados</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a></a><span class="fu">str</span>(patos)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>spc_tbl_ [16 × 7] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+ $ GG : chr [1:16] "NM" "NM" "NM" "NM" ...
+ $ PCC: num [1:16] 1850 1645 1935 2015 1145 ...
+ $ CPT: num [1:16] 189 175 175 173 139 ...
+ $ APT: num [1:16] 51.4 57.9 42.4 55 48.6 ...
+ $ LPT: num [1:16] 110.3 108.6 123.4 121.2 92.5 ...
+ $ LCX: num [1:16] 66.4 62.1 55.9 58.4 46.1 ...
+ $ LSC: num [1:16] 105.4 106.9 118.9 114.6 85.6 ...
+ - attr(*, "spec")=
+  .. cols(
+  ..   GG = col_character(),
+  ..   PCC = col_double(),
+  ..   CPT = col_double(),
+  ..   APT = col_double(),
+  ..   LPT = col_double(),
+  ..   LCX = col_double(),
+  ..   LSC = col_double()
+  .. )
+ - attr(*, "problems")=&lt;externalptr&gt; </code></pre>
+</div>
+</div>
+</section>
+<section id="comandos-úteis-1" class="slide level2">
+<h2>Comandos úteis</h2>
+<p><code>glimpse()</code> uma visão mais organizada da estrutura dos dados</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a></a><span class="fu">glimpse</span>(patos)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 16
+Columns: 7
+$ GG  &lt;chr&gt; "NM", "NM", "NM", "NM", "NF", "NF", "NF", "NF", "CM", "CM", "CM", …
+$ PCC &lt;dbl&gt; 1850, 1645, 1935, 2015, 1145, 1100, 1270, 1170, 3085, 3075, 3075, …
+$ CPT &lt;dbl&gt; 189.14, 174.84, 175.24, 173.25, 138.89, 150.94, 144.80, 155.00, 24…
+$ APT &lt;dbl&gt; 51.41, 57.85, 42.36, 55.05, 48.57, 45.81, 39.79, 44.81, 70.03, 62.…
+$ LPT &lt;dbl&gt; 110.30, 108.57, 123.44, 121.24, 92.46, 97.60, 108.17, 92.15, 144.6…
+$ LCX &lt;dbl&gt; 66.41, 62.09, 55.90, 58.41, 46.06, 66.32, 45.39, 57.04, 62.30, 58.…
+$ LSC &lt;dbl&gt; 105.36, 106.89, 118.92, 114.60, 85.57, 75.83, 99.73, 82.29, 129.23…</code></pre>
+</div>
+</div>
+<p><code>names()</code> lista o nome das colunas ou de itens de um objeto</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a></a><span class="fu">names</span>(patos)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "GG"  "PCC" "CPT" "APT" "LPT" "LCX" "LSC"</code></pre>
+</div>
+</div>
+</section>
+<section id="seleção-de-colunas" class="slide level2">
+<h2>Seleção de Colunas</h2>
+<p>A função <code>select()</code> do pacote <code>dplyr</code> nos permite selecionar colunas no dataset</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a></a><span class="fu">names</span>(patos)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "GG"  "PCC" "CPT" "APT" "LPT" "LCX" "LSC"</code></pre>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a></a><span class="fu">select</span>(patos, GG,PCC,APT)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 16 × 3
+   GG      PCC   APT
+   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1 NM     1850  51.4
+ 2 NM     1645  57.8
+ 3 NM     1935  42.4
+ 4 NM     2015  55.0
+ 5 NF     1145  48.6
+ 6 NF     1100  45.8
+ 7 NF     1270  39.8
+ 8 NF     1170  44.8
+ 9 CM     3085  70.0
+10 CM     3075  62.7
+11 CM     3075  56.0
+12 CM     2635  65.5
+13 CF     1710  61.4
+14 CF     1835  65.5
+15 CF     2035  56.4
+16 CF     1880  61.6</code></pre>
+</div>
+</div>
+<p>O primeiro argumento é o nome do dataset, seguido das colunas.</p>
+</div><div class="column" style="width:;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a></a><span class="fu">select</span>(patos, GG,APT<span class="sc">:</span>LSC)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 16 × 5
+   GG      APT   LPT   LCX   LSC
+   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1 NM     51.4 110.   66.4 105. 
+ 2 NM     57.8 109.   62.1 107. 
+ 3 NM     42.4 123.   55.9 119. 
+ 4 NM     55.0 121.   58.4 115. 
+ 5 NF     48.6  92.5  46.1  85.6
+ 6 NF     45.8  97.6  66.3  75.8
+ 7 NF     39.8 108.   45.4  99.7
+ 8 NF     44.8  92.2  57.0  82.3
+ 9 CM     70.0 145.   62.3 129. 
+10 CM     62.7 139.   58.8 126. 
+11 CM     56.0 147.   73.7 131. 
+12 CM     65.5 126.   61.4 135. 
+13 CF     61.4 109.   61.5 110. 
+14 CF     65.5 106.   46.7  99.7
+15 CF     56.4 108.   57.5 107. 
+16 CF     61.6 117.   59.1 106. </code></pre>
+</div>
+</div>
+<p>Podemos informar um intervalo de colunas com <code>inicio:fim</code></p>
+</div></div>
+</section>
+<section id="auxiliares-de-seleção" class="slide level2">
+<h2>Auxiliares de Seleção</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a></a><span class="fu">names</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Sepal.Length" "Sepal.Width"  "Petal.Length" "Petal.Width"  "Species"     </code></pre>
+</div>
+</div>
+<p><code>starts_with()</code> Permite selecionar colunas que começam com um termo</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a></a><span class="fu">select</span>(iris, <span class="fu">starts_with</span>(<span class="st">"Petal"</span>)) <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Petal.Length Petal.Width
+1          1.4         0.2
+2          1.4         0.2
+3          1.3         0.2</code></pre>
+</div>
+</div>
+<p><code>ends_with()</code> Permite selecionar colunas que terminam com um termo</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a></a><span class="fu">select</span>(iris, <span class="fu">ends_with</span>(<span class="st">"Length"</span>)) <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Sepal.Length Petal.Length
+1          5.1          1.4
+2          4.9          1.4
+3          4.7          1.3</code></pre>
+</div>
+</div>
+<p><code>contains()</code> Permite selecionar colunas que contenham o termo</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a></a><span class="fu">select</span>(iris, <span class="fu">contains</span>(<span class="st">"."</span>)) <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Sepal.Length Sepal.Width Petal.Length Petal.Width
+1          5.1         3.5          1.4         0.2
+2          4.9         3.0          1.4         0.2
+3          4.7         3.2          1.3         0.2</code></pre>
+</div>
+</div>
+</section>
+<section id="filtrando-colunas" class="slide level2">
+<h2>Filtrando colunas</h2>
+<p>A função <code>filter()</code> nos permite filtrar observações com base em condições.</p>
+<p>As condições são avaliadas logicamente retornando em <code>TRUE</code> ou <code>FALSE</code>.</p>
+<div class="columns">
+<div class="column" style="width:20%;">
+<p>Operadores:</p>
+<p>Igualdade: <code>==</code></p>
+<p>Diferença: <code>!=</code></p>
+<p>Comparação: <br><code>&gt;</code> <code>&lt;</code> <code>&gt;=</code> <code>&lt;=</code></p>
+<p>Lógicos:</p>
+<ul>
+<li><p>E (And) <code>&amp;</code></p></li>
+<li><p>Ou (or) <code>|</code></p></li>
+</ul>
+</div><div class="column" style="width:80%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a></a><span class="fu">filter</span>(iris,</span>
+<span id="cb64-2"><a></a>       Species <span class="sc">==</span> <span class="st">"setosa"</span>,</span>
+<span id="cb64-3"><a></a>       Petal.Length <span class="sc">&gt;</span> <span class="fl">1.5</span>) <span class="sc">|&gt;</span></span>
+<span id="cb64-4"><a></a>       <span class="fu">head</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.4         3.9          1.7         0.4  setosa
+2          4.8         3.4          1.6         0.2  setosa
+3          5.7         3.8          1.7         0.3  setosa</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a></a><span class="fu">filter</span>(iris, Species <span class="sc">!=</span> <span class="st">"versicolor"</span>, </span>
+<span id="cb66-2"><a></a>    Sepal.Length <span class="sc">&gt;=</span> <span class="dv">5</span> <span class="sc">&amp;</span>  Sepal.Length <span class="sc">&lt;</span> <span class="fl">5.3</span> ) <span class="sc">|&gt;</span></span>
+<span id="cb66-3"><a></a>    <span class="fu">head</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.1         3.5          1.4         0.2  setosa
+2          5.0         3.6          1.4         0.2  setosa
+3          5.0         3.4          1.5         0.2  setosa</code></pre>
+</div>
+</div>
+</div></div>
+</section>
+<section id="transformando-e-criando-variáveis" class="slide level2">
+<h2>Transformando e Criando variáveis</h2>
+<p>O comando <code>mutate()</code> nos permite criar novas variáveis ou alterar as existentes.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a></a><span class="fu">mutate</span>(patos, <span class="at">PCC_KG =</span> PCC<span class="sc">/</span><span class="dv">1000</span>) <span class="sc">|&gt;</span></span>
+<span id="cb68-2"><a></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 8
+  GG      PCC   CPT   APT   LPT   LCX   LSC PCC_KG
+  &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+1 NM     1850  189.  51.4 110.   66.4 105.    1.85
+2 NM     1645  175.  57.8 109.   62.1 107.    1.64
+3 NM     1935  175.  42.4 123.   55.9 119.    1.94
+4 NM     2015  173.  55.0 121.   58.4 115.    2.02
+5 NF     1145  139.  48.6  92.5  46.1  85.6   1.14
+6 NF     1100  151.  45.8  97.6  66.3  75.8   1.1 </code></pre>
+</div>
+</div>
+<p>Por padrão a nova variável é adicionada ao final do dataset, mas esse comportamento pode ser modificado usando os argumentos <code>.before</code> ou <code>.after</code> e explicitando antes ou depois de qual coluna desejamos nossa nova variável.</p>
+</section>
+<section id="operador-pipe" class="slide level2">
+<h2>Operador <strong><em>pipe</em></strong></h2>
+<p>O operador <code>|&gt;</code> (<em>pipe</em>) liga operações em um fluxo contínuo da <strong>esquerda para a direita</strong>.</p>
+<p>O <em>pipe</em> original <code>%&gt;%</code> surgiu com o <code>tidyverse</code>, seu impacto foi tão grande na linguagem que há alguns anos atrás os desenvolvedores do R incluíram um operador nativo na linguagem.</p>
+<p>Utilizando o <em>pipe</em> podemos realizar uma sequência de inúmeras operações evitando a criação de objetos intermediários para armazenar os resultados.</p>
+<p>No fluxo o <strong>objeto à esquerda</strong> será o alvo da <strong>operação da direita</strong>.</p>
+<p>Num fluxo com o <em>pipe</em> o operador sempre deve aparecer ao final da linha em caso de quebra:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a></a>iris <span class="sc">|&gt;</span></span>
+<span id="cb70-2"><a></a>  <span class="fu">head</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.1         3.5          1.4         0.2  setosa
+2          4.9         3.0          1.4         0.2  setosa
+3          4.7         3.2          1.3         0.2  setosa</code></pre>
+</div>
+</div>
+<p>Isto aqui causa um erro:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a></a>iris</span>
+<span id="cb72-2"><a></a><span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><br></p>
+<pre><code>Error: unexpected '|&gt;' in "|&gt;"</code></pre>
+</section></section>
+<section>
+<section id="análise-exploratória-de-dados" class="title-slide slide level1 center" data-background-color="#170b28ff" data-background-image="images/data-science.png" data-background-size="400px" data-background-position="65% 50%">
+<h1>Análise<br>Exploratória de Dados</h1>
+
+</section>
+<section id="medidas-de-posição" class="slide level2">
+<h2>Medidas de Posição</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a></a>dados <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/dados_var.xlsx"</span>, <span class="at">sheet =</span> <span class="dv">1</span>, <span class="at">range =</span> <span class="st">"A3:C9"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>A função <code>summarise()</code> do pacote <code>dplyr</code> nos permite gerar estatísticas descritivas</p>
+<div class="columns">
+<div class="column" style="width:;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a></a>dados <span class="sc">|&gt;</span></span>
+<span id="cb75-2"><a></a>  <span class="fu">summarise</span>(<span class="at">Media_H =</span> <span class="fu">mean</span>(Homens),</span>
+<span id="cb75-3"><a></a>            <span class="at">Media_M =</span> <span class="fu">mean</span>(Mulheres),</span>
+<span id="cb75-4"><a></a>            <span class="at">Mediana_H =</span> <span class="fu">median</span>(Homens),</span>
+<span id="cb75-5"><a></a>            <span class="at">Mediana_M =</span> <span class="fu">median</span>(Mulheres))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 4
+  Media_H Media_M Mediana_H Mediana_M
+    &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+1    13.5    19.7        15      17.5</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a></a>dados <span class="sc">|&gt;</span></span>
+<span id="cb77-2"><a></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(Homens<span class="sc">:</span>Mulheres,</span>
+<span id="cb77-3"><a></a>              <span class="fu">list</span>(<span class="at">media =</span> mean,</span>
+<span id="cb77-4"><a></a>              <span class="at">mediana =</span> median),</span>
+<span id="cb77-5"><a></a>              <span class="at">.names =</span> <span class="st">"{.col}_{.fn}"</span> ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 4
+  Homens_media Homens_mediana Mulheres_media Mulheres_mediana
+         &lt;dbl&gt;          &lt;dbl&gt;          &lt;dbl&gt;            &lt;dbl&gt;
+1         13.5             15           19.7             17.5</code></pre>
+</div>
+</div>
+</div></div>
+</section>
+<section id="medidas-de-dispersão" class="slide level2">
+<h2>Medidas de Dispersão</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a></a>dados <span class="sc">|&gt;</span></span>
+<span id="cb79-2"><a></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(Homens,</span>
+<span id="cb79-3"><a></a>              <span class="fu">list</span>(<span class="at">min =</span> min,</span>
+<span id="cb79-4"><a></a>              <span class="at">max =</span> max,</span>
+<span id="cb79-5"><a></a>              <span class="at">range =</span> range,</span>
+<span id="cb79-6"><a></a>              <span class="at">dp =</span> sd,</span>
+<span id="cb79-7"><a></a>              <span class="at">var =</span> var),</span>
+<span id="cb79-8"><a></a>              <span class="at">.names =</span> <span class="st">"{.col}_{.fn}"</span> ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  Homens_min Homens_max Homens_range Homens_dp Homens_var
+       &lt;dbl&gt;      &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+1          1         25            1      9.03       81.5
+2          1         25           25      9.03       81.5</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a></a>dados <span class="sc">|&gt;</span></span>
+<span id="cb81-2"><a></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(Homens<span class="sc">:</span>Mulheres,</span>
+<span id="cb81-3"><a></a>              <span class="fu">list</span>(<span class="at">quartis =</span> quantile),</span>
+<span id="cb81-4"><a></a>              <span class="at">.names =</span> <span class="st">"{.col}_{.fn}"</span> ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 2
+  Homens_quartis Mulheres_quartis
+           &lt;dbl&gt;            &lt;dbl&gt;
+1            1                4  
+2            7.5             14.2
+3           15               17.5
+4           18.8             27.5
+5           25               35  </code></pre>
+</div>
+</div>
+</section>
+<section id="summary" class="slide level2">
+<h2><code>summary()</code></h2>
+<p>A função nativa <code>summary()</code> nos fornece um rol de estatísticas descritivas</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a></a>dados <span class="sc">|&gt;</span></span>
+<span id="cb83-2"><a></a>  <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Motivos              Homens         Mulheres    
+ Length:6           Min.   : 1.00   Min.   : 4.00  
+ Class :character   1st Qu.: 7.50   1st Qu.:14.25  
+ Mode  :character   Median :15.00   Median :17.50  
+                    Mean   :13.50   Mean   :19.67  
+                    3rd Qu.:18.75   3rd Qu.:27.50  
+                    Max.   :25.00   Max.   :35.00  </code></pre>
+</div>
+</div>
+<p>Esta função embora limitada no rol de estatísticas fornecidas, é muito útil para um diagnóstico rápido dos dados. Ela nos permite avaliar o número de dados perdidos (<code>NA</code>) bem como valores fora do intervalo esperado, nossos <em>outliers</em>.</p>
+</section>
+<section id="descritivas-segmentadas" class="slide level2">
+<h2>Descritivas segmentadas</h2>
+<p>Na grande maioria das vezes precisamos calcular estatísticas descritivas agrupadas por níveis de variáveis categóricas. O pacote <code>rstatix</code> é muito eficiente nessa tarefa.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a></a><span class="fu">library</span>(rstatix)</span>
+<span id="cb85-2"><a></a></span>
+<span id="cb85-3"><a></a>iris <span class="sc">|&gt;</span></span>
+<span id="cb85-4"><a></a>  <span class="fu">group_by</span>(Species) <span class="sc">|&gt;</span></span>
+<span id="cb85-5"><a></a>  <span class="fu">get_summary_stats</span>(<span class="fu">everything</span>(),</span>
+<span id="cb85-6"><a></a>                    <span class="at">type =</span> <span class="st">"mean_sd"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 12 × 5
+   Species    variable         n  mean    sd
+   &lt;fct&gt;      &lt;fct&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1 setosa     Sepal.Length    50 5.01  0.352
+ 2 setosa     Sepal.Width     50 3.43  0.379
+ 3 setosa     Petal.Length    50 1.46  0.174
+ 4 setosa     Petal.Width     50 0.246 0.105
+ 5 versicolor Sepal.Length    50 5.94  0.516
+ 6 versicolor Sepal.Width     50 2.77  0.314
+ 7 versicolor Petal.Length    50 4.26  0.47 
+ 8 versicolor Petal.Width     50 1.33  0.198
+ 9 virginica  Sepal.Length    50 6.59  0.636
+10 virginica  Sepal.Width     50 2.97  0.322
+11 virginica  Petal.Length    50 5.55  0.552
+12 virginica  Petal.Width     50 2.03  0.275</code></pre>
+</div>
+</div>
+<p>A função <code>group_by()</code> do <code>dplyr</code> agrupa o nossos dados pelos níveis do fator <code>Species</code>, permitindo que as estatísticas sejam calculadas segmentadas e não como um todo para cada variável.</p>
+<p>Variando o argumento <code>type</code> temos acesso a diversas estatísticas. Experimente utilizar <code>type = "full"</code>.</p>
+</section></section>
+<section>
+<section id="inferência-estatística" class="title-slide slide level1 center" data-background-color="#5181c1ff" data-background-image="images/inference.png" data-background-size="600px" data-background-position="65% 50%">
+<h1>Inferência Estatística</h1>
+
+</section>
+<section id="pacotes-necessários" class="slide level2">
+<h2>Pacotes necessários</h2>
+<p>Nesta sessão utilizaremos alguns pacotes auxiliares, caso não tenham instalado ainda:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">`</span><span class="at">car</span><span class="st">`</span>, <span class="st">`</span><span class="at">tidyverse</span><span class="st">`</span>, <span class="st">`</span><span class="at">ggpubr</span><span class="st">`</span>, <span class="st">`</span><span class="at">agricolae</span><span class="st">`</span>, <span class="st">`</span><span class="at">devtools</span><span class="st">`</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Utilizaremos também dados do pacote <code>ecodados</code>, vocês podem fazer a instalação rodando <code>devtools::install_github("paternogbc/ecodados")</code>.</p>
+<p>Este pacote é parte do excelente livro <a href="https://analises-ecologicas.com/" target="_blank">Análises Ecológicas no R de <span class="citation" data-cites="da2022analises">Da Silva <em>et al.</em> (<span>2022</span>)</span></a> e é simplesmente um dos melhores livros dedicados a ciência de dados para Ecologia, disponível gratuitamente na internet. Obrigado aos autores mais uma vez!</p>
+</section>
+<section id="teste-large-t-para-duas-amostras-independentes" class="slide level2">
+<h2>Teste <span class="math inline">\(\large t\)</span> para duas amostras independentes</h2>
+<p>Um teste t baseado em duas amostras é usado para testar a diferença entre duas médias populacionais <span class="math inline">\(\mu_1\)</span> e <span class="math inline">\(\mu_2\)</span> quando <span class="math inline">\(\sigma_1\)</span> e <span class="math inline">\(\sigma_2\)</span> são desconhecidos, e portanto usamos os desvios amostrais.</p>
+<p><span class="math display">\[t = \frac{\bar{x_1}-\bar{x_2}}{s}\sqrt{\frac{n_1\times n_2}{n_1 + n_2}}\]</span></p>
+<p><strong>Premissas do Teste <span class="math inline">\(t\)</span>:</strong></p>
+<ol type="1">
+<li>As amostras devem ser independentes</li>
+<li>As unidades amostrais são selecionadas aleatoriamente</li>
+<li>Distribuição normal (gaussiana) dos resíduos</li>
+<li>Homogeneidade da variância</li>
+</ol>
+</section>
+<section id="teste-large-t-para-duas-amostras-independentes-1" class="slide level2">
+<h2>Teste <span class="math inline">\(\large t\)</span> para duas amostras independentes</h2>
+<h4 id="exemplo">Exemplo</h4>
+<p>Usaremos os dados de comprimento rostro-cloacal (CRC) de machos de anfíbios da espécie <em>Physalaemus nattereri</em> (Anura:Leptodactylidae) amostrados em diferentes estações do ano.</p>
+<p><strong>Pergunta:</strong> Existe diferença na média co CRC em <em>P. nattereri</em> entre as estações?</p>
+<p><strong>Hipótese Nula:</strong> As médias de CRC são iguais.</p>
+<p><strong>Hipótese Alternativa:</strong> As médias de CRC são diferentes entre as estações.</p>
+<p>Antes de realizarmos o teste <span class="math inline">\(t\)</span>, precisamos nos certificar de que nossos dados atendem as premissas.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a></a><span class="fu">library</span>(tidyverse, <span class="at">quietly =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb88-2"><a></a></span>
+<span id="cb88-3"><a></a>crc_phy_nat <span class="ot">&lt;-</span> ecodados<span class="sc">::</span>teste_t_var_igual</span>
+<span id="cb88-4"><a></a></span>
+<span id="cb88-5"><a></a><span class="fu">glimpse</span>(crc_phy_nat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 51
+Columns: 2
+$ CRC     &lt;dbl&gt; 3.82, 3.57, 3.67, 3.72, 3.75, 3.83, 3.85, 3.87, 3.93, 4.01, 4.…
+$ Estacao &lt;chr&gt; "Chuvosa", "Chuvosa", "Chuvosa", "Chuvosa", "Chuvosa", "Chuvos…</code></pre>
+</div>
+</div>
+</section>
+<section id="teste-large-t-para-duas-amostras-independentes-2" class="slide level2">
+<h2>Teste <span class="math inline">\(\large t\)</span> para duas amostras independentes</h2>
+<h4 id="checando-premissas">Checando premissas</h4>
+<p><strong>QQ Plot</strong></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(CRC <span class="sc">~</span> Estacao, <span class="at">data =</span> crc_phy_nat)</span>
+<span id="cb90-2"><a></a></span>
+<span id="cb90-3"><a></a>(qq <span class="ot">&lt;-</span> car<span class="sc">::</span><span class="fu">qqPlot</span>(mod))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 22 26</code></pre>
+</div>
+</div>
+<img data-src="intro_tidy_slides_files/figure-revealjs/unnamed-chunk-52-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<section id="teste-large-t-para-duas-amostras-independentes-3" class="slide level2">
+<h2>Teste <span class="math inline">\(\large t\)</span> para duas amostras independentes</h2>
+<h4 id="checando-premissas-1">Checando premissas</h4>
+<p>Podemos ainda utilizar o teste de Shapiro-Wilk e avaliar a normalidade</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a></a><span class="fu">shapiro.test</span>(<span class="fu">residuals</span>(mod))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  residuals(mod)
+W = 0.98307, p-value = 0.6746</code></pre>
+</div>
+</div>
+<p>e a heterocedasticidade (homogeneidade) da variância com o teste de Levene</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a></a>car<span class="sc">::</span><span class="fu">leveneTest</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Levene's Test for Homogeneity of Variance (center = median)
+      Df F value Pr(&gt;F)
+group  1  1.1677 0.2852
+      49               </code></pre>
+</div>
+</div>
+</section>
+<section id="teste-large-t-para-duas-amostras-independentes-4" class="slide level2">
+<h2>Teste <span class="math inline">\(\large t\)</span> para duas amostras independentes</h2>
+<p>Uma vez satisfeitas as premissas, podemos prosseguir e realizar o teste <span class="math inline">\(t\)</span>:</p>
+<div class="columns">
+<div class="column" style="width:45%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a></a>teste_T <span class="ot">&lt;-</span> <span class="fu">t.test</span>(CRC <span class="sc">~</span> Estacao,</span>
+<span id="cb96-2"><a></a>                  <span class="at">data =</span> crc_phy_nat,</span>
+<span id="cb96-3"><a></a>                  <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb96-4"><a></a></span>
+<span id="cb96-5"><a></a>teste_T</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Two Sample t-test
+
+data:  CRC by Estacao
+t = 4.1524, df = 49, p-value = 0.000131
+alternative hypothesis: true difference in means between group Chuvosa and group Seca is not equal to 0
+95 percent confidence interval:
+ 0.2242132 0.6447619
+sample estimates:
+mean in group Chuvosa    mean in group Seca 
+             3.695357              3.260870 </code></pre>
+</div>
+</div>
+</div><div class="column" style="width:5%;">
+
+</div><div class="column" style="width:45%;">
+<p>Ao apresentar os seu resultados inclua:</p>
+<ol type="i">
+<li><p>A estatística <span class="math inline">\(t\)</span>: <span class="math inline">\(t = 4.1524\)</span></p></li>
+<li><p>O p-valor: <span class="math inline">\(p-value = 0.000131\)</span></p></li>
+<li><p>Graus de Liberdade: <span class="math inline">\(df = 49\)</span></p></li>
+<li><p>Diferenca entre as médias: <span class="math inline">\(0.434\)</span></p></li>
+</ol>
+</div></div>
+</section>
+<section id="teste-large-t-para-duas-amostras-independentes-5" class="slide level2">
+<h2>Teste <span class="math inline">\(\large t\)</span> para duas amostras independentes</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a></a>extrafont<span class="sc">::</span><span class="fu">loadfonts</span>(<span class="at">quiet =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb98-2"><a></a></span>
+<span id="cb98-3"><a></a><span class="fu">ggplot</span>(<span class="at">data =</span> crc_phy_nat, <span class="fu">aes</span>(<span class="at">x =</span> Estacao, <span class="at">y =</span> CRC, <span class="at">color =</span> Estacao)) <span class="sc">+</span> </span>
+<span id="cb98-4"><a></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Estações"</span>, </span>
+<span id="cb98-5"><a></a>         <span class="at">y =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"CRC (mm) - "</span>, <span class="fu">italic</span>(<span class="st">"P. nattereri"</span>)))) <span class="sc">+</span></span>
+<span id="cb98-6"><a></a>    <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="fu">c</span>(<span class="st">"#606c38"</span>, <span class="st">"#dda15e"</span>), <span class="at">color =</span> <span class="st">"black"</span>, </span>
+<span id="cb98-7"><a></a>                 <span class="at">outlier.shape =</span> <span class="cn">NA</span>, <span class="at">width =</span> .<span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb98-8"><a></a>    <span class="fu">geom_jitter</span>(<span class="at">shape =</span> <span class="dv">21</span>, <span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="fl">0.1</span>), </span>
+<span id="cb98-9"><a></a>                <span class="at">cex =</span> <span class="dv">3</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>, <span class="at">stroke =</span> .<span class="dv">8</span>,</span>
+<span id="cb98-10"><a></a>                <span class="at">fill =</span> <span class="st">"grey60"</span>) <span class="sc">+</span></span>
+<span id="cb98-11"><a></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"black"</span>, <span class="st">"black"</span>)) <span class="sc">+</span></span>
+<span id="cb98-12"><a></a>    <span class="fu">annotate</span>(<span class="st">"text"</span>,</span>
+<span id="cb98-13"><a></a>             <span class="at">label =</span><span class="st">"t = 4.1524"</span>,</span>
+<span id="cb98-14"><a></a>             <span class="at">size =</span> <span class="dv">4</span>,</span>
+<span id="cb98-15"><a></a>             <span class="at">x =</span> <span class="st">"Seca"</span>,</span>
+<span id="cb98-16"><a></a>             <span class="at">y =</span> <span class="fl">4.6</span>,</span>
+<span id="cb98-17"><a></a>             <span class="at">hjust =</span> <span class="dv">0</span>,</span>
+<span id="cb98-18"><a></a>             <span class="at">family =</span> <span class="st">"Ubuntu"</span>) <span class="sc">+</span></span>
+<span id="cb98-19"><a></a>    <span class="fu">annotate</span>(<span class="st">"text"</span>,</span>
+<span id="cb98-20"><a></a>               <span class="at">label =</span><span class="st">"DF = 49"</span>,</span>
+<span id="cb98-21"><a></a>               <span class="at">size =</span> <span class="dv">4</span>,</span>
+<span id="cb98-22"><a></a>               <span class="at">x =</span> <span class="st">"Seca"</span>,</span>
+<span id="cb98-23"><a></a>               <span class="at">y =</span> <span class="fl">4.5</span>,</span>
+<span id="cb98-24"><a></a>               <span class="at">hjust =</span> <span class="dv">0</span>,</span>
+<span id="cb98-25"><a></a>               <span class="at">family =</span> <span class="st">"Ubuntu"</span>) <span class="sc">+</span></span>
+<span id="cb98-26"><a></a>    <span class="fu">annotate</span>(<span class="st">"text"</span>,</span>
+<span id="cb98-27"><a></a>               <span class="at">label =</span><span class="st">"Estimate: 0.434"</span>,</span>
+<span id="cb98-28"><a></a>               <span class="at">size =</span> <span class="dv">4</span>,</span>
+<span id="cb98-29"><a></a>               <span class="at">x =</span> <span class="st">"Seca"</span>,</span>
+<span id="cb98-30"><a></a>               <span class="at">y =</span> <span class="fl">4.4</span>,</span>
+<span id="cb98-31"><a></a>               <span class="at">hjust =</span> <span class="dv">0</span>,</span>
+<span id="cb98-32"><a></a>               <span class="at">family =</span> <span class="st">"Ubuntu"</span>) <span class="sc">+</span></span>
+<span id="cb98-33"><a></a>    <span class="fu">annotate</span>(<span class="st">"text"</span>,</span>
+<span id="cb98-34"><a></a>               <span class="at">label =</span><span class="st">"p-value = 0.000131"</span>,</span>
+<span id="cb98-35"><a></a>               <span class="at">size =</span> <span class="dv">4</span>,</span>
+<span id="cb98-36"><a></a>               <span class="at">x =</span> <span class="st">"Seca"</span>,</span>
+<span id="cb98-37"><a></a>               <span class="at">y =</span> <span class="fl">4.3</span>,</span>
+<span id="cb98-38"><a></a>               <span class="at">hjust =</span> <span class="dv">0</span>,</span>
+<span id="cb98-39"><a></a>               <span class="at">family =</span> <span class="st">"Ubuntu"</span>) <span class="sc">+</span></span>
+<span id="cb98-40"><a></a>    <span class="fu">theme_classic</span>(<span class="at">base_size =</span> <span class="dv">14</span>,</span>
+<span id="cb98-41"><a></a>                  <span class="at">base_family =</span> <span class="st">"Ubuntu"</span>) <span class="sc">+</span></span>
+<span id="cb98-42"><a></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
+</div>
+<img data-src="intro_tidy_slides_files/figure-revealjs/unnamed-chunk-56-1.png" width="960" class="r-stretch"></section>
+<section id="teste-t-pareado" class="slide level2">
+<h2>Teste <span class="math inline">\(t\)</span> pareado</h2>
+<p>No teste <span class="math inline">\(t\)</span> pareado temos duas observações da mesma unidade amostral subetida ao tratamento/efeito de interesse. O nosso objetivo é determinar se a diferença entre observações é zero.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="images/samples.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Adaptado de @larson2023estatistica"><img data-src="images/samples.png" width="400" alt="Adaptado de Larson and Farber (2023)"></a></p>
+<figcaption>Adaptado de <span class="citation" data-cites="larson2023estatistica">Larson and Farber (<a href="#/referências" role="doc-biblioref" onclick="">2023</a>)</span></figcaption>
+</figure>
+</div>
+<p>Premissas:</p>
+<ol type="1">
+<li>As unidades amostrais são selecionadas aleatoriamente</li>
+<li>As observações <em>não são independentes</em></li>
+<li>Distribuição normal (gaussiana) dos valores da diferença para cada par</li>
+</ol>
+</section>
+<section id="teste-t-pareado-1" class="slide level2">
+<h2>Teste <span class="math inline">\(t\)</span> pareado</h2>
+<h4 id="exemplo-1">Exemplo</h4>
+<p>Novamente vamos utilizar dados do pacote <code>ecodados</code> seguindo o exemplo disponível em <span class="citation" data-cites="da2022analises">Da Silva <em>et al.</em> (<a href="#/referências" role="doc-biblioref" onclick="">2022</a>)</span>. Vamos utilizar dados de riqueza de espécies de artrópodes em uma área antes e depois de um processo de queimada.</p>
+<p><strong>Pergunta:</strong> A riqueza de espécies de artrópodes é afetada pelas queimadas?</p>
+<p><strong>Hipótese Nula:</strong> A riqueza de espécies é igual antes e depois.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a></a>art_rich <span class="ot">&lt;-</span> ecodados<span class="sc">::</span>teste_t_pareado</span>
+<span id="cb99-2"><a></a></span>
+<span id="cb99-3"><a></a>art_rich <span class="sc">|&gt;</span></span>
+<span id="cb99-4"><a></a>  <span class="fu">glimpse</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 54
+Columns: 3
+$ Areas   &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,…
+$ Riqueza &lt;int&gt; 92, 74, 96, 89, 76, 80, 62, 100, 50, 137, 54, 89, 116, 66, 79,…
+$ Estado  &lt;chr&gt; "Pre-Queimada", "Pre-Queimada", "Pre-Queimada", "Pre-Queimada"…</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a></a>art_rich <span class="sc">|&gt;</span></span>
+<span id="cb101-2"><a></a>  <span class="fu">count</span>(Estado)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        Estado  n
+1 Pos-Queimada 27
+2 Pre-Queimada 27</code></pre>
+</div>
+</div>
+</section>
+<section id="teste-t-pareado-2" class="slide level2">
+<h2>Teste <span class="math inline">\(t\)</span> pareado</h2>
+<h4 id="exemplo-2">Exemplo</h4>
+<p>A função é a mesma <code>t.test()</code>, porém precisamos informar que agora estamos avaliando dados pareados, isso é feito pelo argumento <code>paired = TRUE</code>. Uma outra diferença é que para o teste pareado, não podemos utilizar a notação de fórmula, precisamos declarar explicitamente nossos dois vetores de observações. O restante da análise segue a anterior.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a></a>rich_antes <span class="ot">&lt;-</span> art_rich <span class="sc">|&gt;</span></span>
+<span id="cb103-2"><a></a>  <span class="fu">filter</span>(Estado <span class="sc">==</span> <span class="st">"Pre-Queimada"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb103-3"><a></a>  <span class="fu">pull</span>(Riqueza)</span>
+<span id="cb103-4"><a></a></span>
+<span id="cb103-5"><a></a>rich_depois <span class="ot">&lt;-</span> art_rich <span class="sc">|&gt;</span></span>
+<span id="cb103-6"><a></a>  <span class="fu">filter</span>(Estado <span class="sc">==</span> <span class="st">"Pos-Queimada"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb103-7"><a></a>  <span class="fu">pull</span>(Riqueza)</span>
+<span id="cb103-8"><a></a></span>
+<span id="cb103-9"><a></a>par_T <span class="ot">&lt;-</span> <span class="fu">t.test</span>(<span class="at">x =</span> rich_antes, <span class="at">y =</span> rich_depois, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb103-10"><a></a></span>
+<span id="cb103-11"><a></a>par_T</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Paired t-test
+
+data:  rich_antes and rich_depois
+t = 7.5788, df = 26, p-value = 4.803e-08
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 32.47117 56.63994
+sample estimates:
+mean difference 
+       44.55556 </code></pre>
+</div>
+</div>
+</section>
+<section id="teste-t-pareado-3" class="slide level2">
+<h2>Teste <span class="math inline">\(t\)</span> pareado</h2>
+<h4 id="exemplo-3">Exemplo</h4>
+<p>Como no exemplo anterior podemos apresentar nossos resultados de maneira gráfica. A função <code>ggpaired()</code> do pacote <code>ggpubr</code> nos fornece uma maneira bastante didática de apresentar nossos resultados.</p>
+<div class="columns">
+<div class="column" style="width:;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a></a>ggpubr<span class="sc">::</span><span class="fu">ggpaired</span>(art_rich, <span class="at">x =</span> <span class="st">"Estado"</span>, <span class="at">y =</span> <span class="st">"Riqueza"</span>,</span>
+<span id="cb105-2"><a></a><span class="at">color =</span> <span class="st">"Estado"</span>, <span class="at">line.color =</span> <span class="st">"gray"</span>, <span class="at">line.size =</span> <span class="fl">0.8</span>,</span>
+<span id="cb105-3"><a></a><span class="at">palette =</span> <span class="fu">c</span>(<span class="st">"#606c38"</span>, <span class="st">"#dda15e"</span>), <span class="at">width =</span> <span class="fl">0.5</span>,</span>
+<span id="cb105-4"><a></a><span class="at">point.size =</span> <span class="dv">4</span>, <span class="at">xlab =</span> <span class="st">"Estado das localidades"</span>,</span>
+<span id="cb105-5"><a></a><span class="at">ylab =</span> <span class="st">"Riqueza de Espécies"</span>) <span class="sc">+</span></span>
+<span id="cb105-6"><a></a><span class="fu">expand_limits</span>(<span class="at">y =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">150</span>)) <span class="sc">+</span></span>
+<span id="cb105-7"><a></a><span class="fu">theme_classic</span>(<span class="at">base_size =</span> <span class="dv">14</span>, <span class="at">base_family =</span> <span class="st">"Ubuntu"</span>) <span class="sc">+</span></span>
+<span id="cb105-8"><a></a>  <span class="fu">theme</span>(<span class="at">legend.direction =</span> <span class="st">"horizontal"</span>,</span>
+<span id="cb105-9"><a></a>        <span class="at">legend.position =</span> <span class="st">"top"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width:;">
+<div class="cell" data-layout-align="center" width="6" height="5">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center margin-caption">
+<figure>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="intro_tidy_slides_files/figure-revealjs/unnamed-chunk-60-1.png" class="lightbox" data-gallery="r-graph" title="Código adaptado de @da2022analises"><img data-src="intro_tidy_slides_files/figure-revealjs/unnamed-chunk-60-1.png" class="quarto-figure quarto-figure-center" width="960" alt="Código adaptado de Da Silva et al. (2022)"></a></p>
+</figure>
+</div>
+<figcaption>Código adaptado de <span class="citation" data-cites="da2022analises">Da Silva <em>et al.</em> (<a href="#/referências" role="doc-biblioref" onclick="">2022</a>)</span></figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="correlação" class="slide level2">
+<h2>Correlação</h2>
+<blockquote>
+<p>Uma <strong>correlação</strong> é uma relação entre duas variáveis. Os dados podem ser representados por pares ordenados (x, y), sendo x a <strong>variável independente</strong> (ou explanatória) e y a <strong>variável dependente</strong> (ou resposta). <span class="citation" data-cites="larson2023estatistica">(<a href="#/referências" role="doc-biblioref" onclick="">Larson and Farber, 2023</a>)</span></p>
+</blockquote>
+<div class="columns">
+<div class="column" style="width:;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb106"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a></a>dados_pib_co2 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb106-2"><a></a>  <span class="at">PIB =</span> <span class="fu">c</span>(<span class="fl">1.7</span>, <span class="fl">1.2</span>, <span class="fl">2.5</span>, <span class="fl">2.8</span>, <span class="fl">3.6</span>, <span class="fl">2.2</span>, <span class="fl">0.8</span>, <span class="fl">1.5</span>, <span class="fl">2.4</span>, <span class="fl">5.9</span>),</span>
+<span id="cb106-3"><a></a>  <span class="at">CO2 =</span> <span class="fu">c</span>(<span class="fl">552.6</span>, <span class="fl">462.3</span>, <span class="fl">475.4</span>, <span class="fl">374.3</span>, <span class="fl">748.5</span>, <span class="fl">400.9</span>, <span class="fl">253.0</span>, <span class="fl">318.6</span>, <span class="fl">496.8</span>, <span class="fl">1180.6</span>)</span>
+<span id="cb106-4"><a></a>)</span>
+<span id="cb106-5"><a></a></span>
+<span id="cb106-6"><a></a>dados_pib_co2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 2
+     PIB   CO2
+   &lt;dbl&gt; &lt;dbl&gt;
+ 1   1.7  553.
+ 2   1.2  462.
+ 3   2.5  475.
+ 4   2.8  374.
+ 5   3.6  748.
+ 6   2.2  401.
+ 7   0.8  253 
+ 8   1.5  319.
+ 9   2.4  497.
+10   5.9 1181.</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:;">
+<div class="cell" data-layout-align="center" width="5" height="6">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb108"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a></a><span class="fu">library</span>(ggtext)</span>
+<span id="cb108-2"><a></a></span>
+<span id="cb108-3"><a></a><span class="fu">ggplot</span>(dados_pib_co2,</span>
+<span id="cb108-4"><a></a>       <span class="fu">aes</span>(<span class="at">x =</span> PIB, <span class="at">y =</span> CO2)) <span class="sc">+</span></span>
+<span id="cb108-5"><a></a>  <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span><span class="dv">4</span>, <span class="at">fill =</span> <span class="st">"grey70"</span>, <span class="at">color =</span> <span class="st">"black"</span>)<span class="sc">+</span></span>
+<span id="cb108-6"><a></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">14</span>, <span class="at">base_family =</span> <span class="st">"Ubuntu"</span>) <span class="sc">+</span></span>
+<span id="cb108-7"><a></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>) <span class="sc">+</span></span>
+<span id="cb108-8"><a></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">1200</span>,<span class="at">by =</span> <span class="dv">200</span>))<span class="sc">+</span></span>
+<span id="cb108-9"><a></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Relação entre PIB e a quantidade de CO2 emitida,</span></span>
+<span id="cb108-10"><a></a><span class="st">       para amostra com 10 países."</span>,</span>
+<span id="cb108-11"><a></a>       <span class="at">x =</span> <span class="st">"PIB &lt;br&gt; (em trilhões de dólares)"</span>,</span>
+<span id="cb108-12"><a></a>       <span class="at">y =</span> <span class="st">"CO&lt;sub&gt;2&lt;/sub&gt; &lt;br&gt; (em milhões de toneladas métricas)"</span>) <span class="sc">+</span></span>
+<span id="cb108-13"><a></a>  <span class="fu">theme</span>(<span class="at">axis.title =</span> <span class="fu">element_markdown</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="intro_tidy_slides_files/figure-revealjs/unnamed-chunk-62-1.png" class="lightbox" data-gallery="r-graph"><img data-src="intro_tidy_slides_files/figure-revealjs/unnamed-chunk-62-1.png" class="quarto-figure quarto-figure-center" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="correlação-de-pearson" class="slide level2">
+<h2>Correlação de Pearson</h2>
+<p>Mais uma vez usaremos dados do <code>ecodados</code> de <span class="citation" data-cites="da2022analises">(<a href="#/referências" role="doc-biblioref" onclick="">Da Silva <em>et al.</em>, 2022</a>)</span>. Neste exemplo, avaliaremos a correlação entre a altura do tronco e o tamanho da raiz medidos em 35 indivíduos de uma espécie vegetal arbustiva.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a></a>arbustos <span class="ot">&lt;-</span> ecodados<span class="sc">::</span>correlacao</span>
+<span id="cb109-2"><a></a>arbustos <span class="sc">|&gt;</span> <span class="fu">glimpse</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 35
+Columns: 2
+$ Tamanho_raiz   &lt;dbl&gt; 10.177049, 6.622634, 7.773629, 11.055257, 4.487274, 11.…
+$ Tamanho_tronco &lt;dbl&gt; 19.54383, 17.13558, 19.50681, 21.57085, 13.22763, 21.62…</code></pre>
+</div>
+</div>
+<p>Utilizaremos a função <code>cor.test()</code> explicitando que queremos o coeficiente de Pearson no argumento <code>method="pearson"</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb111"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a></a><span class="fu">cor.test</span>(arbustos<span class="sc">$</span>Tamanho_raiz,</span>
+<span id="cb111-2"><a></a>         arbustos<span class="sc">$</span>Tamanho_tronco,</span>
+<span id="cb111-3"><a></a>         <span class="at">method =</span> <span class="st">"pearson"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's product-moment correlation
+
+data:  arbustos$Tamanho_raiz and arbustos$Tamanho_tronco
+t = 11.49, df = 33, p-value = 4.474e-13
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ 0.7995083 0.9457816
+sample estimates:
+      cor 
+0.8944449 </code></pre>
+</div>
+</div>
+</section>
+<section id="correlação-1" class="slide level2">
+<h2>Correlação</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb113" data-cap-location="margin"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a></a>arbustos <span class="ot">&lt;-</span> ecodados<span class="sc">::</span>correlacao</span>
+<span id="cb113-2"><a></a></span>
+<span id="cb113-3"><a></a><span class="fu">ggplot</span>(<span class="at">data =</span> arbustos, <span class="fu">aes</span>(<span class="at">x =</span> Tamanho_raiz,</span>
+<span id="cb113-4"><a></a><span class="at">y =</span> Tamanho_tronco)) <span class="sc">+</span></span>
+<span id="cb113-5"><a></a><span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Tamanho da raiz (m)"</span>, <span class="at">y =</span> <span class="st">"Altura do tronco (m)"</span>) <span class="sc">+</span></span>
+<span id="cb113-6"><a></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"#3e5c76"</span>,</span>
+<span id="cb113-7"><a></a><span class="at">linetype =</span> <span class="st">"solid"</span>, <span class="at">linewidth=</span><span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb113-8"><a></a><span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">4</span>, <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">fill =</span> <span class="st">"#dc2f02"</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb113-9"><a></a><span class="fu">annotate</span>(<span class="st">"text"</span>,</span>
+<span id="cb113-10"><a></a>         <span class="at">x =</span> <span class="dv">14</span>, <span class="at">y =</span> <span class="dv">14</span>,</span>
+<span id="cb113-11"><a></a>         <span class="at">label =</span> <span class="st">"r = 0.89, P &lt; 0.001"</span>,</span>
+<span id="cb113-12"><a></a>         <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">5</span>,</span>
+<span id="cb113-13"><a></a>         <span class="at">family =</span> <span class="st">"Ubuntu"</span>) <span class="sc">+</span></span>
+<span id="cb113-14"><a></a></span>
+<span id="cb113-15"><a></a><span class="fu">theme_classic</span>(<span class="at">base_size =</span> <span class="dv">14</span>, <span class="at">base_family =</span> <span class="st">"Ubuntu"</span>) <span class="sc">+</span></span>
+<span id="cb113-16"><a></a><span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
+</div>
+<img data-src="intro_tidy_slides_files/figure-revealjs/fig-cor-1.png" width="960" class="r-stretch quarto-figure-center" id="fig-cor"><p class="caption">
+Figure&nbsp;1: Adaptado de <span class="citation" data-cites="da2022analises">Da Silva <em>et al.</em> (<a href="#/referências" role="doc-biblioref" onclick="">2022</a>)</span>
+</p></section>
+<section id="regressão-linear-simples" class="slide level2">
+<h2>Regressão Linear Simples</h2>
+<p>A regressão linear simples é usada para analisar a relação entre uma <strong>variável preditora</strong> (plotada no eixo-X) e uma <strong>variável resposta</strong> (plotada no eixo-Y). As duas variáveis devem ser contínuas. Diferente das correlações, a regressão assume uma relação de causa e efeito entre as variáveis. O valor da variável preditora (X) causa, direta ou indiretamente, o valor da variável resposta (Y). Assim, Y é uma função linear de X <span class="citation" data-cites="da2022analises">(<a href="#/referências" role="doc-biblioref" onclick="">Da Silva <em>et al.</em>, 2022</a>)</span>.</p>
+<p><span class="math display">\[\Large y = \beta_0+\beta_1 X_i + \varepsilon_i\]</span> Este é o modelo matemático que define uma Regressão Linear Simples, onde:</p>
+<ul>
+<li><p><span class="math inline">\(\large y\)</span> é o nosso vetor de observações da nossa variável resposta</p></li>
+<li><p><span class="math inline">\(\large \beta_0\)</span> é o <strong>intercepto</strong> (<em>intercept</em>) que representa o valor da função quando <span class="math inline">\(X = 0\)</span></p></li>
+<li><p><span class="math inline">\(\large \beta_1\)</span> é a <strong>inclinação</strong> (<em>slope</em>) que mede a mudança na variável <span class="math inline">\(y\)</span> para cada mudança de unidade da variável <span class="math inline">\(X\)</span></p></li>
+<li><p><span class="math inline">\(\large \varepsilon_i\)</span> é no nosso vetor de <strong>erros aleatórios</strong> ou <strong>resíduos</strong>, é toda variabilidade em <span class="math inline">\(\large y\)</span> que não pode ser explicada por <span class="math inline">\(X\)</span></p></li>
+</ul>
+</section>
+<section id="regressão-linear-simples-1" class="slide level2">
+<h2>Regressão Linear Simples</h2>
+<p>A regressão linear também possui premissas:</p>
+<ol type="1">
+<li><p>As amostras devem ser independentes</p></li>
+<li><p>As unidades amostrais são selecionadas aleatoriamente</p></li>
+<li><p>Distribuição normal (gaussiana) <strong>dos resíduos</strong></p></li>
+<li><p>Homogeneidade da variância <strong>dos resíduos</strong></p></li>
+</ol>
+</section>
+<section id="regressão-linear-simples-2" class="slide level2">
+<h2>Regressão Linear Simples</h2>
+<h4 id="exemplo-4">Exemplo</h4>
+<p>Avaliaremos a relação entre o gradiente de temperatura média anual (°C) e o tamanho médio do comprimento rostro-cloacal (CRC em mm) de populações de <em>Dendropsophus minutus</em> (Anura:Hylidae) amostradas em 109 localidades no Brasil.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb114"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a></a>den_min <span class="ot">&lt;-</span> ecodados<span class="sc">::</span>regressoes</span>
+<span id="cb114-2"><a></a></span>
+<span id="cb114-3"><a></a>den_min <span class="sc">|&gt;</span> <span class="fu">glimpse</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 109
+Columns: 4
+$ Municipio    &lt;chr&gt; "Acorizal", "Alpinopolis", "Alto_Paraiso", "Americana", "…
+$ CRC          &lt;dbl&gt; 22.98816, 22.91788, 21.97629, 23.32453, 22.83651, 20.8698…
+$ Temperatura  &lt;dbl&gt; 24.13000, 20.09417, 21.86167, 20.28333, 25.47333, 20.1216…
+$ Precipitacao &lt;dbl&gt; 1228.2, 1487.6, 1812.4, 1266.2, 2154.0, 1269.2, 1940.6, 1…</code></pre>
+</div>
+</div>
+<p><strong>Pergunta</strong>: A temperatura afeta o tamanho do CRC de populações de <em>Dendropsophus minutus</em>?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb116"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a></a>mod_rls <span class="ot">&lt;-</span> <span class="fu">lm</span>(CRC <span class="sc">~</span> Temperatura, <span class="at">data =</span> den_min)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Utilizando a função <code>plot()</code> podemos fazer a inspeção visual dos resíduos e checar a normalidade e a homogeneidade da variância.</p>
+</section>
+<section id="regressão-linear-simples-3" class="slide level2">
+<h2>Regressão Linear Simples</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb117"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb117-1"><a></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>), <span class="at">oma =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">0</span>))</span>
+<span id="cb117-2"><a></a><span class="fu">plot</span>(mod_rls)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="intro_tidy_slides_files/figure-revealjs/unnamed-chunk-67-1.png" width="960" class="r-stretch"></section>
+<section id="regressão-linear-simples-4" class="slide level2">
+<h2>Regressão Linear Simples</h2>
+<p>Confirmado que nossos dados atendem as premissas de normalidade e heterocedasticidade dos resíduos, podemos agora ver os resultados da nossa regressão usando as funções <code>anova()</code> e <code>summary()</code>. Falaremos de ANOVA (Análise de Variância) na próxima sessão, mas a função <code>anova()</code> quando fornecida um único modelo nos retorna a famosa Tabela da Anova, que nos mostra se os termos do nosso modelo foram significativos.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb118"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a></a><span class="fu">anova</span>(mod_rls)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Response: CRC
+             Df  Sum Sq Mean Sq F value    Pr(&gt;F)    
+Temperatura   1  80.931  80.931   38.92 9.011e-09 ***
+Residuals   107 222.500   2.079                      
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+</section>
+<section id="regressão-linear-simples-5" class="slide level2">
+<h2>Regressão Linear Simples</h2>
+<p>A nossa velha amiga <code>summary()</code> nos fornece também a significância dos termos do modelo, e ainda os valores dos coeficientes, e do coeficiente de determinação (<span class="math inline">\(R^2\)</span>), que indica o quanto da variação em <span class="math inline">\(y\)</span> é explicada pela nossa variável <span class="math inline">\(X\)</span>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb120"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a></a><span class="fu">summary</span>(mod_rls)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = CRC ~ Temperatura, data = den_min)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.4535 -0.7784  0.0888  0.9168  3.1868 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 16.23467    0.91368  17.768  &lt; 2e-16 ***
+Temperatura  0.26905    0.04313   6.239 9.01e-09 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.442 on 107 degrees of freedom
+Multiple R-squared:  0.2667,    Adjusted R-squared:  0.2599 
+F-statistic: 38.92 on 1 and 107 DF,  p-value: 9.011e-09</code></pre>
+</div>
+</div>
+</section>
+<section id="regressão-linear-simples-6" class="slide level2">
+<h2>Regressão Linear Simples</h2>
+<p>Podemos apresentar nossos resultados por meio de um gráfico de dispersão como vimos anteriormente.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb122"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb122-1"><a></a><span class="fu">ggplot</span>(<span class="at">data =</span> den_min, <span class="fu">aes</span>(<span class="at">x =</span> Temperatura, <span class="at">y =</span> CRC)) <span class="sc">+</span></span>
+<span id="cb122-2"><a></a><span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Temperatura média anual (°C)"</span>,</span>
+<span id="cb122-3"><a></a><span class="at">y =</span> <span class="st">"Comprimento rostro-cloacal (mm)"</span>) <span class="sc">+</span></span>
+<span id="cb122-4"><a></a><span class="fu">geom_smooth</span>(<span class="at">method =</span> lm, <span class="at">se =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb122-5"><a></a>            <span class="at">color =</span> <span class="st">"#413c58"</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb122-6"><a></a><span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">4</span>, <span class="at">shape =</span> <span class="dv">21</span>,</span>
+<span id="cb122-7"><a></a>           <span class="at">fill =</span> <span class="st">"#988683"</span>, <span class="at">color=</span><span class="st">"#5c5c5e"</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb122-8"><a></a><span class="fu">theme_classic</span>(<span class="at">base_size =</span> <span class="dv">14</span>, <span class="at">base_family =</span> <span class="st">"Ubuntu"</span>) <span class="sc">+</span></span>
+<span id="cb122-9"><a></a><span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="intro_tidy_slides_files/figure-revealjs/unnamed-chunk-71-1.png" width="960" class="r-stretch"></section>
+<section id="regressão-linear-simples-7" class="slide level2">
+<h2>Regressão Linear Simples</h2>
+<h4 id="interpretando-os-resultados">Interpretando os resultados</h4>
+<p>Aqui vale comentar sobre as diferentes hipóteses que são testadas em cada função.</p>
+<p>A função <code>summary()</code> realiza um teste <span class="math inline">\(t\)</span> para cada um dos betas do modelo, no nosso caso de uma regressão linear simples o intercepto e o slope. A hipótese nula neste caso é:</p>
+<p><span class="math display">\[H_0: \beta_i = 0 \quad versus \quad H_a: \beta_i \neq 0\]</span></p>
+<p>Ou seja, o teste avalia se a variável explicativa <span class="math inline">\(X\)</span> tem efeito significativo sobre <span class="math inline">\(y\)</span> controlando pelas outras variáveis do modelo.</p>
+</section>
+<section id="regressão-linear-simples-8" class="slide level2">
+<h2>Regressão Linear Simples</h2>
+<h4 id="interpretando-os-resultados-1">Interpretando os resultados</h4>
+<p>Já a função <code>anova()</code> está fazendo uma análise de variância (ANOVA) que testa a seguinte hipótese nula global de que todos os coeficientes, exceto o intercepto, são iguais a zero:</p>
+<p><span class="math display">\[H_0: \beta_1 = \beta_2 = \cdots \beta_n =  0\]</span></p>
+<p>Mas como falamos de uma regressão linear <strong>simples</strong>, testamos somente o nosso <span class="math inline">\(\beta_1\)</span>.</p>
+<p>Ou seja, o teste <span class="math inline">\(F\)</span> da ANOVA <strong>avalia se o modelo completo com as variáveis preditoras explica significativamente mais variância do que um modelo nulo</strong> (só com o intercepto).</p>
+<p>Se o valor-p do teste <span class="math inline">\(F\)</span> for pequeno, rejeitamos <span class="math inline">\(H_0\)</span> e concluímos que <strong>pelo menos uma variável tem efeito significativo sobre a resposta</strong>.</p>
+</section>
+<section id="análise-de-variância-anova" class="slide level2">
+<h2>Análise de Variância (ANOVA)</h2>
+<p>Análise de variância com um fator é uma técnica de teste de hipótese usada para comparar as médias de três ou mais populações. A análise de variância geralmente é abreviada como ANOVA.</p>
+<p>Como mencionado anteriormente, a ANOVA é um teste de razão de variâncias. O que a estatistica do teste avalia de maneira resumida:</p>
+<p><span class="math display">\[Estatística \ do \ Teste = \frac{Variância \ dentro \ dos \ grupos}{Variância \ entre \ grupos}\]</span></p>
+<p>A <strong>Estatística <span class="math inline">\(F\)</span></strong> é o quociente destas duas variâncias, e nossa hipótese nula na ANOVA testa se a média dos grupos é igual:</p>
+<p><span class="math display">\[H_0: \mu_1 = \mu_2 = \cdots \mu_n\]</span></p>
+<p><strong>Premissas da ANOVA</strong>:</p>
+<ol type="1">
+<li>As amostras devem ser independentes</li>
+<li>As unidades amostrais são selecionadas aleatoriamente</li>
+<li>Distribuição normal (gaussiana) dos resíduos</li>
+<li>Homogeneidade da variância</li>
+</ol>
+</section>
+<section id="análise-de-variância-anova-1" class="slide level2">
+<h2>Análise de Variância (ANOVA)</h2>
+<h4 id="tabela-da-anova">Tabela da ANOVA</h4>
+<div class="cell">
+<div class="cell-output-display">
+<div id="qjexmnitzl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#qjexmnitzl table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#qjexmnitzl thead, #qjexmnitzl tbody, #qjexmnitzl tfoot, #qjexmnitzl tr, #qjexmnitzl td, #qjexmnitzl th {
+  border-style: none;
+}
+
+#qjexmnitzl p {
+  margin: 0;
+  padding: 0;
+}
+
+#qjexmnitzl .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 90%;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#qjexmnitzl .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#qjexmnitzl .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#qjexmnitzl .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#qjexmnitzl .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#qjexmnitzl .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qjexmnitzl .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#qjexmnitzl .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#qjexmnitzl .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#qjexmnitzl .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#qjexmnitzl .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#qjexmnitzl .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#qjexmnitzl .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#qjexmnitzl .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#qjexmnitzl .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#qjexmnitzl .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#qjexmnitzl .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#qjexmnitzl .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#qjexmnitzl .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qjexmnitzl .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#qjexmnitzl .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#qjexmnitzl .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#qjexmnitzl .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qjexmnitzl .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#qjexmnitzl .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#qjexmnitzl .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qjexmnitzl .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qjexmnitzl .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#qjexmnitzl .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qjexmnitzl .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#qjexmnitzl .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qjexmnitzl .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#qjexmnitzl .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qjexmnitzl .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#qjexmnitzl .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qjexmnitzl .gt_left {
+  text-align: left;
+}
+
+#qjexmnitzl .gt_center {
+  text-align: center;
+}
+
+#qjexmnitzl .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#qjexmnitzl .gt_font_normal {
+  font-weight: normal;
+}
+
+#qjexmnitzl .gt_font_bold {
+  font-weight: bold;
+}
+
+#qjexmnitzl .gt_font_italic {
+  font-style: italic;
+}
+
+#qjexmnitzl .gt_super {
+  font-size: 65%;
+}
+
+#qjexmnitzl .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#qjexmnitzl .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#qjexmnitzl .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#qjexmnitzl .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#qjexmnitzl .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#qjexmnitzl .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#qjexmnitzl .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#qjexmnitzl .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#qjexmnitzl div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="gt_col_headings header">
+<th id="fv" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-top-width: 2px; border-top-style: solid; border-top-color: black; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: black" scope="col"><strong>Fontes de Variação (FV)</strong></th>
+<th id="gl" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="text-align: center; border-top-width: 2px; border-top-style: solid; border-top-color: black; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: black;" scope="col"><strong>Graus de Liberdade (GL)</strong></th>
+<th id="sq" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="text-align: center; border-top-width: 2px; border-top-style: solid; border-top-color: black; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: black;" scope="col"><strong>Soma de Quadrados (SQ)</strong></th>
+<th id="qm" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="text-align: center; border-top-width: 2px; border-top-style: solid; border-top-color: black; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: black;" scope="col"><strong>Quadrado Médio (QM)</strong></th>
+<th id="stat" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="text-align: center; border-top-width: 2px; border-top-style: solid; border-top-color: black; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: black;" scope="col"><strong><em>F</em></strong></th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_center" headers="fv" style="border-top-width: 2px; border-top-style: solid; border-top-color: black; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: black">Tratamento<br>(entre)</td>
+<td class="gt_row gt_center" headers="gl" style="text-align: center; border-top-width: 2px; border-top-style: solid; border-top-color: black; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: black;"><span class="math inline">\(p-1\)</span></td>
+<td class="gt_row gt_center" headers="sq" style="text-align: center; border-top-width: 2px; border-top-style: solid; border-top-color: black; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: black;"><span class="math inline">\(SQ_{Trat}\)</span></td>
+<td class="gt_row gt_center" headers="qm" style="text-align: center; border-top-width: 2px; border-top-style: solid; border-top-color: black; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: black;"><span class="math inline">\(\frac{SQ_{Trat}}{p-1}\)</span></td>
+<td class="gt_row gt_center" headers="stat" style="text-align: center; border-top-width: 2px; border-top-style: solid; border-top-color: black; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: black;"><span class="math inline">\(\frac{QM_{Trat}}{QM_{Res}}\)</span></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="fv" style="border-top-width: 2px; border-top-style: solid; border-top-color: black; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: black">Erro Experimental<br>(dentro)</td>
+<td class="gt_row gt_center" headers="gl" style="text-align: center; border-top-width: 2px; border-top-style: solid; border-top-color: black; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: black;"><span class="math inline">\(n-p\)</span></td>
+<td class="gt_row gt_center" headers="sq" style="text-align: center; border-top-width: 2px; border-top-style: solid; border-top-color: black; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: black;"><span class="math inline">\(SQ_{Res}\)</span></td>
+<td class="gt_row gt_center" headers="qm" style="text-align: center; border-top-width: 2px; border-top-style: solid; border-top-color: black; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: black;"><span class="math inline">\(\frac{SQ_{Res}}{n-p}\)</span></td>
+<td class="gt_row gt_center" headers="stat" style="text-align: center; border-top-width: 2px; border-top-style: solid; border-top-color: black; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: black;"><br>
+</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="fv" style="border-top-width: 2px; border-top-style: solid; border-top-color: black; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: black"><strong>Total</strong></td>
+<td class="gt_row gt_center" headers="gl" style="text-align: center; border-top-width: 2px; border-top-style: solid; border-top-color: black; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: black;"><span class="math inline">\(n-1\)</span></td>
+<td class="gt_row gt_center" headers="sq" style="text-align: center; border-top-width: 2px; border-top-style: solid; border-top-color: black; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: black;"><span class="math inline">\(SQ_{Total}\)</span></td>
+<td class="gt_row gt_center" headers="qm" style="text-align: center; border-top-width: 2px; border-top-style: solid; border-top-color: black; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: black;"><br>
+</td>
+<td class="gt_row gt_center" headers="stat" style="text-align: center; border-top-width: 2px; border-top-style: solid; border-top-color: black; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: black;"><br>
+</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Esta é a famosa tabela da ANOVA, a mesma tabela que é retornada pelas funções que utilizaremos aqui no R. As somas de quadrado podem ser obtidas como:</p>
+<div class="columns">
+<div class="column" style="width:;">
+<p><span class="math inline">\(\small \displaystyle SQ_{Total} = \sum_{i=1,j=1}^{I,J}Y_{ij}^2 - \frac{\displaystyle \left( \sum_{i=1,j=1}^{I,J}Y_{ij}\right)^2}{IJ}\)</span></p>
+</div><div class="column" style="width:;">
+<p><span class="math inline">\(\small \displaystyle SQ_{Trat} = \sum_{i=1}^{I}\frac{T_{i}^2}{J} - \frac{\displaystyle \left( \sum_{i=1,j=1}^{I,J}Y_{ij}\right)^2}{IJ}\)</span></p>
+</div></div>
+<p><span class="math inline">\(\small SQ_{Total} \ = \ SQ_{Trat} + SQ_{Res}\)</span></p>
+</section>
+<section id="anova-de-um-fator" class="slide level2">
+<h2>Anova de um Fator</h2>
+<p>Na ANOVA de um fator testamos o efeito de uma única variável categórica (Tratamento) sobre nossa variável dependente (<span class="math inline">\(y\)</span>).</p>
+<p><strong>Pergunta</strong>: Existe diferença no tamanho do bico (<code>bill_length_mm</code>) entre as diferentes espécies de pinguim?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb123"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb123-1"><a></a>pinguins <span class="ot">&lt;-</span> palmerpenguins<span class="sc">::</span>penguins</span>
+<span id="cb123-2"><a></a></span>
+<span id="cb123-3"><a></a>pinguins <span class="sc">|&gt;</span></span>
+<span id="cb123-4"><a></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 8
+  species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+  &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;
+1 Adelie  Torgersen           39.1          18.7               181        3750
+2 Adelie  Torgersen           39.5          17.4               186        3800
+3 Adelie  Torgersen           40.3          18                 195        3250
+4 Adelie  Torgersen           NA            NA                  NA          NA
+5 Adelie  Torgersen           36.7          19.3               193        3450
+6 Adelie  Torgersen           39.3          20.6               190        3650
+# ℹ 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="anova-de-um-fator-1" class="slide level2">
+<h2>Anova de um Fator</h2>
+<p>Diferente da última sessão, utilizaremos a função <code>aov()</code> para realizarmos a ANOVA.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb125"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb125-1"><a></a>anova_bico <span class="ot">&lt;-</span> <span class="fu">aov</span>(bill_length_mm <span class="sc">~</span> species, <span class="at">data =</span> pinguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<h4 id="testando-premissas">Testando Premissas</h4>
+<p>Assim como fizemos com nosso modelo de regressão linear podemos avaliar nossos resíduos visualmente.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb126"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb126-1"><a></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>), <span class="at">oma =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">0</span>))</span>
+<span id="cb126-2"><a></a><span class="fu">plot</span>(anova_bico)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="intro_tidy_slides_files/figure-revealjs/unnamed-chunk-75-1.png" class="lightbox" data-gallery="r-graph"><img data-src="intro_tidy_slides_files/figure-revealjs/unnamed-chunk-75-1.png" class="quarto-figure quarto-figure-center" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="anova-de-um-fator-2" class="slide level2">
+<h2>Anova de um Fator</h2>
+<p>Nossos resíduos parecem seguir normalidade e homocedasticidade. Mas podemos confirmar realizando os testes de Shapiro-Wilk (normalidade) e Bartlett (homocedasticidade).</p>
+<p><span><i class="fa-solid fa-circle-exclamation" aria-label="circle-exclamation"></i> <strong>Lembre-se que sempre testamos os resíduos!</strong></span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb127"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb127-1"><a></a><span class="fu">shapiro.test</span>(<span class="fu">residuals</span>(anova_bico))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  residuals(anova_bico)
+W = 0.98903, p-value = 0.01131</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb129"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb129-1"><a></a><span class="fu">bartlett.test</span>(bill_length_mm <span class="sc">~</span> species, <span class="at">data =</span> pinguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Bartlett test of homogeneity of variances
+
+data:  bill_length_mm by species
+Bartlett's K-squared = 5.6179, df = 2, p-value = 0.06027</code></pre>
+</div>
+</div>
+<p>Lembrando que a hipótese nula em ambos os testes é de que os dados seguem normalidade/homocedasticidade. Confirmamos assim o nosso diagnístico visual.</p>
+</section>
+<section id="anova-de-um-fator-3" class="slide level2">
+<h2>Anova de um Fator</h2>
+<h3 id="tabela-anova">Tabela Anova</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb131"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb131-1"><a></a><span class="fu">summary</span>(anova_bico)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             Df Sum Sq Mean Sq F value Pr(&gt;F)    
+species       2   7194    3597   410.6 &lt;2e-16 ***
+Residuals   339   2970       9                   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+2 observations deleted due to missingness</code></pre>
+</div>
+</div>
+<p>E aqui obtemos a nossa tabela da ANOVA. E com base no p-valor obtido podemos confirmar que existe efeito de Espécie sobre o Tamanho do Bico dos Pinguins. Em relação a nossa hipótese nula, isso significa dizer que <strong>pelo menos um dos grupos avaliados possui média diferente dos demais</strong>.</p>
+</section>
+<section id="anova-de-um-fator---comparação-de-médias" class="slide level2">
+<h2>Anova de um Fator - Comparação de Médias</h2>
+<p>Uma vez sabendo que existe diferença significativa, agora precisamos realizar um pós-teste de comparação de médias entre os grupos. Para isso vamos utilizar o pacote <code>agricolae</code>. Este pacote é excelente por possuir diversos pos-testes para anova, entre eles Tukey, SNK, e Duncan.</p>
+<p><strong>Tukey HSD </strong></p>
+<p>O Teste <strong>Tukey HSD (<em>honestly significant difference</em>)</strong> é amplamente reconhecido por controlar de forma rigorosa a taxa de erro familiar, permitindo comparações par a par entre todas as médias com um critério bastante robusto.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb133"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb133-1"><a></a>agricolae<span class="sc">::</span><span class="fu">HSD.test</span>(anova_bico,<span class="st">"species"</span>, <span class="at">group=</span><span class="cn">TRUE</span>, <span class="at">console=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Study: anova_bico ~ "species"
+
+HSD Test for bill_length_mm 
+
+Mean Square Error:  8.760732 
+
+species,  means
+
+          bill_length_mm      std   r        se  Min  Max   Q25   Q50    Q75
+Adelie          38.79139 2.663405 151 0.2408694 32.1 46.0 36.75 38.80 40.750
+Chinstrap       48.83382 3.339256  68 0.3589349 40.9 58.0 46.35 49.55 51.075
+Gentoo          47.50488 3.081857 123 0.2668810 40.9 59.6 45.30 47.30 49.550
+
+Alpha: 0.05 ; DF Error: 339 
+Critical Value of Studentized Range: 3.329136 
+
+Groups according to probability of means differences and alpha level( 0.05 )
+
+Treatments with the same letter are not significantly different.
+
+          bill_length_mm groups
+Chinstrap       48.83382      a
+Gentoo          47.50488      b
+Adelie          38.79139      c</code></pre>
+</div>
+</div>
+</section>
+<section id="anova-de-um-fator---comparação-de-médias-1" class="slide level2">
+<h2>Anova de um Fator - Comparação de Médias</h2>
+<p><strong>SNK</strong></p>
+<p>O Teste <strong>Student-Newman-Keuls (SNK)</strong> realiza comparações par a par de maneira sequencial, equilibrando a sensibilidade para detectar diferenças com um critério menos conservador que o Tukey HSD, mas mais rigoroso que o teste de Duncan.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb135"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb135-1"><a></a>agricolae<span class="sc">::</span><span class="fu">SNK.test</span>(anova_bico, <span class="st">"species"</span>, <span class="at">group =</span> <span class="cn">TRUE</span>, <span class="at">console =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Study: anova_bico ~ "species"
+
+Student Newman Keuls Test
+for bill_length_mm 
+
+Mean Square Error:  8.760732 
+
+species,  means
+
+          bill_length_mm      std   r        se  Min  Max   Q25   Q50    Q75
+Adelie          38.79139 2.663405 151 0.2408694 32.1 46.0 36.75 38.80 40.750
+Chinstrap       48.83382 3.339256  68 0.3589349 40.9 58.0 46.35 49.55 51.075
+Gentoo          47.50488 3.081857 123 0.2668810 40.9 59.6 45.30 47.30 49.550
+
+Groups according to probability of means differences and alpha level( 0.05 )
+
+Means with the same letter are not significantly different.
+
+          bill_length_mm groups
+Chinstrap       48.83382      a
+Gentoo          47.50488      b
+Adelie          38.79139      c</code></pre>
+</div>
+</div>
+</section>
+<section id="anova-de-um-fator---comparação-de-médias-2" class="slide level2">
+<h2>Anova de um Fator - Comparação de Médias</h2>
+<p><strong>Duncan</strong></p>
+<p>O Teste de <strong>Duncan</strong> adota uma abordagem mais liberal, facilitando a identificação de intervalos de similaridade entre as médias, mas com uma margem maior de risco de erro do Tipo I.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb137"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb137-1"><a></a>agricolae<span class="sc">::</span><span class="fu">duncan.test</span>(anova_bico, <span class="st">"species"</span>, <span class="at">group =</span> <span class="cn">TRUE</span>, <span class="at">console =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Study: anova_bico ~ "species"
+
+Duncan's new multiple range test
+for bill_length_mm 
+
+Mean Square Error:  8.760732 
+
+species,  means
+
+          bill_length_mm      std   r        se  Min  Max   Q25   Q50    Q75
+Adelie          38.79139 2.663405 151 0.2408694 32.1 46.0 36.75 38.80 40.750
+Chinstrap       48.83382 3.339256  68 0.3589349 40.9 58.0 46.35 49.55 51.075
+Gentoo          47.50488 3.081857 123 0.2668810 40.9 59.6 45.30 47.30 49.550
+
+Groups according to probability of means differences and alpha level( 0.05 )
+
+Means with the same letter are not significantly different.
+
+          bill_length_mm groups
+Chinstrap       48.83382      a
+Gentoo          47.50488      b
+Adelie          38.79139      c</code></pre>
+</div>
+</div>
+</section>
+<section id="anova-de-um-fator---comparação-de-médias-3" class="slide level2">
+<h2>Anova de um Fator - Comparação de Médias</h2>
+<p><strong>Dunnet</strong></p>
+<p>O Teste <strong>Dunnett</strong> é particularmente útil quando o objetivo principal é comparar cada tratamento com um grupo de controle, focando essa análise e ajustando as comparações para esse propósito.</p>
+<p>Para realizar esse teste usaremos o pacote <code>multcomp</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb139"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb139-1"><a></a>multcomp<span class="sc">::</span><span class="fu">glht</span>(anova_bico, <span class="at">linfct =</span> multcomp<span class="sc">::</span><span class="fu">mcp</span>(<span class="at">species=</span> <span class="st">"Dunnett"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+     General Linear Hypotheses
+
+Multiple Comparisons of Means: Dunnett Contrasts
+
+
+Linear Hypotheses:
+                        Estimate
+Chinstrap - Adelie == 0   10.042
+Gentoo - Adelie == 0       8.713</code></pre>
+</div>
+</div>
+</section>
+<section id="anova-de-um-fator-4" class="slide level2">
+<h2>Anova de um Fator</h2>
+<p><strong>Apresentando os resultados</strong></p>
+<p>Além da apresentação da tabela podemos reportar nossos resultados graficamente com boxplots e adicionar os grupos do teste de Tukey.</p>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb141"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb141-1"><a></a><span class="fu">library</span>(ggtext)</span>
+<span id="cb141-2"><a></a></span>
+<span id="cb141-3"><a></a>grupos <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">species =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"Adelie"</span>, <span class="st">"Chinstrap"</span>, <span class="st">"Gentoo"</span>)),</span>
+<span id="cb141-4"><a></a>                 <span class="at">grupos =</span> <span class="fu">c</span>(<span class="st">"C"</span>,<span class="st">"A"</span>,<span class="st">"B"</span>),</span>
+<span id="cb141-5"><a></a>                 <span class="at">ymax =</span> <span class="fu">c</span>(<span class="dv">48</span>,<span class="dv">59</span>,<span class="dv">58</span>))</span>
+<span id="cb141-6"><a></a></span>
+<span id="cb141-7"><a></a>tukey <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">species =</span> <span class="st">"Adelie"</span>,</span>
+<span id="cb141-8"><a></a>                <span class="at">label =</span> <span class="st">"&lt;b&gt;TukeyHSD&lt;/b&gt;&lt;br&gt;MSE: 8.76&lt;br&gt;p &lt; 0.05&lt;br&gt;q&lt;sub&gt;a&lt;/sub&gt;: 3.329"</span>,</span>
+<span id="cb141-9"><a></a>                <span class="at">y =</span> <span class="dv">55</span>)</span>
+<span id="cb141-10"><a></a></span>
+<span id="cb141-11"><a></a>pinguins <span class="sc">|&gt;</span></span>
+<span id="cb141-12"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>species, <span class="at">y=</span>bill_length_mm, <span class="at">fill =</span> species)) <span class="sc">+</span></span>
+<span id="cb141-13"><a></a>  <span class="fu">geom_boxplot</span>(<span class="at">outliers =</span> <span class="cn">FALSE</span>)<span class="sc">+</span></span>
+<span id="cb141-14"><a></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x=</span>grupos<span class="sc">$</span>species,</span>
+<span id="cb141-15"><a></a>           <span class="at">y =</span> grupos<span class="sc">$</span>ymax, </span>
+<span id="cb141-16"><a></a>           <span class="at">label =</span> grupos<span class="sc">$</span>grupos,</span>
+<span id="cb141-17"><a></a>           <span class="at">family =</span> <span class="st">"Ubuntu"</span>,</span>
+<span id="cb141-18"><a></a>            <span class="at">size =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb141-19"><a></a>  <span class="fu">geom_richtext</span>(<span class="at">data =</span> tukey, <span class="fu">aes</span>(<span class="at">x =</span> species, <span class="at">y =</span> <span class="dv">55</span>, <span class="at">label =</span> label),</span>
+<span id="cb141-20"><a></a>                <span class="at">fill =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb141-21"><a></a>  <span class="fu">theme_classic</span>(<span class="at">base_size =</span> <span class="dv">14</span>, <span class="at">base_family =</span> <span class="st">"Ubuntu"</span>) <span class="sc">+</span></span>
+<span id="cb141-22"><a></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb141-23"><a></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Variação do Comprimento de Bico em Pinguins"</span>,</span>
+<span id="cb141-24"><a></a>       <span class="at">x =</span> <span class="st">"Espécies"</span>,</span>
+<span id="cb141-25"><a></a>       <span class="at">y =</span> <span class="st">"Comprimento do Bico (mm)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
+</div>
+<img data-src="intro_tidy_slides_files/figure-revealjs/unnamed-chunk-84-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<section id="bonus-anova-vs-teste-t" class="slide level2">
+<h2>Bonus &gt; Anova vs Teste T</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb142"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb142-1"><a></a><span class="fu">t.test</span>(CRC <span class="sc">~</span> Estacao,</span>
+<span id="cb142-2"><a></a>                  <span class="at">data =</span> crc_phy_nat,</span>
+<span id="cb142-3"><a></a>                  <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Two Sample t-test
+
+data:  CRC by Estacao
+t = 4.1524, df = 49, p-value = 0.000131
+alternative hypothesis: true difference in means between group Chuvosa and group Seca is not equal to 0
+95 percent confidence interval:
+ 0.2242132 0.6447619
+sample estimates:
+mean in group Chuvosa    mean in group Seca 
+             3.695357              3.260870 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb144"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb144-1"><a></a><span class="fu">aov</span>(CRC <span class="sc">~</span> Estacao, <span class="at">data =</span> crc_phy_nat) <span class="sc">|&gt;</span></span>
+<span id="cb144-2"><a></a>  <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+Estacao      1  2.384  2.3838   17.24 0.000131 ***
+Residuals   49  6.774  0.1383                     
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+</section>
+<section id="thats-all-folks" class="slide level2">
+<h2>That’s all folks!</h2>
+<div class="center-col">
+<p><img data-src="images/the-office-michael.gif" width="600"> <br></p>
+<p><i class="fa-solid fa-envelope" aria-label="envelope"></i> pbarrosbio@gmail.com</p>
+<p><i class="fa-solid fa-link" aria-label="link"></i> https://paulobarros.com.br</p>
+<p><br></p>
+<h4 id="obrigado-pela-paciência">Obrigado pela paciência!</h4>
+</div>
+</section>
+<section id="referências" class="slide level2 smaller scrollable">
+<h2>Referências</h2>
+
+
+<div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
+<div id="ref-da2022analises" class="csl-entry" role="listitem">
+DA SILVA, F. R. <em>et al.</em> <strong>An<span>á</span>lises ecol<span>ó</span>gicas no r</strong>. [s.l.] Clube de Autores, 2022.
+</div>
+<div id="ref-larson2023estatistica" class="csl-entry" role="listitem">
+LARSON, R.; FARBER, B. <strong>Estat<span>ı́</span>stica aplicada: Retratando o mundo</strong>. [s.l.] Bookman Editora, 2023.
+</div>
+</div>
+</section></section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<p><img src="images/pb_logo.png" class="slide-logo"></p>
+<div class="footer footer-default">
+
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+            const codeEl = trigger.previousElementSibling.cloneNode(true);
+            for (const childEl of codeEl.children) {
+              if (isCodeAnnotation(childEl)) {
+                childEl.remove();
+              }
+            }
+            return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp("https:\/\/paulobarros\.github\.io\/intro-r-tidyverse");
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+    (function() {
+      let previousOnload = window.onload;
+      window.onload = () => {
+        if (previousOnload) {
+          previousOnload();
+        }
+        lightboxQuarto.on('slide_before_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          const href = trigger.getAttribute('href');
+          if (href !== null) {
+            const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+            if (imgEl !== null) {
+              const srcAttr = imgEl.getAttribute("src");
+              if (srcAttr && srcAttr.startsWith("data:")) {
+                slideConfig.href = srcAttr;
+              }
+            }
+          } 
+        });
+      
+        lightboxQuarto.on('slide_after_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(slideNode);
+          }
+        });
+      
+      };
+      
+    })();
+              </script>
+    
+
+</body></html>

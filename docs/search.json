@@ -581,5 +581,537 @@
       "Inferência Estatística",
       "Teste de Hipótese"
     ]
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#teste",
+    "href": "slides/intro-tidy-revealjs.html#teste",
+    "title": "Estatística no R",
+    "section": "Teste",
+    "text": "Teste"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#hi-there",
+    "href": "slides/intro-tidy-revealjs.html#hi-there",
+    "title": "Estatística no R",
+    "section": "Hi there! ",
+    "text": "Hi there! \n\n\n\n\n\nPaulo Barros\n\n 2024 - PhD Zootecnia (Melhoramento Genético Animal) (PPZ-UESB)\n 2024 - MSc Genética, Biodiversidade e Conservação (PPGGBC-UESB)\n 2020 - Biologia com Ênfase em Genética (UESB)\n\n\n\n\n\n\nConsultoria Ambiental\n\n\nConsultoria Estatística\n\n\nCursos e Mentorias\n\n\nDesenvolvimento de Pacotes"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#o-que-aprender-pra-aprender-r",
+    "href": "slides/intro-tidy-revealjs.html#o-que-aprender-pra-aprender-r",
+    "title": "Estatística no R",
+    "section": "O que aprender pra aprender R…",
+    "text": "O que aprender pra aprender R…\n\n\n\n\nO jeito difícil…\n\n\n\n\nO jeito fácil…\n\n\n\n\n\n\nImagem por Allison Horst."
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#encontre-sua-motivação-individual",
+    "href": "slides/intro-tidy-revealjs.html#encontre-sua-motivação-individual",
+    "title": "Estatística no R",
+    "section": "Encontre sua motivação individual",
+    "text": "Encontre sua motivação individual\n\n\n\nImagem por Allison Horst."
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#instalando-r-e-r-studio",
+    "href": "slides/intro-tidy-revealjs.html#instalando-r-e-r-studio",
+    "title": "Estatística no R",
+    "section": "Instalando R e R Studio",
+    "text": "Instalando R e R Studio\n\n\n\n\nThe Comprehensive R Archive Network - CRAN\n\nR-4.5.0\n\n(2025-04-11, How About a Twenty-Six)\n\n\n\n\n\n\nRStudio IDE\n\nVersion 2025.05.0 Build 496"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#o-básico-do-r",
+    "href": "slides/intro-tidy-revealjs.html#o-básico-do-r",
+    "title": "Estatística no R",
+    "section": "O básico do R",
+    "text": "O básico do R\n\n\nMatemática Básica\n\n1 / 200 * 30\n\n[1] 0.15\n\n(59 + 73 + 2) / 3\n\n[1] 44.66667\n\n\nComentários\nQualquer texto precedido de # não é lido como código.\n\n# Comentários são úteis\n# pra documentar o código\n\n1:5 # cria uma sequência de 1 a 5\n\n[1] 1 2 3 4 5\n\n\n\n\n\nObjetos\nobject_name &lt;- value\n\nprimes &lt;- c(2, 3, 5, 7, 11, 13)\n\nprimes\n\n[1]  2  3  5  7 11 13\n\n\nc() é a função de combinar elementos.\nNomes de Objetos\nTodo objeto no R deve ter o nome iniciado por letra, e só podem conter _ ou .\ni_use_snake_case\notherPeopleUseCamelCase\nsome.people.use.periods\nAnd_aFew.People_RENOUNCEconvention"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#pacotes",
+    "href": "slides/intro-tidy-revealjs.html#pacotes",
+    "title": "Estatística no R",
+    "section": "Pacotes",
+    "text": "Pacotes\nPacotes são conjuntos de funções combinadas que extendem a capacidade da linguagem R.\nAtualmente são mais de 22 mil pacotes no CRAN\n\n\nInstalação\n\ninstall.packages(\"tidyverse\")\n\nCarregamento\n\nlibrary(tidyverse)\n\n\n\n\n\n\n\n\nAtenção\n\n\nInstalamos uma única vez (Por versão do R). Carregamos os pacotes todas as vezes que precisamos utilizar em nossos scripts.\n\n\n\n\n\n\nDatasets\nA maioria dos pacotes vem com datasets de exemplos.\n\ndata(package=\"nome_do_pacote\")\n\nPara listar todos os datasets\n\ndata(package = .packages(all.available = TRUE))"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#uma-maneira-elegante-e-intuitiva-de-trabalhar-com-dados",
+    "href": "slides/intro-tidy-revealjs.html#uma-maneira-elegante-e-intuitiva-de-trabalhar-com-dados",
+    "title": "Estatística no R",
+    "section": "Uma maneira elegante e intuitiva de trabalhar com dados…",
+    "text": "Uma maneira elegante e intuitiva de trabalhar com dados…\nVamos dar uma olhada no dataset iris que já vem com o R.\nO comando str() nos diz a estrutura dos dados.\n\nstr(iris)\n\n'data.frame':   150 obs. of  5 variables:\n $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...\n $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...\n $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...\n $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...\n $ Species     : Factor w/ 3 levels \"setosa\",\"versicolor\",..: 1 1 1 1 1 1 1 1 1 1 ...\n\n\nO comando head() exibe as primeiras observações de um objeto.\n\nhead(iris, 10)\n\n   Sepal.Length Sepal.Width Petal.Length Petal.Width Species\n1           5.1         3.5          1.4         0.2  setosa\n2           4.9         3.0          1.4         0.2  setosa\n3           4.7         3.2          1.3         0.2  setosa\n4           4.6         3.1          1.5         0.2  setosa\n5           5.0         3.6          1.4         0.2  setosa\n6           5.4         3.9          1.7         0.4  setosa\n7           4.6         3.4          1.4         0.3  setosa\n8           5.0         3.4          1.5         0.2  setosa\n9           4.4         2.9          1.4         0.2  setosa\n10          4.9         3.1          1.5         0.1  setosa"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#uma-maneira-elegante-e-intuitiva-de-trabalhar-com-dados-1",
+    "href": "slides/intro-tidy-revealjs.html#uma-maneira-elegante-e-intuitiva-de-trabalhar-com-dados-1",
+    "title": "Estatística no R",
+    "section": "Uma maneira elegante e intuitiva de trabalhar com dados…",
+    "text": "Uma maneira elegante e intuitiva de trabalhar com dados…\n\nBase R\n\nsetosa_data &lt;- iris[iris$Species == \"setosa\", ]\n\nsepal_data &lt;- setosa_data[, grepl(\"^Sepal\",names(setosa_data))]\n\nsepal_means &lt;- colMeans(sepal_data)\n\nas.data.frame(t(sepal_means))\n\n\n\n\n\n  Sepal.Length Sepal.Width\n1        5.006       3.428\n\n\n\n\n\n\nTidy Way\n\nlibrary(tidyverse, quietly = TRUE)\n\n\niris |&gt;\n  filter(Species == \"setosa\") |&gt;\n  select(starts_with(\"Sepal\")) |&gt;\n  summarize_all(list(mean = mean))\n\n  Sepal.Length_mean Sepal.Width_mean\n1             5.006            3.428\n\n\n\n\n\n\n\nEm português…\nCom o dataset iris |&gt;\nFiltre pela species = setosa |&gt;\nSelecione colunas que começam com Sepal |&gt;\nCalcule as médias."
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#grammar-of-graphics",
+    "href": "slides/intro-tidy-revealjs.html#grammar-of-graphics",
+    "title": "Estatística no R",
+    "section": "Grammar of graphics",
+    "text": "Grammar of graphics"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#estrutura-básica-de-um-ggplot",
+    "href": "slides/intro-tidy-revealjs.html#estrutura-básica-de-um-ggplot",
+    "title": "Estatística no R",
+    "section": "Estrutura básica de um ggplot",
+    "text": "Estrutura básica de um ggplot\n\nlibrary(ggplot2)\n\nggplot(iris) +\n  aes(x = Species, y = Sepal.Length) +\n  geom_boxplot(aes(fill = Species)) +\n  scale_fill_manual(values = c(\"#f7a072\",\"#0fa3b1\",\"#b5e2fa\"))+\n  labs(title=\"Distribuição de Comprimento de Sépala\",\n       x = \"Espécies\",\n       y = \"Comprimento Sépala\") +\n  theme_classic(base_size = 14, base_family = \"DejaVu Sans\")"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#estrutura-básica-de-um-ggplot-1",
+    "href": "slides/intro-tidy-revealjs.html#estrutura-básica-de-um-ggplot-1",
+    "title": "Estatística no R",
+    "section": "Estrutura básica de um ggplot",
+    "text": "Estrutura básica de um ggplot\n\n\n\nlibrary(ggplot2)\n\nggplot(iris, aes(x=Sepal.Width)) +\n  geom_histogram() +\n  theme_bw(base_size = 22)\n\n\n\n\n\n\n\n\n\n\nlibrary(ggplot2)\nggplot(iris, aes(x=Sepal.Width)) +\n  geom_histogram(color = \"#32746d\",\n                 fill=\"#cad2c5\",\n                 alpha = 0.6) +\n  theme_bw(base_size = 22,\n           base_family = \"Ubuntu\")"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#visualizando-distribuições",
+    "href": "slides/intro-tidy-revealjs.html#visualizando-distribuições",
+    "title": "Estatística no R",
+    "section": "Visualizando distribuições",
+    "text": "Visualizando distribuições\n\n\n\nlibrary(ggplot2)\n\nggplot(iris, aes(x=Sepal.Width)) +\n  geom_histogram() +\n  theme_bw(base_size = 22)\n\n\n\n\n\n\n\n\n\n\nlibrary(ggplot2)\nggplot(iris, aes(x=Sepal.Width)) +\n  geom_histogram(color = \"#32746d\",\n                 fill=\"#cad2c5\",\n                 alpha = 0.6) +\n  theme_bw(base_size = 22,\n           base_family = \"Ubuntu\")"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#relacionamento-entre-variáveis",
+    "href": "slides/intro-tidy-revealjs.html#relacionamento-entre-variáveis",
+    "title": "Estatística no R",
+    "section": "Relacionamento entre variáveis",
+    "text": "Relacionamento entre variáveis\n\n\n\nlibrary(ggplot2)\n\nggplot(iris, \n  aes(x = Sepal.Length,Petal.Length)) +\n  geom_point() +\n  theme_classic(base_size = 24,\n                base_family = \"Ubuntu\")\n\n\n\n\n\n\n\n\n\n\nlibrary(ggplot2)\n\nggplot(iris,\n    aes(x = Sepal.Length,Petal.Length)) +\n  geom_point(aes(fill = Species),\n             size = 3,\n             shape = 21,\n             alpha = 0.75) +\n  geom_smooth(method = \"lm\",\n              linetype = 2,\n              linewidth = 0.5,\n              color = \"grey30\",\n              se = FALSE) +\n  theme_classic(base_size = 24,\n                base_family = \"Ubuntu\") +\n  theme(legend.position = \"top\",\n        legend.direction = \"horizontal\")"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#ciclo-de-uma-análise-de-dados",
+    "href": "slides/intro-tidy-revealjs.html#ciclo-de-uma-análise-de-dados",
+    "title": "Estatística no R",
+    "section": "Ciclo de uma Análise de Dados",
+    "text": "Ciclo de uma Análise de Dados"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#vantagens-em-aprender-r",
+    "href": "slides/intro-tidy-revealjs.html#vantagens-em-aprender-r",
+    "title": "Estatística no R",
+    "section": "Vantagens em aprender R",
+    "text": "Vantagens em aprender R\n\n\n\n\nIndependência pra rodar suas análises\nUm maior entendimento da sua própria pesquisa\nOportunidades de carreira\nReproducibilidade: caminha pra se tornar industry standard\n\n\n\n\n\n\n\n\ne principalmente…\nVocê não ter que sair correndo atrás de alguém faltando 15 dias pra sua qualificação/defesa querendo aprender R pra rodar tuas análises e estatística pra interpretar teus dados."
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#importando-dados",
+    "href": "slides/intro-tidy-revealjs.html#importando-dados",
+    "title": "Estatística no R",
+    "section": "Importando Dados",
+    "text": "Importando Dados\nOs tipos de arquivos mais comuns são as planilhas tipo excel (.xls, .xlsx) e arquivos de texto delimitados (.csv,.tsv,.txt).\nPlanilhas\nPacote readxl fornece uma maneira simples de importar arquivos tipo Excel.\n\nlibrary(readxl)\n\n\ndados &lt;- read_excel(\"data/dados_var.xlsx\")\n\nPor padrão read_excel() sempre importa a primeira folha de uma planilha.\nPosso listar as folhas dentro de uma planilha com excel_sheets() …\n\nexcel_sheets(\"data/dados_var.xlsx\")\n\n[1] \"Média--Variância-DP-CV\" \"Temperatura\"           \n\n\ne importar uma folha diferente pelo nome ou ordem com o argumento sheet\n\ndados_folha_2 &lt;- read_excel(\"data/dados_var.xlsx\", sheet = 2)"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#importando-dados-1",
+    "href": "slides/intro-tidy-revealjs.html#importando-dados-1",
+    "title": "Estatística no R",
+    "section": "Importando Dados",
+    "text": "Importando Dados\nPlanilhas\n\nhead(dados)\n\n# A tibble: 6 × 3\n  Tabela 2. Número de pacientes homens e mulheres e os motivos que…¹ ...2  ...3 \n  &lt;chr&gt;                                                              &lt;chr&gt; &lt;chr&gt;\n1 &lt;NA&gt;                                                               &lt;NA&gt;  &lt;NA&gt; \n2 Motivos                                                            Home… Mulh…\n3 Restauração                                                        20    35   \n4 Implante                                                           5     20   \n5 Limpeza                                                            15    30   \n6 Extração                                                           25    15   \n# ℹ abbreviated name:\n#   ¹​`Tabela 2. Número de pacientes homens e mulheres e os motivos que frequentam o consultório odontológico durante o período de um ano.`\n\nhead(dados_folha_2)\n\n# A tibble: 2 × 13\n  Temperatura     Segunda Terça Quarta Quinta Sexta Sábado Domingo ...9  MÉDIA\n  &lt;chr&gt;             &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt; &lt;lgl&gt; &lt;lgl&gt;\n1 Primeira semana      27    32     31     30    29     30      31 NA    NA   \n2 Segunda semana       25    30     32     27    29     28      32 NA    NA   \n# ℹ 3 more variables: VARIÂNCIA &lt;lgl&gt;, DP &lt;lgl&gt;, CV &lt;lgl&gt;"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#importando-dados-2",
+    "href": "slides/intro-tidy-revealjs.html#importando-dados-2",
+    "title": "Estatística no R",
+    "section": "Importando Dados",
+    "text": "Importando Dados\nPlanilhas\nPodemos definir além da folha um intervalo de células na mesma notação do Excel.\n\ndados &lt;- read_excel(\"data/dados_var.xlsx\", sheet = 1, range = \"A3:C9\")\n\ndados_folha_2 &lt;- read_excel(\"data/dados_var.xlsx\", sheet = 2, range = \"A1:H3\")\n\nAgora nossos dados foram importados corretamente \n\nhead(dados)\n\n# A tibble: 6 × 3\n  Motivos     Homens Mulheres\n  &lt;chr&gt;        &lt;dbl&gt;    &lt;dbl&gt;\n1 Restauração     20       35\n2 Implante         5       20\n3 Limpeza         15       30\n4 Extração        25       15\n5 Prótese         15       14\n6 Clareamento      1        4\n\nhead(dados_folha_2)\n\n# A tibble: 2 × 8\n  Temperatura     Segunda Terça Quarta Quinta Sexta Sábado Domingo\n  &lt;chr&gt;             &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;\n1 Primeira semana      27    32     31     30    29     30      31\n2 Segunda semana       25    30     32     27    29     28      32"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#importando-dados-3",
+    "href": "slides/intro-tidy-revealjs.html#importando-dados-3",
+    "title": "Estatística no R",
+    "section": "Importando Dados",
+    "text": "Importando Dados\nArquivos .csv\nSão arquivos separados por vírgula. O pacote readr possui duas funções para leitura de arquivos .csv.\n\n\n\npatos &lt;- read_csv(\"data/dadosPatos.csv\")\n\nhead(patos)\n\n# A tibble: 6 × 7\n  GG      PCC   CPT   APT   LPT   LCX   LSC\n  &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 NM     1850  189.  51.4 110.   66.4 105. \n2 NM     1645  175.  57.8 109.   62.1 107. \n3 NM     1935  175.  42.4 123.   55.9 119. \n4 NM     2015  173.  55.0 121.   58.4 115. \n5 NF     1145  139.  48.6  92.5  46.1  85.6\n6 NF     1100  151.  45.8  97.6  66.3  75.8\n\n\n\n\n\nEm alguns casos nosso arquivo pode não ter um cabeçalho com o nome das variáveis.\nO argumento header = FALSE garante que a primeira linha não seja lida como cabeçalhos neste caso.\n\nA função read_csv() faz a leitura de um arquivo padrão separado por vírgulas, entretanto, alguns programas exportam .csv com ponto e vírgula como separador.\nPra isso temos a função read_csv2(). O processo de importação é idêntico."
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#comandos-úteis",
+    "href": "slides/intro-tidy-revealjs.html#comandos-úteis",
+    "title": "Estatística no R",
+    "section": "Comandos úteis",
+    "text": "Comandos úteis\nstr() exibe a estrutura dos dados\n\nstr(patos)\n\nspc_tbl_ [16 × 7] (S3: spec_tbl_df/tbl_df/tbl/data.frame)\n $ GG : chr [1:16] \"NM\" \"NM\" \"NM\" \"NM\" ...\n $ PCC: num [1:16] 1850 1645 1935 2015 1145 ...\n $ CPT: num [1:16] 189 175 175 173 139 ...\n $ APT: num [1:16] 51.4 57.9 42.4 55 48.6 ...\n $ LPT: num [1:16] 110.3 108.6 123.4 121.2 92.5 ...\n $ LCX: num [1:16] 66.4 62.1 55.9 58.4 46.1 ...\n $ LSC: num [1:16] 105.4 106.9 118.9 114.6 85.6 ...\n - attr(*, \"spec\")=\n  .. cols(\n  ..   GG = col_character(),\n  ..   PCC = col_double(),\n  ..   CPT = col_double(),\n  ..   APT = col_double(),\n  ..   LPT = col_double(),\n  ..   LCX = col_double(),\n  ..   LSC = col_double()\n  .. )\n - attr(*, \"problems\")=&lt;externalptr&gt;"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#comandos-úteis-1",
+    "href": "slides/intro-tidy-revealjs.html#comandos-úteis-1",
+    "title": "Estatística no R",
+    "section": "Comandos úteis",
+    "text": "Comandos úteis\nglimpse() uma visão mais organizada da estrutura dos dados\n\nglimpse(patos)\n\nRows: 16\nColumns: 7\n$ GG  &lt;chr&gt; \"NM\", \"NM\", \"NM\", \"NM\", \"NF\", \"NF\", \"NF\", \"NF\", \"CM\", \"CM\", \"CM\", …\n$ PCC &lt;dbl&gt; 1850, 1645, 1935, 2015, 1145, 1100, 1270, 1170, 3085, 3075, 3075, …\n$ CPT &lt;dbl&gt; 189.14, 174.84, 175.24, 173.25, 138.89, 150.94, 144.80, 155.00, 24…\n$ APT &lt;dbl&gt; 51.41, 57.85, 42.36, 55.05, 48.57, 45.81, 39.79, 44.81, 70.03, 62.…\n$ LPT &lt;dbl&gt; 110.30, 108.57, 123.44, 121.24, 92.46, 97.60, 108.17, 92.15, 144.6…\n$ LCX &lt;dbl&gt; 66.41, 62.09, 55.90, 58.41, 46.06, 66.32, 45.39, 57.04, 62.30, 58.…\n$ LSC &lt;dbl&gt; 105.36, 106.89, 118.92, 114.60, 85.57, 75.83, 99.73, 82.29, 129.23…\n\n\nnames() lista o nome das colunas ou de itens de um objeto\n\nnames(patos)\n\n[1] \"GG\"  \"PCC\" \"CPT\" \"APT\" \"LPT\" \"LCX\" \"LSC\""
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#manipulando-dados",
+    "href": "slides/intro-tidy-revealjs.html#manipulando-dados",
+    "title": "Estatística no R",
+    "section": "Manipulando dados",
+    "text": "Manipulando dados\nA função select() do pacote dplyr nos permite selecionar colunas no dataset\n\nnames(patos)\n\n[1] \"GG\"  \"PCC\" \"CPT\" \"APT\" \"LPT\" \"LCX\" \"LSC\"\n\n\n\n\n\nselect(patos, GG,PCC,APT)\n\n# A tibble: 16 × 3\n   GG      PCC   APT\n   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;\n 1 NM     1850  51.4\n 2 NM     1645  57.8\n 3 NM     1935  42.4\n 4 NM     2015  55.0\n 5 NF     1145  48.6\n 6 NF     1100  45.8\n 7 NF     1270  39.8\n 8 NF     1170  44.8\n 9 CM     3085  70.0\n10 CM     3075  62.7\n11 CM     3075  56.0\n12 CM     2635  65.5\n13 CF     1710  61.4\n14 CF     1835  65.5\n15 CF     2035  56.4\n16 CF     1880  61.6\n\n\nO primeiro argumento é o nome do dataset, seguido das colunas.\n\n\nselect(patos, GG,APT:LSC)\n\n# A tibble: 16 × 5\n   GG      APT   LPT   LCX   LSC\n   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n 1 NM     51.4 110.   66.4 105. \n 2 NM     57.8 109.   62.1 107. \n 3 NM     42.4 123.   55.9 119. \n 4 NM     55.0 121.   58.4 115. \n 5 NF     48.6  92.5  46.1  85.6\n 6 NF     45.8  97.6  66.3  75.8\n 7 NF     39.8 108.   45.4  99.7\n 8 NF     44.8  92.2  57.0  82.3\n 9 CM     70.0 145.   62.3 129. \n10 CM     62.7 139.   58.8 126. \n11 CM     56.0 147.   73.7 131. \n12 CM     65.5 126.   61.4 135. \n13 CF     61.4 109.   61.5 110. \n14 CF     65.5 106.   46.7  99.7\n15 CF     56.4 108.   57.5 107. \n16 CF     61.6 117.   59.1 106. \n\n\nPodemos informar um intervalo de colunas com inicio:fim"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#manipulando-dados-1",
+    "href": "slides/intro-tidy-revealjs.html#manipulando-dados-1",
+    "title": "Estatística no R",
+    "section": "Manipulando dados",
+    "text": "Manipulando dados\n\nnames(iris)\n\n[1] \"Sepal.Length\" \"Sepal.Width\"  \"Petal.Length\" \"Petal.Width\"  \"Species\"     \n\n\nstarts_with() Permite selecionar colunas que começam com um termo\n\nselect(iris, starts_with(\"Petal\")) |&gt; head(3)\n\n  Petal.Length Petal.Width\n1          1.4         0.2\n2          1.4         0.2\n3          1.3         0.2\n\n\nends_with() Permite selecionar colunas que terminam com um termo\n\nselect(iris, ends_with(\"Length\")) |&gt; head(3)\n\n  Sepal.Length Petal.Length\n1          5.1          1.4\n2          4.9          1.4\n3          4.7          1.3\n\n\ncontains() Permite selecionar colunas que contenham o termo\n\nselect(iris, contains(\".\")) |&gt; head(3)\n\n  Sepal.Length Sepal.Width Petal.Length Petal.Width\n1          5.1         3.5          1.4         0.2\n2          4.9         3.0          1.4         0.2\n3          4.7         3.2          1.3         0.2"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#seleção-de-colunas",
+    "href": "slides/intro-tidy-revealjs.html#seleção-de-colunas",
+    "title": "Estatística no R",
+    "section": "Seleção de Colunas",
+    "text": "Seleção de Colunas\nA função select() do pacote dplyr nos permite selecionar colunas no dataset\n\nnames(patos)\n\n[1] \"GG\"  \"PCC\" \"CPT\" \"APT\" \"LPT\" \"LCX\" \"LSC\"\n\n\n\n\n\nselect(patos, GG,PCC,APT)\n\n# A tibble: 16 × 3\n   GG      PCC   APT\n   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;\n 1 NM     1850  51.4\n 2 NM     1645  57.8\n 3 NM     1935  42.4\n 4 NM     2015  55.0\n 5 NF     1145  48.6\n 6 NF     1100  45.8\n 7 NF     1270  39.8\n 8 NF     1170  44.8\n 9 CM     3085  70.0\n10 CM     3075  62.7\n11 CM     3075  56.0\n12 CM     2635  65.5\n13 CF     1710  61.4\n14 CF     1835  65.5\n15 CF     2035  56.4\n16 CF     1880  61.6\n\n\nO primeiro argumento é o nome do dataset, seguido das colunas.\n\n\nselect(patos, GG,APT:LSC)\n\n# A tibble: 16 × 5\n   GG      APT   LPT   LCX   LSC\n   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n 1 NM     51.4 110.   66.4 105. \n 2 NM     57.8 109.   62.1 107. \n 3 NM     42.4 123.   55.9 119. \n 4 NM     55.0 121.   58.4 115. \n 5 NF     48.6  92.5  46.1  85.6\n 6 NF     45.8  97.6  66.3  75.8\n 7 NF     39.8 108.   45.4  99.7\n 8 NF     44.8  92.2  57.0  82.3\n 9 CM     70.0 145.   62.3 129. \n10 CM     62.7 139.   58.8 126. \n11 CM     56.0 147.   73.7 131. \n12 CM     65.5 126.   61.4 135. \n13 CF     61.4 109.   61.5 110. \n14 CF     65.5 106.   46.7  99.7\n15 CF     56.4 108.   57.5 107. \n16 CF     61.6 117.   59.1 106. \n\n\nPodemos informar um intervalo de colunas com inicio:fim"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#auxiliares-de-seleção",
+    "href": "slides/intro-tidy-revealjs.html#auxiliares-de-seleção",
+    "title": "Estatística no R",
+    "section": "Auxiliares de Seleção",
+    "text": "Auxiliares de Seleção\n\nnames(iris)\n\n[1] \"Sepal.Length\" \"Sepal.Width\"  \"Petal.Length\" \"Petal.Width\"  \"Species\"     \n\n\nstarts_with() Permite selecionar colunas que começam com um termo\n\nselect(iris, starts_with(\"Petal\")) |&gt; head(3)\n\n  Petal.Length Petal.Width\n1          1.4         0.2\n2          1.4         0.2\n3          1.3         0.2\n\n\nends_with() Permite selecionar colunas que terminam com um termo\n\nselect(iris, ends_with(\"Length\")) |&gt; head(3)\n\n  Sepal.Length Petal.Length\n1          5.1          1.4\n2          4.9          1.4\n3          4.7          1.3\n\n\ncontains() Permite selecionar colunas que contenham o termo\n\nselect(iris, contains(\".\")) |&gt; head(3)\n\n  Sepal.Length Sepal.Width Petal.Length Petal.Width\n1          5.1         3.5          1.4         0.2\n2          4.9         3.0          1.4         0.2\n3          4.7         3.2          1.3         0.2"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#filtrando-colunas",
+    "href": "slides/intro-tidy-revealjs.html#filtrando-colunas",
+    "title": "Estatística no R",
+    "section": "Filtrando colunas",
+    "text": "Filtrando colunas\nA função filter() nos permite filtrar observações com base em condições.\nAs condições são avaliadas logicamente retornando em TRUE ou FALSE.\n\n\nOperadores:\nIgualdade: ==\nDiferença: !=\nComparação: &gt; &lt; &gt;= &lt;=\nLógicos:\n\nE (And) &\nOu (or) |\n\n\n\nfilter(iris,\n       Species == \"setosa\",\n       Petal.Length &gt; 1.5) |&gt;\n       head(3)\n\n  Sepal.Length Sepal.Width Petal.Length Petal.Width Species\n1          5.4         3.9          1.7         0.4  setosa\n2          4.8         3.4          1.6         0.2  setosa\n3          5.7         3.8          1.7         0.3  setosa\n\n\n\nfilter(iris, Species != \"versicolor\", \n    Sepal.Length &gt;= 5 &  Sepal.Length &lt; 5.3 ) |&gt;\n    head(3)\n\n  Sepal.Length Sepal.Width Petal.Length Petal.Width Species\n1          5.1         3.5          1.4         0.2  setosa\n2          5.0         3.6          1.4         0.2  setosa\n3          5.0         3.4          1.5         0.2  setosa"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#transformando-e-criando-variáveis",
+    "href": "slides/intro-tidy-revealjs.html#transformando-e-criando-variáveis",
+    "title": "Estatística no R",
+    "section": "Transformando e Criando variáveis",
+    "text": "Transformando e Criando variáveis\nO comando mutate() nos permite criar novas variáveis ou alterar as existentes.\n\nmutate(patos, PCC_KG = PCC/1000) |&gt;\n  head()\n\n# A tibble: 6 × 8\n  GG      PCC   CPT   APT   LPT   LCX   LSC PCC_KG\n  &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;\n1 NM     1850  189.  51.4 110.   66.4 105.    1.85\n2 NM     1645  175.  57.8 109.   62.1 107.    1.64\n3 NM     1935  175.  42.4 123.   55.9 119.    1.94\n4 NM     2015  173.  55.0 121.   58.4 115.    2.02\n5 NF     1145  139.  48.6  92.5  46.1  85.6   1.14\n6 NF     1100  151.  45.8  97.6  66.3  75.8   1.1 \n\n\nPor padrão a nova variável é adicionada ao final do dataset, mas esse comportamento pode ser modificado usando os argumentos .before ou .after e explicitando antes ou depois de qual coluna desejamos nossa nova variável."
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#operador-pipe",
+    "href": "slides/intro-tidy-revealjs.html#operador-pipe",
+    "title": "Estatística no R",
+    "section": "Operador pipe",
+    "text": "Operador pipe\nO operador |&gt; (pipe) liga operações em um fluxo contínuo da esquerda para a direita.\nO pipe original %&gt;% surgiu com o tidyverse, seu impacto foi tão grande na linguagem que há alguns anos atrás os desenvolvedores do R incluíram um operador nativo na linguagem.\nUtilizando o pipe podemos realizar uma sequência de inúmeras operações evitando a criação de objetos intermediários para armazenar os resultados.\nNo fluxo o objeto à esquerda será o alvo da operação da direita.\nNum fluxo com o pipe o operador sempre deve aparecer ao final da linha em caso de quebra:\n\niris |&gt;\n  head(3)\n\n  Sepal.Length Sepal.Width Petal.Length Petal.Width Species\n1          5.1         3.5          1.4         0.2  setosa\n2          4.9         3.0          1.4         0.2  setosa\n3          4.7         3.2          1.3         0.2  setosa\n\n\nIsto aqui causa um erro:\n\niris\n|&gt; head(3)\n\n\nError: unexpected '|&gt;' in \"|&gt;\""
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#medidas-de-posição",
+    "href": "slides/intro-tidy-revealjs.html#medidas-de-posição",
+    "title": "Estatística no R",
+    "section": "Medidas de Posição",
+    "text": "Medidas de Posição\n\ndados &lt;- read_excel(\"data/dados_var.xlsx\", sheet = 1, range = \"A3:C9\")\n\nA função summarise() do pacote dplyr nos permite gerar estatísticas descritivas\n\n\n\ndados |&gt;\n  summarise(Media_H = mean(Homens),\n            Media_M = mean(Mulheres),\n            Mediana_H = median(Homens),\n            Mediana_M = median(Mulheres))\n\n# A tibble: 1 × 4\n  Media_H Media_M Mediana_H Mediana_M\n    &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;\n1    13.5    19.7        15      17.5\n\n\n\n\ndados |&gt;\n  summarise(across(Homens:Mulheres,\n              list(media = mean,\n              mediana = median),\n              .names = \"{.col}_{.fn}\" ))\n\n# A tibble: 1 × 4\n  Homens_media Homens_mediana Mulheres_media Mulheres_mediana\n         &lt;dbl&gt;          &lt;dbl&gt;          &lt;dbl&gt;            &lt;dbl&gt;\n1         13.5             15           19.7             17.5"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#medidas-de-dispersão",
+    "href": "slides/intro-tidy-revealjs.html#medidas-de-dispersão",
+    "title": "Estatística no R",
+    "section": "Medidas de Dispersão",
+    "text": "Medidas de Dispersão\n\ndados |&gt;\n  summarise(across(Homens,\n              list(min = min,\n              max = max,\n              range = range,\n              dp = sd,\n              var = var),\n              .names = \"{.col}_{.fn}\" ))\n\n# A tibble: 2 × 5\n  Homens_min Homens_max Homens_range Homens_dp Homens_var\n       &lt;dbl&gt;      &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;\n1          1         25            1      9.03       81.5\n2          1         25           25      9.03       81.5\n\n\n\ndados |&gt;\n  summarise(across(Homens:Mulheres,\n              list(quartis = quantile),\n              .names = \"{.col}_{.fn}\" ))\n\n# A tibble: 5 × 2\n  Homens_quartis Mulheres_quartis\n           &lt;dbl&gt;            &lt;dbl&gt;\n1            1                4  \n2            7.5             14.2\n3           15               17.5\n4           18.8             27.5\n5           25               35"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#summary",
+    "href": "slides/intro-tidy-revealjs.html#summary",
+    "title": "Estatística no R",
+    "section": "summary()",
+    "text": "summary()\nA função nativa summary() nos fornece um rol de estatísticas descritivas\n\ndados |&gt;\n  summary()\n\n   Motivos              Homens         Mulheres    \n Length:6           Min.   : 1.00   Min.   : 4.00  \n Class :character   1st Qu.: 7.50   1st Qu.:14.25  \n Mode  :character   Median :15.00   Median :17.50  \n                    Mean   :13.50   Mean   :19.67  \n                    3rd Qu.:18.75   3rd Qu.:27.50  \n                    Max.   :25.00   Max.   :35.00  \n\n\nEsta função embora limitada no rol de estatísticas fornecidas, é muito útil para um diagnóstico rápido dos dados. Ela nos permite avaliar o número de dados perdidos (NA) bem como valores fora do intervalo esperado, nossos outliers."
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#descritivas-segmentadas",
+    "href": "slides/intro-tidy-revealjs.html#descritivas-segmentadas",
+    "title": "Estatística no R",
+    "section": "Descritivas segmentadas",
+    "text": "Descritivas segmentadas\nNa grande maioria das vezes precisamos calcular estatísticas descritivas agrupadas por níveis de variáveis categóricas. O pacote rstatix é muito eficiente nessa tarefa.\n\nlibrary(rstatix)\n\niris |&gt;\n  group_by(Species) |&gt;\n  get_summary_stats(everything(),\n                    type = \"mean_sd\")\n\n# A tibble: 12 × 5\n   Species    variable         n  mean    sd\n   &lt;fct&gt;      &lt;fct&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n 1 setosa     Sepal.Length    50 5.01  0.352\n 2 setosa     Sepal.Width     50 3.43  0.379\n 3 setosa     Petal.Length    50 1.46  0.174\n 4 setosa     Petal.Width     50 0.246 0.105\n 5 versicolor Sepal.Length    50 5.94  0.516\n 6 versicolor Sepal.Width     50 2.77  0.314\n 7 versicolor Petal.Length    50 4.26  0.47 \n 8 versicolor Petal.Width     50 1.33  0.198\n 9 virginica  Sepal.Length    50 6.59  0.636\n10 virginica  Sepal.Width     50 2.97  0.322\n11 virginica  Petal.Length    50 5.55  0.552\n12 virginica  Petal.Width     50 2.03  0.275\n\n\nA função group_by() do dplyr agrupa o nossos dados pelos níveis do fator Species, permitindo que as estatísticas sejam calculadas segmentadas e não como um todo para cada variável.\nVariando o argumento type temos acesso a diversas estatísticas. Experimente utilizar type = \"full\"."
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#pacotes-necessários",
+    "href": "slides/intro-tidy-revealjs.html#pacotes-necessários",
+    "title": "Estatística no R",
+    "section": "Pacotes necessários",
+    "text": "Pacotes necessários\nNesta sessão utilizaremos alguns pacotes auxiliares, caso não tenham instalado ainda:\n\ninstall.packages(c(`car`, `tidyverse`, `ggpubr`, `agricolae`, `devtools`))\n\nUtilizaremos também dados do pacote ecodados, vocês podem fazer a instalação rodando devtools::install_github(\"paternogbc/ecodados\").\nEste pacote é parte do excelente livro Análises Ecológicas no R de Da Silva et al. (2022) e é simplesmente um dos melhores livros dedicados a ciência de dados para Ecologia, disponível gratuitamente na internet. Obrigado aos autores mais uma vez!"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#teste-large-t",
+    "href": "slides/intro-tidy-revealjs.html#teste-large-t",
+    "title": "Estatística no R",
+    "section": "Teste \\(\\large t\\)",
+    "text": "Teste \\(\\large t\\)\n\n\n\n\nDA SILVA, F. R. et al. Análises ecológicas no r. [s.l.] Clube de Autores, 2022."
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#teste-large-t-para-duas-amostras-independentes",
+    "href": "slides/intro-tidy-revealjs.html#teste-large-t-para-duas-amostras-independentes",
+    "title": "Estatística no R",
+    "section": "Teste \\(\\large t\\) para duas amostras independentes",
+    "text": "Teste \\(\\large t\\) para duas amostras independentes\nUm teste t baseado em duas amostras é usado para testar a diferença entre duas médias populacionais \\(\\mu_1\\) e \\(\\mu_2\\) quando \\(\\sigma_1\\) e \\(\\sigma_2\\) são desconhecidos, e portanto usamos os desvios amostrais.\n\\[t = \\frac{\\bar{x_1}-\\bar{x_2}}{s}\\sqrt{\\frac{n_1\\times n_2}{n_1 + n_2}}\\]\nPremissas do Teste \\(t\\):\n\nAs amostras devem ser independentes\nAs unidades amostrais são selecionadas aleatoriamente\nDistribuição normal (gaussiana) dos resíduos\nHomogeneidade da variância"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#referências",
+    "href": "slides/intro-tidy-revealjs.html#referências",
+    "title": "Estatística no R",
+    "section": "Referências",
+    "text": "Referências\n\n\n\n\nDA SILVA, F. R. et al. Análises ecológicas no r. [s.l.] Clube de Autores, 2022.\n\n\nLARSON, R.; FARBER, B. Estatı́stica aplicada: Retratando o mundo. [s.l.] Bookman Editora, 2023."
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#teste-large-t-para-duas-amostras-independentes-1",
+    "href": "slides/intro-tidy-revealjs.html#teste-large-t-para-duas-amostras-independentes-1",
+    "title": "Estatística no R",
+    "section": "Teste \\(\\large t\\) para duas amostras independentes",
+    "text": "Teste \\(\\large t\\) para duas amostras independentes\nExemplo\nUsaremos os dados de comprimento rostro-cloacal (CRC) de machos de anfíbios da espécie Physalaemus nattereri (Anura:Leptodactylidae) amostrados em diferentes estações do ano.\nPergunta: Existe diferença na média co CRC em P. nattereri entre as estações?\nHipótese Nula: As médias de CRC são iguais.\nHipótese Alternativa: As médias de CRC são diferentes entre as estações.\nAntes de realizarmos o teste \\(t\\), precisamos nos certificar de que nossos dados atendem as premissas.\n\nlibrary(tidyverse, quietly = TRUE)\n\ncrc_phy_nat &lt;- ecodados::teste_t_var_igual\n\nglimpse(crc_phy_nat)\n\nRows: 51\nColumns: 2\n$ CRC     &lt;dbl&gt; 3.82, 3.57, 3.67, 3.72, 3.75, 3.83, 3.85, 3.87, 3.93, 4.01, 4.…\n$ Estacao &lt;chr&gt; \"Chuvosa\", \"Chuvosa\", \"Chuvosa\", \"Chuvosa\", \"Chuvosa\", \"Chuvos…"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#teste-large-t-para-duas-amostras-independentes-2",
+    "href": "slides/intro-tidy-revealjs.html#teste-large-t-para-duas-amostras-independentes-2",
+    "title": "Estatística no R",
+    "section": "Teste \\(\\large t\\) para duas amostras independentes",
+    "text": "Teste \\(\\large t\\) para duas amostras independentes\nChecando premissas\nQQ Plot\n\nmod &lt;- lm(CRC ~ Estacao, data = crc_phy_nat)\n\n(qq &lt;- car::qqPlot(mod))\n\n\n[1] 22 26"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#teste-large-t-para-duas-amostras-independentes-3",
+    "href": "slides/intro-tidy-revealjs.html#teste-large-t-para-duas-amostras-independentes-3",
+    "title": "Estatística no R",
+    "section": "Teste \\(\\large t\\) para duas amostras independentes",
+    "text": "Teste \\(\\large t\\) para duas amostras independentes\nChecando premissas\nPodemos ainda utilizar o teste de Shapiro-Wilk e avaliar a normalidade\n\nshapiro.test(residuals(mod))\n\n\n    Shapiro-Wilk normality test\n\ndata:  residuals(mod)\nW = 0.98307, p-value = 0.6746\n\n\ne a heterocedasticidade (homogeneidade) da variância com o teste de Levene\n\ncar::leveneTest(mod)\n\nLevene's Test for Homogeneity of Variance (center = median)\n      Df F value Pr(&gt;F)\ngroup  1  1.1677 0.2852\n      49"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#teste-large-t-para-duas-amostras-independentes-4",
+    "href": "slides/intro-tidy-revealjs.html#teste-large-t-para-duas-amostras-independentes-4",
+    "title": "Estatística no R",
+    "section": "Teste \\(\\large t\\) para duas amostras independentes",
+    "text": "Teste \\(\\large t\\) para duas amostras independentes\nUma vez satisfeitas as premissas, podemos prosseguir e realizar o teste \\(t\\):\n\n\n\nteste_T &lt;- t.test(CRC ~ Estacao,\n                  data = crc_phy_nat,\n                  var.equal = TRUE)\n\nteste_T\n\n\n    Two Sample t-test\n\ndata:  CRC by Estacao\nt = 4.1524, df = 49, p-value = 0.000131\nalternative hypothesis: true difference in means between group Chuvosa and group Seca is not equal to 0\n95 percent confidence interval:\n 0.2242132 0.6447619\nsample estimates:\nmean in group Chuvosa    mean in group Seca \n             3.695357              3.260870 \n\n\n\n\n\nAo apresentar os seu resultados inclua:\n\nA estatística \\(t\\): \\(t = 4.1524\\)\nO p-valor: \\(p-value = 0.000131\\)\nGraus de Liberdade: \\(df = 49\\)\nDiferenca entre as médias: \\(0.434\\)"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#teste-large-t-para-duas-amostras-independentes-5",
+    "href": "slides/intro-tidy-revealjs.html#teste-large-t-para-duas-amostras-independentes-5",
+    "title": "Estatística no R",
+    "section": "Teste \\(\\large t\\) para duas amostras independentes",
+    "text": "Teste \\(\\large t\\) para duas amostras independentes\n\n\nCode\nextrafont::loadfonts(quiet = TRUE)\n\nggplot(data = crc_phy_nat, aes(x = Estacao, y = CRC, color = Estacao)) + \n    labs(x = \"Estações\", \n         y = expression(paste(\"CRC (mm) - \", italic(\"P. nattereri\")))) +\n    geom_boxplot(fill = c(\"#606c38\", \"#dda15e\"), color = \"black\", \n                 outlier.shape = NA, width = .3) +\n    geom_jitter(shape = 21, position = position_jitter(0.1), \n                cex = 3, alpha = 0.7, stroke = .8,\n                fill = \"grey60\") +\n    scale_color_manual(values = c(\"black\", \"black\")) +\n    annotate(\"text\",\n             label =\"t = 4.1524\",\n             size = 4,\n             x = \"Seca\",\n             y = 4.6,\n             hjust = 0,\n             family = \"Ubuntu\") +\n    annotate(\"text\",\n               label =\"DF = 49\",\n               size = 4,\n               x = \"Seca\",\n               y = 4.5,\n               hjust = 0,\n               family = \"Ubuntu\") +\n    annotate(\"text\",\n               label =\"Estimate: 0.434\",\n               size = 4,\n               x = \"Seca\",\n               y = 4.4,\n               hjust = 0,\n               family = \"Ubuntu\") +\n    annotate(\"text\",\n               label =\"p-value = 0.000131\",\n               size = 4,\n               x = \"Seca\",\n               y = 4.3,\n               hjust = 0,\n               family = \"Ubuntu\") +\n    theme_classic(base_size = 14,\n                  base_family = \"Ubuntu\") +\n    theme(legend.position = \"none\")"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#teste-t-pareado",
+    "href": "slides/intro-tidy-revealjs.html#teste-t-pareado",
+    "title": "Estatística no R",
+    "section": "Teste \\(t\\) pareado",
+    "text": "Teste \\(t\\) pareado\nNo teste \\(t\\) pareado temos duas observações da mesma unidade amostral subetida ao tratamento/efeito de interesse. O nosso objetivo é determinar se a diferença entre observações é zero.\n\n\n\nAdaptado de Larson and Farber (2023)\n\n\nPremissas:\n\nAs unidades amostrais são selecionadas aleatoriamente\nAs observações não são independentes\nDistribuição normal (gaussiana) dos valores da diferença para cada par"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#teste-t-pareado-1",
+    "href": "slides/intro-tidy-revealjs.html#teste-t-pareado-1",
+    "title": "Estatística no R",
+    "section": "Teste \\(t\\) pareado",
+    "text": "Teste \\(t\\) pareado\nExemplo\nNovamente vamos utilizar dados do pacote ecodados seguindo o exemplo disponível em Da Silva et al. (2022). Vamos utilizar dados de riqueza de espécies de artrópodes em uma área antes e depois de um processo de queimada.\nPergunta: A riqueza de espécies de artrópodes é afetada pelas queimadas?\nHipótese Nula: A riqueza de espécies é igual antes e depois.\n\nart_rich &lt;- ecodados::teste_t_pareado\n\nart_rich |&gt;\n  glimpse()\n\nRows: 54\nColumns: 3\n$ Areas   &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,…\n$ Riqueza &lt;int&gt; 92, 74, 96, 89, 76, 80, 62, 100, 50, 137, 54, 89, 116, 66, 79,…\n$ Estado  &lt;chr&gt; \"Pre-Queimada\", \"Pre-Queimada\", \"Pre-Queimada\", \"Pre-Queimada\"…\n\nart_rich |&gt;\n  count(Estado)\n\n        Estado  n\n1 Pos-Queimada 27\n2 Pre-Queimada 27"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#teste-t-pareado-2",
+    "href": "slides/intro-tidy-revealjs.html#teste-t-pareado-2",
+    "title": "Estatística no R",
+    "section": "Teste \\(t\\) pareado",
+    "text": "Teste \\(t\\) pareado\nExemplo\nA função é a mesma t.test(), porém precisamos informar que agora estamos avaliando dados pareados, isso é feito pelo argumento paired = TRUE. Uma outra diferença é que para o teste pareado, não podemos utilizar a notação de fórmula, precisamos declarar explicitamente nossos dois vetores de observações. O restante da análise segue a anterior.\n\nrich_antes &lt;- art_rich |&gt;\n  filter(Estado == \"Pre-Queimada\") |&gt;\n  pull(Riqueza)\n\nrich_depois &lt;- art_rich |&gt;\n  filter(Estado == \"Pos-Queimada\") |&gt;\n  pull(Riqueza)\n\npar_T &lt;- t.test(x = rich_antes, y = rich_depois, paired = TRUE)\n\npar_T\n\n\n    Paired t-test\n\ndata:  rich_antes and rich_depois\nt = 7.5788, df = 26, p-value = 4.803e-08\nalternative hypothesis: true mean difference is not equal to 0\n95 percent confidence interval:\n 32.47117 56.63994\nsample estimates:\nmean difference \n       44.55556"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#teste-t-pareado-3",
+    "href": "slides/intro-tidy-revealjs.html#teste-t-pareado-3",
+    "title": "Estatística no R",
+    "section": "Teste \\(t\\) pareado",
+    "text": "Teste \\(t\\) pareado\nExemplo\nComo no exemplo anterior podemos apresentar nossos resultados de maneira gráfica. A função ggpaired() do pacote ggpubr nos fornece uma maneira bastante didática de apresentar nossos resultados.\n\n\n\nggpubr::ggpaired(art_rich, x = \"Estado\", y = \"Riqueza\",\ncolor = \"Estado\", line.color = \"gray\", line.size = 0.8,\npalette = c(\"#606c38\", \"#dda15e\"), width = 0.5,\npoint.size = 4, xlab = \"Estado das localidades\",\nylab = \"Riqueza de Espécies\") +\nexpand_limits(y = c(0, 150)) +\ntheme_classic(base_size = 14, base_family = \"Ubuntu\") +\n  theme(legend.direction = \"horizontal\",\n        legend.position = \"top\")\n\n\n\n\n\n\n\n\n\n\n\nCódigo adaptado de Da Silva et al. (2022)"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#correlação",
+    "href": "slides/intro-tidy-revealjs.html#correlação",
+    "title": "Estatística no R",
+    "section": "Correlação",
+    "text": "Correlação\n\nUma correlação é uma relação entre duas variáveis. Os dados podem ser representados por pares ordenados (x, y), sendo x a variável independente (ou explanatória) e y a variável dependente (ou resposta). (Larson and Farber, 2023)\n\n\n\n\ndados_pib_co2 &lt;- tibble(\n  PIB = c(1.7, 1.2, 2.5, 2.8, 3.6, 2.2, 0.8, 1.5, 2.4, 5.9),\n  CO2 = c(552.6, 462.3, 475.4, 374.3, 748.5, 400.9, 253.0, 318.6, 496.8, 1180.6)\n)\n\ndados_pib_co2\n\n# A tibble: 10 × 2\n     PIB   CO2\n   &lt;dbl&gt; &lt;dbl&gt;\n 1   1.7  553.\n 2   1.2  462.\n 3   2.5  475.\n 4   2.8  374.\n 5   3.6  748.\n 6   2.2  401.\n 7   0.8  253 \n 8   1.5  319.\n 9   2.4  497.\n10   5.9 1181.\n\n\n\n\n\nCode\nlibrary(ggtext)\n\nggplot(dados_pib_co2,\n       aes(x = PIB, y = CO2)) +\n  geom_point(shape = 21, size =4, fill = \"grey70\", color = \"black\")+\n  theme_bw(base_size = 14, base_family = \"Ubuntu\") +\n  scale_x_continuous(breaks = 1:6) +\n  scale_y_continuous(breaks = seq(0,1200,by = 200))+\n  labs(title = \"Relação entre PIB e a quantidade de CO2 emitida,\n       para amostra com 10 países.\",\n       x = \"PIB &lt;br&gt; (em trilhões de dólares)\",\n       y = \"CO&lt;sub&gt;2&lt;/sub&gt; &lt;br&gt; (em milhões de toneladas métricas)\") +\n  theme(axis.title = element_markdown())"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#correlação-1",
+    "href": "slides/intro-tidy-revealjs.html#correlação-1",
+    "title": "Estatística no R",
+    "section": "Correlação",
+    "text": "Correlação\n\n\nCode\narbustos &lt;- ecodados::correlacao\n\nggplot(data = arbustos, aes(x = Tamanho_raiz,\ny = Tamanho_tronco)) +\nlabs(x = \"Tamanho da raiz (m)\", y = \"Altura do tronco (m)\") +\n  geom_smooth(method = lm, se = FALSE, color = \"#3e5c76\",\nlinetype = \"solid\", linewidth=0.7) +\ngeom_point(size = 4, shape = 21, fill = \"#dc2f02\", alpha = 0.8) +\nannotate(\"text\",\n         x = 14, y = 14,\n         label = \"r = 0.89, P &lt; 0.001\",\n         color = \"black\", size = 5,\n         family = \"Ubuntu\") +\n\ntheme_classic(base_size = 14, base_family = \"Ubuntu\") +\ntheme(legend.position = \"none\")\n\n\n\n\nFigure 1: Adaptado de Da Silva et al. (2022)"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#correlação-2",
+    "href": "slides/intro-tidy-revealjs.html#correlação-2",
+    "title": "Estatística no R",
+    "section": "Correlação",
+    "text": "Correlação\n\n\n\n\n\n\n\nFigure 1: Adaptado de Da Silva et al. (2022)\n\n\n\n\n\n\nListing 1: Reta de Regressão"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#correlação-de-pearson",
+    "href": "slides/intro-tidy-revealjs.html#correlação-de-pearson",
+    "title": "Estatística no R",
+    "section": "Correlação de Pearson",
+    "text": "Correlação de Pearson\nMais uma vez usaremos dados do ecodados de (Da Silva et al., 2022). Neste exemplo, avaliaremos a correlação entre a altura do tronco e o tamanho da raiz medidos em 35 indivíduos de uma espécie vegetal arbustiva.\n\narbustos &lt;- ecodados::correlacao\narbustos |&gt; glimpse()\n\nRows: 35\nColumns: 2\n$ Tamanho_raiz   &lt;dbl&gt; 10.177049, 6.622634, 7.773629, 11.055257, 4.487274, 11.…\n$ Tamanho_tronco &lt;dbl&gt; 19.54383, 17.13558, 19.50681, 21.57085, 13.22763, 21.62…\n\n\nUtilizaremos a função cor.test() explicitando que queremos o coeficiente de Pearson no argumento method=\"pearson\".\n\ncor.test(arbustos$Tamanho_raiz,\n         arbustos$Tamanho_tronco,\n         method = \"pearson\")\n\n\n    Pearson's product-moment correlation\n\ndata:  arbustos$Tamanho_raiz and arbustos$Tamanho_tronco\nt = 11.49, df = 33, p-value = 4.474e-13\nalternative hypothesis: true correlation is not equal to 0\n95 percent confidence interval:\n 0.7995083 0.9457816\nsample estimates:\n      cor \n0.8944449"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#regressão-linear-simples",
+    "href": "slides/intro-tidy-revealjs.html#regressão-linear-simples",
+    "title": "Estatística no R",
+    "section": "Regressão Linear Simples",
+    "text": "Regressão Linear Simples\nA regressão linear simples é usada para analisar a relação entre uma variável preditora (plotada no eixo-X) e uma variável resposta (plotada no eixo-Y). As duas variáveis devem ser contínuas. Diferente das correlações, a regressão assume uma relação de causa e efeito entre as variáveis. O valor da variável preditora (X) causa, direta ou indiretamente, o valor da variável resposta (Y). Assim, Y é uma função linear de X (Da Silva et al., 2022).\n\\[\\Large y = \\beta_0+\\beta_1 X_i + \\varepsilon_i\\] Este é o modelo matemático que define uma Regressão Linear Simples, onde:\n\n\\(\\large y\\) é o nosso vetor de observações da nossa variável resposta\n\\(\\large \\beta_0\\) é o intercepto (intercept) que representa o valor da função quando \\(X = 0\\)\n\\(\\large \\beta_1\\) é a inclinação (slope) que mede a mudança na variável \\(y\\) para cada mudança de unidade da variável \\(X\\)\n\\(\\large \\varepsilon_i\\) é no nosso vetor de erros aleatórios ou resíduos, é toda variabilidade em \\(\\large y\\) que não pode ser explicada por \\(X\\)"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#regressão-linear-simples-1",
+    "href": "slides/intro-tidy-revealjs.html#regressão-linear-simples-1",
+    "title": "Estatística no R",
+    "section": "Regressão Linear Simples",
+    "text": "Regressão Linear Simples\nA regressão linear também possui premissas:\n\nAs amostras devem ser independentes\nAs unidades amostrais são selecionadas aleatoriamente\nDistribuição normal (gaussiana) dos resíduos\nHomogeneidade da variância dos resíduos"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#regressão-linear-simples-2",
+    "href": "slides/intro-tidy-revealjs.html#regressão-linear-simples-2",
+    "title": "Estatística no R",
+    "section": "Regressão Linear Simples",
+    "text": "Regressão Linear Simples\nExemplo\nAvaliaremos a relação entre o gradiente de temperatura média anual (°C) e o tamanho médio do comprimento rostro-cloacal (CRC em mm) de populações de Dendropsophus minutus (Anura:Hylidae) amostradas em 109 localidades no Brasil.\n\nden_min &lt;- ecodados::regressoes\n\nden_min |&gt; glimpse()\n\nRows: 109\nColumns: 4\n$ Municipio    &lt;chr&gt; \"Acorizal\", \"Alpinopolis\", \"Alto_Paraiso\", \"Americana\", \"…\n$ CRC          &lt;dbl&gt; 22.98816, 22.91788, 21.97629, 23.32453, 22.83651, 20.8698…\n$ Temperatura  &lt;dbl&gt; 24.13000, 20.09417, 21.86167, 20.28333, 25.47333, 20.1216…\n$ Precipitacao &lt;dbl&gt; 1228.2, 1487.6, 1812.4, 1266.2, 2154.0, 1269.2, 1940.6, 1…\n\n\nPergunta: A temperatura afeta o tamanho do CRC de populações de Dendropsophus minutus?\n\nmod_rls &lt;- lm(CRC ~ Temperatura, data = den_min)\n\nUtilizando a função plot() podemos fazer a inspeção visual dos resíduos e checar a normalidade e a homogeneidade da variância."
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#regressão-linear-simples-3",
+    "href": "slides/intro-tidy-revealjs.html#regressão-linear-simples-3",
+    "title": "Estatística no R",
+    "section": "Regressão Linear Simples",
+    "text": "Regressão Linear Simples\n\npar(mfrow = c(2, 2), oma = c(0, 0, 2, 0))\nplot(mod_rls)"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#regressão-linear-simples-4",
+    "href": "slides/intro-tidy-revealjs.html#regressão-linear-simples-4",
+    "title": "Estatística no R",
+    "section": "Regressão Linear Simples",
+    "text": "Regressão Linear Simples\nConfirmado que nossos dados atendem as premissas de normalidade e heterocedasticidade dos resíduos, podemos agora ver os resultados da nossa regressão usando as funções anova() e summary(). Falaremos de ANOVA (Análise de Variância) na próxima sessão, mas a função anova() quando fornecida um único modelo nos retorna a famosa Tabela da Anova, que nos mostra se os termos do nosso modelo foram significativos.\n\nanova(mod_rls)\n\nAnalysis of Variance Table\n\nResponse: CRC\n             Df  Sum Sq Mean Sq F value    Pr(&gt;F)    \nTemperatura   1  80.931  80.931   38.92 9.011e-09 ***\nResiduals   107 222.500   2.079                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#regressão-linear-simples-5",
+    "href": "slides/intro-tidy-revealjs.html#regressão-linear-simples-5",
+    "title": "Estatística no R",
+    "section": "Regressão Linear Simples",
+    "text": "Regressão Linear Simples\nA nossa velha amiga summary() nos fornece também a significância dos termos do modelo, e ainda os valores dos coeficientes, e do coeficiente de determinação (\\(R^2\\)), que indica o quanto da variação em \\(y\\) é explicada pela nossa variável \\(X\\).\n\nsummary(mod_rls)\n\n\nCall:\nlm(formula = CRC ~ Temperatura, data = den_min)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-3.4535 -0.7784  0.0888  0.9168  3.1868 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) 16.23467    0.91368  17.768  &lt; 2e-16 ***\nTemperatura  0.26905    0.04313   6.239 9.01e-09 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.442 on 107 degrees of freedom\nMultiple R-squared:  0.2667,    Adjusted R-squared:  0.2599 \nF-statistic: 38.92 on 1 and 107 DF,  p-value: 9.011e-09"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#regressão-linear-simples-6",
+    "href": "slides/intro-tidy-revealjs.html#regressão-linear-simples-6",
+    "title": "Estatística no R",
+    "section": "Regressão Linear Simples",
+    "text": "Regressão Linear Simples\nPodemos apresentar nossos resultados por meio de um gráfico de dispersão como vimos anteriormente.\n\nggplot(data = den_min, aes(x = Temperatura, y = CRC)) +\nlabs(x = \"Temperatura média anual (°C)\",\ny = \"Comprimento rostro-cloacal (mm)\") +\ngeom_smooth(method = lm, se = FALSE,\n            color = \"#413c58\", alpha = 0.8) +\ngeom_point(size = 4, shape = 21,\n           fill = \"#988683\", color=\"#5c5c5e\", alpha = 0.8) +\ntheme_classic(base_size = 14, base_family = \"Ubuntu\") +\ntheme(legend.position = \"none\")"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#regressão-linear-simples-7",
+    "href": "slides/intro-tidy-revealjs.html#regressão-linear-simples-7",
+    "title": "Estatística no R",
+    "section": "Regressão Linear Simples",
+    "text": "Regressão Linear Simples\nInterpretando os resultados\nAqui vale comentar sobre as diferentes hipóteses que são testadas em cada função.\nA função summary() realiza um teste \\(t\\) para cada um dos betas do modelo, no nosso caso de uma regressão linear simples o intercepto e o slope. A hipótese nula neste caso é:\n\\[H_0: \\beta_i = 0 \\quad versus \\quad H_a: \\beta_i \\neq 0\\]\nOu seja, o teste avalia se a variável explicativa \\(X\\) tem efeito significativo sobre \\(y\\) controlando pelas outras variáveis do modelo."
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#regressão-linear-simples-8",
+    "href": "slides/intro-tidy-revealjs.html#regressão-linear-simples-8",
+    "title": "Estatística no R",
+    "section": "Regressão Linear Simples",
+    "text": "Regressão Linear Simples\nInterpretando os resultados\nJá a função anova() está fazendo uma análise de variância (ANOVA) que testa a seguinte hipótese nula global de que todos os coeficientes, exceto o intercepto, são iguais a zero:\n\\[H_0: \\beta_1 = \\beta_2 = \\cdots \\beta_n =  0\\]\nMas como falamos de uma regressão linear simples, testamos somente o nosso \\(\\beta_1\\).\nOu seja, o teste \\(F\\) da ANOVA avalia se o modelo completo com as variáveis preditoras explica significativamente mais variância do que um modelo nulo (só com o intercepto).\nSe o valor-p do teste \\(F\\) for pequeno, rejeitamos \\(H_0\\) e concluímos que pelo menos uma variável tem efeito significativo sobre a resposta."
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#análise-de-variância-anova",
+    "href": "slides/intro-tidy-revealjs.html#análise-de-variância-anova",
+    "title": "Estatística no R",
+    "section": "Análise de Variância (ANOVA)",
+    "text": "Análise de Variância (ANOVA)\nAnálise de variância com um fator é uma técnica de teste de hipótese usada para comparar as médias de três ou mais populações. A análise de variância geralmente é abreviada como ANOVA.\nComo mencionado anteriormente, a ANOVA é um teste de razão de variâncias. O que a estatistica do teste avalia de maneira resumida:\n\\[Estatística \\ do \\ Teste = \\frac{Variância \\ dentro \\ dos \\ grupos}{Variância \\ entre \\ grupos}\\]\nA Estatística \\(F\\) é o quociente destas duas variâncias, e nossa hipótese nula na ANOVA testa se a média dos grupos é igual:\n\\[H_0: \\mu_1 = \\mu_2 = \\cdots \\mu_n\\]\nPremissas da ANOVA:\n\nAs amostras devem ser independentes\nAs unidades amostrais são selecionadas aleatoriamente\nDistribuição normal (gaussiana) dos resíduos\nHomogeneidade da variância"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#análise-de-variância-anova-1",
+    "href": "slides/intro-tidy-revealjs.html#análise-de-variância-anova-1",
+    "title": "Estatística no R",
+    "section": "Análise de Variância (ANOVA)",
+    "text": "Análise de Variância (ANOVA)\nTabela da ANOVA\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFontes de Variação (FV)\nGraus de Liberdade (GL)\nSoma de Quadrados (SQ)\nQuadrado Médio (QM)\nF\n\n\n\n\nTratamento(entre)\n\\(p-1\\)\n\\(SQ_{Trat}\\)\n\\(\\frac{SQ_{Trat}}{p-1}\\)\n\\(\\frac{QM_{Trat}}{QM_{Res}}\\)\n\n\nErro Experimental(dentro)\n\\(n-p\\)\n\\(SQ_{Res}\\)\n\\(\\frac{SQ_{Res}}{n-p}\\)\n\n\n\n\nTotal\n\\(n-1\\)\n\\(SQ_{Total}\\)\n\n\n\n\n\n\n\n\n\n\n\nEsta é a famosa tabela da ANOVA, a mesma tabela que é retornada pelas funções que utilizaremos aqui no R. As somas de quadrado podem ser obtidas como:\n\n\n\\(\\small \\displaystyle SQ_{Total} = \\sum_{i=1,j=1}^{I,J}Y_{ij}^2 - \\frac{\\displaystyle \\left( \\sum_{i=1,j=1}^{I,J}Y_{ij}\\right)^2}{IJ}\\)\n\n\\(\\small \\displaystyle SQ_{Trat} = \\sum_{i=1}^{I}\\frac{T_{i}^2}{J} - \\frac{\\displaystyle \\left( \\sum_{i=1,j=1}^{I,J}Y_{ij}\\right)^2}{IJ}\\)\n\n\\(\\small SQ_{Total} \\ = \\ SQ_{Trat} + SQ_{Res}\\)"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#anova-de-um-fator",
+    "href": "slides/intro-tidy-revealjs.html#anova-de-um-fator",
+    "title": "Estatística no R",
+    "section": "Anova de um Fator",
+    "text": "Anova de um Fator\nNa ANOVA de um fator testamos o efeito de uma única variável categórica (Tratamento) sobre nossa variável dependente (\\(y\\)).\nPergunta: Existe diferença no tamanho do bico (bill_length_mm) entre as diferentes espécies de pinguim?\n\npinguins &lt;- palmerpenguins::penguins\n\npinguins |&gt;\n  head()\n\n# A tibble: 6 × 8\n  species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g\n  &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;\n1 Adelie  Torgersen           39.1          18.7               181        3750\n2 Adelie  Torgersen           39.5          17.4               186        3800\n3 Adelie  Torgersen           40.3          18                 195        3250\n4 Adelie  Torgersen           NA            NA                  NA          NA\n5 Adelie  Torgersen           36.7          19.3               193        3450\n6 Adelie  Torgersen           39.3          20.6               190        3650\n# ℹ 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#anova-de-um-fator-1",
+    "href": "slides/intro-tidy-revealjs.html#anova-de-um-fator-1",
+    "title": "Estatística no R",
+    "section": "Anova de um Fator",
+    "text": "Anova de um Fator\nDiferente da última sessão, utilizaremos a função aov() para realizarmos a ANOVA.\n\nanova_bico &lt;- aov(bill_length_mm ~ species, data = pinguins)\n\nTestando Premissas\nAssim como fizemos com nosso modelo de regressão linear podemos avaliar nossos resíduos visualmente.\n\npar(mfrow = c(2, 2), oma = c(0, 0, 2, 0))\nplot(anova_bico)"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#anova-de-um-fator-2",
+    "href": "slides/intro-tidy-revealjs.html#anova-de-um-fator-2",
+    "title": "Estatística no R",
+    "section": "Anova de um Fator",
+    "text": "Anova de um Fator\nNossos resíduos parecem seguir normalidade e homocedasticidade. Mas podemos confirmar realizando os testes de Shapiro-Wilk (normalidade) e Bartlett (homocedasticidade).\n Lembre-se que sempre testamos os resíduos!\n\nshapiro.test(residuals(anova_bico))\n\n\n    Shapiro-Wilk normality test\n\ndata:  residuals(anova_bico)\nW = 0.98903, p-value = 0.01131\n\n\n\nbartlett.test(bill_length_mm ~ species, data = pinguins)\n\n\n    Bartlett test of homogeneity of variances\n\ndata:  bill_length_mm by species\nBartlett's K-squared = 5.6179, df = 2, p-value = 0.06027\n\n\nLembrando que a hipótese nula em ambos os testes é de que os dados seguem normalidade/homocedasticidade. Confirmamos assim o nosso diagnístico visual."
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#anova-de-um-fator-3",
+    "href": "slides/intro-tidy-revealjs.html#anova-de-um-fator-3",
+    "title": "Estatística no R",
+    "section": "Anova de um Fator",
+    "text": "Anova de um Fator\nTabela Anova\n\nsummary(anova_bico)\n\n             Df Sum Sq Mean Sq F value Pr(&gt;F)    \nspecies       2   7194    3597   410.6 &lt;2e-16 ***\nResiduals   339   2970       9                   \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n2 observations deleted due to missingness\n\n\nE aqui obtemos a nossa tabela da ANOVA. E com base no p-valor obtido podemos confirmar que existe efeito de Espécie sobre o Tamanho do Bico dos Pinguins. Em relação a nossa hipótese nula, isso significa dizer que pelo menos um dos grupos avaliados possui média diferente dos demais."
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#anova-de-um-fator-4",
+    "href": "slides/intro-tidy-revealjs.html#anova-de-um-fator-4",
+    "title": "Estatística no R",
+    "section": "Anova de um Fator",
+    "text": "Anova de um Fator\nApresentando os resultados\nAlém da apresentação da tabela podemos reportar nossos resultados graficamente com boxplots e adicionar os grupos do teste de Tukey.\n\n\nCode\nlibrary(ggtext)\n\ngrupos &lt;- tibble(species = factor(c(\"Adelie\", \"Chinstrap\", \"Gentoo\")),\n                 grupos = c(\"C\",\"A\",\"B\"),\n                 ymax = c(48,59,58))\n\ntukey &lt;- tibble(species = \"Adelie\",\n                label = \"&lt;b&gt;TukeyHSD&lt;/b&gt;&lt;br&gt;MSE: 8.76&lt;br&gt;p &lt; 0.05&lt;br&gt;q&lt;sub&gt;a&lt;/sub&gt;: 3.329\",\n                y = 55)\n\npinguins |&gt;\n  ggplot(aes(x=species, y=bill_length_mm, fill = species)) +\n  geom_boxplot(outliers = FALSE)+\n  annotate(\"text\", x=grupos$species,\n           y = grupos$ymax, \n           label = grupos$grupos,\n           family = \"Ubuntu\",\n            size = 5) +\n  geom_richtext(data = tukey, aes(x = species, y = 55, label = label),\n                fill = NA) +\n  theme_classic(base_size = 14, base_family = \"Ubuntu\") +\n  theme(legend.position = \"none\") +\n  labs(title = \"Variação do Comprimento de Bico em Pinguins\",\n       x = \"Espécies\",\n       y = \"Comprimento do Bico (mm)\")"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#anova-de-um-fator-5",
+    "href": "slides/intro-tidy-revealjs.html#anova-de-um-fator-5",
+    "title": "Estatística no R",
+    "section": "Anova de um Fator",
+    "text": "Anova de um Fator\nComparação de Médias\nSNK\nO Teste Student-Newman-Keuls (SNK) realiza comparações par a par de maneira sequencial, equilibrando a sensibilidade para detectar diferenças com um critério menos conservador que o Tukey HSD, mas mais rigoroso que o teste de Duncan.\n\nagricolae::SNK.test(anova_bico, \"species\", group = TRUE, console = TRUE)\n\n\nStudy: anova_bico ~ \"species\"\n\nStudent Newman Keuls Test\nfor bill_length_mm \n\nMean Square Error:  8.760732 \n\nspecies,  means\n\n          bill_length_mm      std   r        se  Min  Max   Q25   Q50    Q75\nAdelie          38.79139 2.663405 151 0.2408694 32.1 46.0 36.75 38.80 40.750\nChinstrap       48.83382 3.339256  68 0.3589349 40.9 58.0 46.35 49.55 51.075\nGentoo          47.50488 3.081857 123 0.2668810 40.9 59.6 45.30 47.30 49.550\n\nGroups according to probability of means differences and alpha level( 0.05 )\n\nMeans with the same letter are not significantly different.\n\n          bill_length_mm groups\nChinstrap       48.83382      a\nGentoo          47.50488      b\nAdelie          38.79139      c"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#anova-de-um-fator-6",
+    "href": "slides/intro-tidy-revealjs.html#anova-de-um-fator-6",
+    "title": "Estatística no R",
+    "section": "Anova de um Fator",
+    "text": "Anova de um Fator\nComparação de Médias\nDuncan\nO Teste de Duncan adota uma abordagem mais liberal, facilitando a identificação de intervalos de similaridade entre as médias, mas com uma margem maior de risco de erro do Tipo I.\n\nagricolae::duncan.test(anova_bico, \"species\", group = TRUE, console = TRUE)\n\n\nStudy: anova_bico ~ \"species\"\n\nDuncan's new multiple range test\nfor bill_length_mm \n\nMean Square Error:  8.760732 \n\nspecies,  means\n\n          bill_length_mm      std   r        se  Min  Max   Q25   Q50    Q75\nAdelie          38.79139 2.663405 151 0.2408694 32.1 46.0 36.75 38.80 40.750\nChinstrap       48.83382 3.339256  68 0.3589349 40.9 58.0 46.35 49.55 51.075\nGentoo          47.50488 3.081857 123 0.2668810 40.9 59.6 45.30 47.30 49.550\n\nGroups according to probability of means differences and alpha level( 0.05 )\n\nMeans with the same letter are not significantly different.\n\n          bill_length_mm groups\nChinstrap       48.83382      a\nGentoo          47.50488      b\nAdelie          38.79139      c"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#anova-de-um-fator-7",
+    "href": "slides/intro-tidy-revealjs.html#anova-de-um-fator-7",
+    "title": "Estatística no R",
+    "section": "Anova de um Fator",
+    "text": "Anova de um Fator\nComparação de Médias\nDunnet\nO Teste Dunnett é particularmente útil quando o objetivo principal é comparar cada tratamento com um grupo de controle, focando essa análise e ajustando as comparações para esse propósito.\nPara realizar esse teste usaremos o pacote multcomp.\n\nmultcomp::glht(anova_bico, linfct = multcomp::mcp(species= \"Dunnett\"))\n\n\n     General Linear Hypotheses\n\nMultiple Comparisons of Means: Dunnett Contrasts\n\n\nLinear Hypotheses:\n                        Estimate\nChinstrap - Adelie == 0   10.042\nGentoo - Adelie == 0       8.713"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#anova-de-um-fator-8",
+    "href": "slides/intro-tidy-revealjs.html#anova-de-um-fator-8",
+    "title": "Estatística no R",
+    "section": "Anova de um Fator",
+    "text": "Anova de um Fator\nApresentando os resultados\nAlém da apresentação da Listing 1 podemos reportar nossos resultados graficamente com boxplots e adicionar os grupos do teste de Tukey.\n\n\nCode\nlibrary(ggtext)\n\ngrupos &lt;- tibble(species = factor(c(\"Adelie\", \"Chinstrap\", \"Gentoo\")),\n                 grupos = c(\"C\",\"A\",\"B\"),\n                 ymax = c(48,59,58))\n\ntukey &lt;- tibble(species = \"Adelie\",\n                label = \"&lt;b&gt;TukeyHSD&lt;/b&gt;&lt;br&gt;MSE: 8.76&lt;br&gt;p &lt; 0.05&lt;br&gt;q&lt;sub&gt;a&lt;/sub&gt;: 3.329\",\n                y = 55)\n\npinguins |&gt;\n  ggplot(aes(x=species, y=bill_length_mm, fill = species)) +\n  geom_boxplot(outliers = FALSE)+\n  annotate(\"text\", x=grupos$species,\n           y = grupos$ymax, \n           label = grupos$grupos,\n           family = \"Ubuntu\",\n            size = 5) +\n  geom_richtext(data = tukey, aes(x = species, y = 55, label = label),\n                fill = NA) +\n  theme_classic(base_size = 14, base_family = \"Ubuntu\") +\n  theme(legend.position = \"none\") +\n  labs(title = \"Variação do Comprimento de Bico em Pinguins\",\n       x = \"Espécies\",\n       y = \"Comprimento do Bico (mm)\")"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#anova-de-um-fator---comparação-de-médias",
+    "href": "slides/intro-tidy-revealjs.html#anova-de-um-fator---comparação-de-médias",
+    "title": "Estatística no R",
+    "section": "Anova de um Fator - Comparação de Médias",
+    "text": "Anova de um Fator - Comparação de Médias\nUma vez sabendo que existe diferença significativa, agora precisamos realizar um pós-teste de comparação de médias entre os grupos. Para isso vamos utilizar o pacote agricolae. Este pacote é excelente por possuir diversos pos-testes para anova, entre eles Tukey, SNK, e Duncan.\nTukey HSD \nO Teste Tukey HSD (honestly significant difference) é amplamente reconhecido por controlar de forma rigorosa a taxa de erro familiar, permitindo comparações par a par entre todas as médias com um critério bastante robusto.\n\nagricolae::HSD.test(anova_bico,\"species\", group=TRUE, console=TRUE)\n\n\nStudy: anova_bico ~ \"species\"\n\nHSD Test for bill_length_mm \n\nMean Square Error:  8.760732 \n\nspecies,  means\n\n          bill_length_mm      std   r        se  Min  Max   Q25   Q50    Q75\nAdelie          38.79139 2.663405 151 0.2408694 32.1 46.0 36.75 38.80 40.750\nChinstrap       48.83382 3.339256  68 0.3589349 40.9 58.0 46.35 49.55 51.075\nGentoo          47.50488 3.081857 123 0.2668810 40.9 59.6 45.30 47.30 49.550\n\nAlpha: 0.05 ; DF Error: 339 \nCritical Value of Studentized Range: 3.329136 \n\nGroups according to probability of means differences and alpha level( 0.05 )\n\nTreatments with the same letter are not significantly different.\n\n          bill_length_mm groups\nChinstrap       48.83382      a\nGentoo          47.50488      b\nAdelie          38.79139      c"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#anova-de-um-fator---comparação-de-médias-1",
+    "href": "slides/intro-tidy-revealjs.html#anova-de-um-fator---comparação-de-médias-1",
+    "title": "Estatística no R",
+    "section": "Anova de um Fator - Comparação de Médias",
+    "text": "Anova de um Fator - Comparação de Médias\nSNK\nO Teste Student-Newman-Keuls (SNK) realiza comparações par a par de maneira sequencial, equilibrando a sensibilidade para detectar diferenças com um critério menos conservador que o Tukey HSD, mas mais rigoroso que o teste de Duncan.\n\nagricolae::SNK.test(anova_bico, \"species\", group = TRUE, console = TRUE)\n\n\nStudy: anova_bico ~ \"species\"\n\nStudent Newman Keuls Test\nfor bill_length_mm \n\nMean Square Error:  8.760732 \n\nspecies,  means\n\n          bill_length_mm      std   r        se  Min  Max   Q25   Q50    Q75\nAdelie          38.79139 2.663405 151 0.2408694 32.1 46.0 36.75 38.80 40.750\nChinstrap       48.83382 3.339256  68 0.3589349 40.9 58.0 46.35 49.55 51.075\nGentoo          47.50488 3.081857 123 0.2668810 40.9 59.6 45.30 47.30 49.550\n\nGroups according to probability of means differences and alpha level( 0.05 )\n\nMeans with the same letter are not significantly different.\n\n          bill_length_mm groups\nChinstrap       48.83382      a\nGentoo          47.50488      b\nAdelie          38.79139      c"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#anova-de-um-fator---comparação-de-médias-2",
+    "href": "slides/intro-tidy-revealjs.html#anova-de-um-fator---comparação-de-médias-2",
+    "title": "Estatística no R",
+    "section": "Anova de um Fator - Comparação de Médias",
+    "text": "Anova de um Fator - Comparação de Médias\nDuncan\nO Teste de Duncan adota uma abordagem mais liberal, facilitando a identificação de intervalos de similaridade entre as médias, mas com uma margem maior de risco de erro do Tipo I.\n\nagricolae::duncan.test(anova_bico, \"species\", group = TRUE, console = TRUE)\n\n\nStudy: anova_bico ~ \"species\"\n\nDuncan's new multiple range test\nfor bill_length_mm \n\nMean Square Error:  8.760732 \n\nspecies,  means\n\n          bill_length_mm      std   r        se  Min  Max   Q25   Q50    Q75\nAdelie          38.79139 2.663405 151 0.2408694 32.1 46.0 36.75 38.80 40.750\nChinstrap       48.83382 3.339256  68 0.3589349 40.9 58.0 46.35 49.55 51.075\nGentoo          47.50488 3.081857 123 0.2668810 40.9 59.6 45.30 47.30 49.550\n\nGroups according to probability of means differences and alpha level( 0.05 )\n\nMeans with the same letter are not significantly different.\n\n          bill_length_mm groups\nChinstrap       48.83382      a\nGentoo          47.50488      b\nAdelie          38.79139      c"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#anova-de-um-fator---comparação-de-médias-3",
+    "href": "slides/intro-tidy-revealjs.html#anova-de-um-fator---comparação-de-médias-3",
+    "title": "Estatística no R",
+    "section": "Anova de um Fator - Comparação de Médias",
+    "text": "Anova de um Fator - Comparação de Médias\nDunnet\nO Teste Dunnett é particularmente útil quando o objetivo principal é comparar cada tratamento com um grupo de controle, focando essa análise e ajustando as comparações para esse propósito.\nPara realizar esse teste usaremos o pacote multcomp.\n\nmultcomp::glht(anova_bico, linfct = multcomp::mcp(species= \"Dunnett\"))\n\n\n     General Linear Hypotheses\n\nMultiple Comparisons of Means: Dunnett Contrasts\n\n\nLinear Hypotheses:\n                        Estimate\nChinstrap - Adelie == 0   10.042\nGentoo - Adelie == 0       8.713"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#thats-all-folks",
+    "href": "slides/intro-tidy-revealjs.html#thats-all-folks",
+    "title": "Estatística no R",
+    "section": "That’s all folks!",
+    "text": "That’s all folks!\n\n \n pbarrosbio@gmail.com\n https://paulobarros.com.br\n\nObrigado pela paciência!"
+  },
+  {
+    "objectID": "slides/intro-tidy-revealjs.html#bonus-anova-vs-teste-t",
+    "href": "slides/intro-tidy-revealjs.html#bonus-anova-vs-teste-t",
+    "title": "Estatística no R",
+    "section": "Bonus > Anova vs Teste T",
+    "text": "Bonus &gt; Anova vs Teste T\n\nt.test(CRC ~ Estacao,\n                  data = crc_phy_nat,\n                  var.equal = TRUE)\n\n\n    Two Sample t-test\n\ndata:  CRC by Estacao\nt = 4.1524, df = 49, p-value = 0.000131\nalternative hypothesis: true difference in means between group Chuvosa and group Seca is not equal to 0\n95 percent confidence interval:\n 0.2242132 0.6447619\nsample estimates:\nmean in group Chuvosa    mean in group Seca \n             3.695357              3.260870 \n\n\n\naov(CRC ~ Estacao, data = crc_phy_nat) |&gt;\n  summary()\n\n            Df Sum Sq Mean Sq F value   Pr(&gt;F)    \nEstacao      1  2.384  2.3838   17.24 0.000131 ***\nResiduals   49  6.774  0.1383                     \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
   }
 ]

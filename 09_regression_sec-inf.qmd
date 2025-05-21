@@ -94,7 +94,7 @@ A regressão linear também possui premissas:
 
 Mais uma vez utilizaremos o pacote `ecodados`.
 
-valiaremos a relação entre o gradiente de temperatura média anual (°C) e o tamanho
+Avaliaremos a relação entre o gradiente de temperatura média anual (°C) e o tamanho
 médio do comprimento rostro-cloacal (CRC em mm) de populações de _Dendropsophus minutus_
 (Anura:Hylidae) amostradas em 109 localidades no Brasil.
 

@@ -1,0 +1,142 @@
+/*-- scss:defaults --*/
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Gabarito:wght@400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Thasadith:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+$link-color:  #ee2740ff;
+$body-color: #2b2d41ff;
+$font-family-sans-serif: "Barlow Condensed", sanserif;
+$font-family-monospace: "IBM Plex Mono", monospace;  
+$presentation-font-size-root: 28px;
+$presentation-font-smaller: 0.6;
+$presentation-line-height: 1.1;
+$code-block-bg: white;
+$presentation-heading-color:  #ee2740ff;
+$presentation-h1-font-size: 2em;
+$presentation-h2-font-size: 1.3em;
+$presentation-title-slide-text-align: left;
+
+/*-- scss:rules --*/
+
+.reveal h1.title {
+    font-family: "Thasadith","Barlow Condensed", sanserif;
+    font-weight: 300;
+    font-size: 3em;
+    color: white;
+    background: #ee2740ff;
+    border-left: 10px solid #2b2d41ff;
+    display: inline-block;
+    padding: 0.05em 0.15em;
+    border-bottom-right-radius: 20px;
+}
+
+.reveal .quarto-title-authors {
+  margin-top: 10px;
+}
+
+.reveal .quarto-title-author-name {
+    display: inline-block;
+    font-family: "Barlow Condensed", sanserif;
+    font-weight: 400;
+    font-size: 1em;
+    color: #2b2d41ff;
+}
+
+.reveal p.subtitle {
+  display: inline-block;
+    font-family: "Thasadith", sanserif;
+    font-weight: 400;
+    font-size: 1.3em;
+    background: #eadbb2ff;
+    color: #2b2d41ff;
+    padding: 0.05em 0.25em;
+    border-bottom-right-radius: 10px;
+}
+
+
+.cell-output pre > code{
+  background-color: #f3f4f5;
+  border-radius: 5px;
+  margin: 10px 0 10px 0;
+  color: black;
+}
+
+
+.reveal pre.sourceCode code {
+  background: #2b2d41ff;
+}
+
+.smallbf {
+  font-size: 20px;
+}
+
+.v-center-container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 90%;
+          width: 90%;
+        }
+
+.center-col {
+          display: grid;
+          justify-content: center;
+          align-items: center;
+          height: 90%;
+          text-align: center;
+}
+
+.reveal .quarto-title-block .quarto-title-authors {
+    margin-bottom: .1rem;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    background-image: url("https://www.paulobarros.com.br/PB.png");
+    background-repeat: no-repeat;
+    background-size: 100px;
+    padding: 0px 0 0px 100px;
+    height: 100px;
+}
+
+
+.reveal .quarto-title-author-name  {
+  color: #2b2d41ff;;
+  font-family: "Barlow Condensed", sanserif;
+  font-weight: 500;
+  font-size: 0.9em;
+  
+}
+
+.reveal .quarto-title-block .quarto-title-authors .quarto-title-author .quarto-title-affiliation {
+    font-size: .7em;
+    margin-top: 0px;
+    margin-bottom: 8px;
+}
+
+.reveal code {
+    color: #100945;
+    font-size: .6em;
+    background-color: rgb(245 224 172);
+    white-space: pre-wrap;
+    border-radius: 5px;
+    padding: 1px 5px;
+    font-weight: 400;
+}
+
+.reveal pre code {
+    background-color: #f6f6f6;
+    font-size: inherit;
+    color: #151629;
+    font-family: inherit;
+    border-left: 2px solid #151629;
+    border-radius: 0;
+}
+
+.tbl-forty{
+  width: 40%;
+}
+
+.tbl-sixty{
+  width: 60%;
+}
